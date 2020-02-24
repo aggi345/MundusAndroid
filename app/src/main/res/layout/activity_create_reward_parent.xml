@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ParentActivities.CreateRewardParentActivity">
+
+    <EditText
+        android:id="@+id/price_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        tools:layout_editor_absoluteX="154dp"
+        tools:layout_editor_absoluteY="483dp" />
+
+    <TextView
+        android:id="@+id/price_textview"
+        android:layout_width="89dp"
+        android:layout_height="47dp"
+        android:text="Price"
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="483dp" />
+
+    <TextView
+        android:id="@+id/createRewardHeader_textview"
+        android:layout_width="161dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="40dp"
+        android:text="Create a Reward"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
+
+    <EditText
+        android:id="@+id/rewardName_plaintext"
+        android:layout_width="317dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="99dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="578dp"
+        android:ems="10"
+        android:hint="Reward Name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/rewardDescription_plaintext"
+        android:layout_width="324dp"
+        android:layout_height="178dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="212dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="341dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Reward Description"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lvlRequired_textview"
+        android:layout_width="89dp"
+        android:layout_height="47dp"
+        android:text="Level"
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="418dp" />
+
+    <EditText
+        android:id="@+id/lvlRequired_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        tools:layout_editor_absoluteX="154dp"
+        tools:layout_editor_absoluteY="420dp" />
+
+    <Button
+        android:id="@+id/createReward_button"
+        android:layout_width="120dp"
+        android:layout_height="56dp"
+        android:text="Create!"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="582dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ChildActivities.MainMenuChildActivity">
+
+    <Button
+        android:id="@+id/marketplace_button"
+        android:layout_width="292dp"
+        android:layout_height="160dp"
+        android:text="Marketplace"
+        tools:layout_editor_absoluteX="59dp"
+        tools:layout_editor_absoluteY="336dp" />
+
+    <TextView
+        android:id="@+id/header_textview"
+        android:layout_width="252dp"
+        android:layout_height="48dp"
+        android:text="Mundus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.049" />
+
+    <Button
+        android:id="@+id/questLog_button"
+        android:layout_width="292dp"
+        android:layout_height="160dp"
+        android:text="Quests"
+        tools:layout_editor_absoluteX="59dp"
+        tools:layout_editor_absoluteY="143dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
