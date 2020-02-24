@@ -2,6 +2,7 @@ package is.hi.HBV601G.mundusandroid.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView textView2;
     private Button mCheckButton;
     private Button mLoginButton;
+    private Button mSignupButton;
 
     private EditText mPassword;
     private EditText mEmail;
@@ -42,6 +44,16 @@ public class LoginActivity extends AppCompatActivity {
 
         mPassword = findViewById(R.id.password_field);
         mEmail= findViewById(R.id.email_field);
+
+        mLoginButton = findViewById(R.id.signup_button);
+        mLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         mCheckButton = (Button)findViewById(R.id.check_button);
         mCheckButton.setOnClickListener(new View.OnClickListener() {
