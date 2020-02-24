@@ -2,8 +2,11 @@ package is.hi.HBV601G.mundusandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.webkit.CookieManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,17 +69,9 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-
-
-         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.71:8080/")
-                 .client(new OkHttpClient().newBuilder().cookieJar(new SessionCookieJar() {
-                 }).build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+         retrofit = RetrofitSingleton.getInstance().getRetrofit();
 
          mundusAPI = retrofit.create(MundusAPI.class);
-
 
     }
 

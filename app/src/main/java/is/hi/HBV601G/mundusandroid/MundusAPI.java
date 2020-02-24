@@ -14,7 +14,7 @@ public interface MundusAPI {
     Call<Integer> login(@Field("email") String email, @Field("password") String password);
 
     //@Headers("Cookie: JSESSIONID = E002569DE8BD39E03A8B1B522C320DDA")
-    @GET("login")
+    @GET("fakeTest")
     Call<String> login2();
 
 }
