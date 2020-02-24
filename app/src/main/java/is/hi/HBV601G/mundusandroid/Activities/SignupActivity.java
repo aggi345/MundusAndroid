@@ -1,6 +1,7 @@
-package is.hi.HBV601G.mundusandroid;
+package is.hi.HBV601G.mundusandroid.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import is.hi.HBV601G.mundusandroid.R;
 
 import android.os.Bundle;
 

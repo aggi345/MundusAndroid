@@ -1,14 +1,4 @@
-package is.hi.HBV601G.mundusandroid;
-
-import android.app.Activity;
-import android.content.Context;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+package is.hi.HBV601G.mundusandroid.Network;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

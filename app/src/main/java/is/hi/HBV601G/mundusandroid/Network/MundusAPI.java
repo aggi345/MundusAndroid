@@ -1,4 +1,4 @@
-package is.hi.HBV601G.mundusandroid;
+package is.hi.HBV601G.mundusandroid.Network;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

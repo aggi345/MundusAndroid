@@ -1,4 +1,4 @@
-package is.hi.HBV601G.mundusandroid;
+package is.hi.HBV601G.mundusandroid.Network;
 
 import java.io.Serializable;
 import java.util.ArrayList;

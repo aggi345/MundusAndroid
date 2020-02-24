@@ -1,30 +1,21 @@
-package is.hi.HBV601G.mundusandroid;
+package is.hi.HBV601G.mundusandroid.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.webkit.CookieManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 
-import java.net.CookieHandler;
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.CookieJar;
-import okhttp3.JavaNetCookieJar;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
+import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
+import is.hi.HBV601G.mundusandroid.R;
+import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
