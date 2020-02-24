@@ -9,7 +9,7 @@ public class RetrofitSingleton {
     private static final RetrofitSingleton INSTANCE = new RetrofitSingleton();
 
     private Retrofit retrofit;
-    private String BASE_URL = "http://192.168.1.55:8080/";
+    private String BASE_URL = "http://192.168.1.71:8080/";
 
     private RetrofitSingleton(){
 
