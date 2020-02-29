@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Child {
+public class Child extends Person {
 
 
 
@@ -15,7 +15,8 @@ public class Child {
 
     private Parent parent; // The parent of the child
 
-    public Child(Parent parent) {
+    public Child(String name, String pin, Parent parent) {
+        super(name,pin);
         this.parent = parent;
     }
 

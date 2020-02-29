@@ -30,8 +30,17 @@ public interface MundusAPI {
     @GET("getparent")
     Call<Parent> getParent();
 
-    @GET("getchildren")
-    Call<Set<Child>> getChildren();
+    @FormUrlEncoded
+    @POST("pin-page-auth")
+    Call<ResponseBody> PinAuth(@Field("id") long personId, @Field("pin") String pin);
+
+
+
+
+
+
+
+
 
 
 }
