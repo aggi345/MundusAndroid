@@ -31,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPassword;
     private EditText mEmail;
 
+    private TextView mStatus;
+
     private String cookie = "";
 
     @Override
@@ -48,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         mPassword = findViewById(R.id.password_editView);
         mEmail= findViewById(R.id.email_editView);
         mSignupButton = findViewById(R.id.signup_button);
+        mStatus = findViewById(R.id.status_textView);
         mCheckButton = (Button)findViewById(R.id.check_button);
         mLoginButton = (Button)findViewById(R.id.login_button);
 
@@ -117,6 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 String r = response.body();
+                mStatus.setText(r + "");
 
             }
 
