@@ -34,6 +34,13 @@ public interface MundusAPI {
     @POST("pin-page-auth")
     Call<ResponseBody> PinAuth(@Field("id") long personId, @Field("pin") String pin);
 
+    @GET("getPersonType")
+    Call<Integer> getPersonType();
+
+    @GET("getSmallChild")
+    Call<Child> getChild();
+
+
 
 
 

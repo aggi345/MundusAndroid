@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.PersonLoginActivity"></activity>
+        <activity android:name=".Activities.ChildMainMenuActivity"></activity>
+        <activity android:name=".Activities.ParentMainMenuActivity" />
+        <activity android:name=".Activities.PersonLoginActivity" />
         <activity android:name=".Activities.PersonSelectActivity" />
         <activity android:name=".Activities.SignupActivity" />
         <activity android:name=".Activities.LoginActivity">

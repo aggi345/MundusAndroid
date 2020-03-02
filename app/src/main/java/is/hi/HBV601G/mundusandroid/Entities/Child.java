@@ -9,6 +9,10 @@ public class Child extends Person {
 
 
 
+    private int totalCoins;
+
+    private int xp;
+
     private Set<Quest> quests = new HashSet<>(); // Contains quests that are assigned to the child
 
     private List<Long> rewards = new ArrayList<>(); // Contains the id of the rewards the child owns
@@ -18,6 +22,7 @@ public class Child extends Person {
     public Child(String name, String pin, Parent parent) {
         super(name,pin);
         this.parent = parent;
+
     }
 
 
@@ -44,4 +49,26 @@ public class Child extends Person {
     public void setParent(Parent parent) {
         this.parent = parent;
     }
+
+    public int getTotalCoins() {
+        return totalCoins;
+    }
+
+    public void setTotalCoins(int totalCoins) {
+        this.totalCoins = totalCoins;
+    }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
+
+    public int getLevel() {
+
+        return xp / 1000 + 1;
+    }
+
 }

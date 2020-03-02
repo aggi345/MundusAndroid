@@ -87,8 +87,7 @@ public class PersonLoginActivity extends AppCompatActivity {
 
                 mErrorMessage.setText("Worked");
 
-
-
+                checkPerson();
 
 
             }
@@ -101,6 +100,39 @@ public class PersonLoginActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void checkPerson() {
+        Call<Integer> personCheckCall = mundusAPI.getPersonType();
+        System.out.println("her1");
+
+        personCheckCall.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                System.out.println("her");
+                if(!response.isSuccessful()){
+                    System.out.println(response.code());
+                   moveToSelectPerson();
+                   return;
+                }
+
+                Integer type = response.body();
+                System.out.println(type);
+
+                if(type == 1){
+                    moveToParentMenu();
+                }else if(type == 0){
+                    moveToChildMenu();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                System.out.println(t.getMessage());
+                //TODO Vantar að meðhöndla vandamál, verðum að gera eh hér.
+            }
+        });
     }
 
     private void loadExtras(){
@@ -118,6 +150,16 @@ public class PersonLoginActivity extends AppCompatActivity {
 
     private void moveToSelectPerson(){
         Intent intent = new Intent(PersonLoginActivity.this, PersonSelectActivity.class);
+        startActivity(intent);
+    }
+
+    private void moveToParentMenu(){
+        Intent intent = new Intent(PersonLoginActivity.this, ParentMainMenuActivity.class);
+        startActivity(intent);
+    }
+
+    private void moveToChildMenu(){
+        Intent intent = new Intent(PersonLoginActivity.this, ChildMainMenuActivity.class);
         startActivity(intent);
     }
 
