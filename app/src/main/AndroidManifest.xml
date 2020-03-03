@@ -12,14 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.ChildActivities.MarketplaceChildActivity"></activity>
-        <activity android:name=".Activities.ParentActivities.MarketplaceActivity" />
-        <activity android:name=".Activities.ChildActivities.QuestLogChildActivity" />
-        <activity android:name=".Activities.ParentActivities.QuestLogParentActivity" />
-        <activity android:name=".Activities.ChildActivities.MainMenuChildActivity" />
-        <activity android:name=".Activities.ParentActivities.CreateRewardParentActivity" />
-        <activity android:name=".Activities.ParentActivities.createQuestParentActivity" />
-        <activity android:name=".Activities.ParentActivities.MainMenuParent" />
+        <activity android:name=".Activities.ChildMainMenuActivity"></activity>
+        <activity android:name=".Activities.ParentMainMenuActivity" />
+        <activity android:name=".Activities.PersonLoginActivity" />
+        <activity android:name=".Activities.PersonSelectActivity" />
         <activity android:name=".Activities.SignupActivity" />
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>

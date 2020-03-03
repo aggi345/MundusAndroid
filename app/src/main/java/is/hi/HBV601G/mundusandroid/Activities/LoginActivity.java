@@ -2,6 +2,7 @@ package is.hi.HBV601G.mundusandroid.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,13 +23,15 @@ public class LoginActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
 
-    private TextView textView;
-    private TextView textView2;
+
     private Button mCheckButton;
     private Button mLoginButton;
+    private Button mSignupButton;
 
     private EditText mPassword;
     private EditText mEmail;
+
+    private TextView mStatus;
 
     private String cookie = "";
 
@@ -37,13 +40,31 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        textView = findViewById(R.id.textView2);
-        textView2 = findViewById(R.id.textView3);
 
-        mPassword = findViewById(R.id.password_field);
-        mEmail= findViewById(R.id.email_field);
+        //Network
+        retrofit = RetrofitSingleton.getInstance().getRetrofit();
+        mundusAPI = retrofit.create(MundusAPI.class);
 
+
+        //Find items
+        mPassword = findViewById(R.id.password_editView);
+        mEmail= findViewById(R.id.email_editView);
+        mSignupButton = findViewById(R.id.signup_button);
+        mStatus = findViewById(R.id.status_textView);
         mCheckButton = (Button)findViewById(R.id.check_button);
+        mLoginButton = (Button)findViewById(R.id.login_button);
+
+
+
+        //Events
+        mSignupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
+            }
+        });
+
         mCheckButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +72,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mLoginButton = (Button)findViewById(R.id.login_button);
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,10 +79,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
-         retrofit = RetrofitSingleton.getInstance().getRetrofit();
-
-         mundusAPI = retrofit.create(MundusAPI.class);
 
     }
 
@@ -77,16 +93,19 @@ public class LoginActivity extends AppCompatActivity {
                 if(!response.isSuccessful()){
                     return;
                 }
-
                 Integer r = response.body();
-                textView.setText(r.toString());
+
+                if(r != -1) {
+                    Intent intent = new Intent(LoginActivity.this, PersonSelectActivity.class);
+                    startActivity(intent);
+                }
 
             }
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-                textView.setText(t.getMessage());
-            }
+
+        }
         });
     }
 
@@ -101,12 +120,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 String r = response.body();
-                textView2.setText(r.toString());
+                mStatus.setText(r + "");
+
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                textView2.setText(t.getMessage());
+
             }
         });
     }

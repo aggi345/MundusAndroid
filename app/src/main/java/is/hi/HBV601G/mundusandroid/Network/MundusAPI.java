@@ -1,6 +1,13 @@
 package is.hi.HBV601G.mundusandroid.Network;
 
+import java.util.Set;
+
+import is.hi.HBV601G.mundusandroid.Entities.Account;
+import is.hi.HBV601G.mundusandroid.Entities.Child;
+import is.hi.HBV601G.mundusandroid.Entities.Parent;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -14,7 +21,33 @@ public interface MundusAPI {
     Call<Integer> login(@Field("email") String email, @Field("password") String password);
 
     //@Headers("Cookie: JSESSIONID = E002569DE8BD39E03A8B1B522C320DDA")
-    @GET("fakeTest")
+    @GET("login")
     Call<String> login2();
+
+    @POST("signup")
+    Call<ResponseBody> signup(@Body Account account);
+
+    @GET("getparent")
+    Call<Parent> getParent();
+
+    @FormUrlEncoded
+    @POST("pin-page-auth")
+    Call<ResponseBody> PinAuth(@Field("id") long personId, @Field("pin") String pin);
+
+    @GET("getPersonType")
+    Call<Integer> getPersonType();
+
+    @GET("getSmallChild")
+    Call<Child> getChild();
+
+
+
+
+
+
+
+
+
+
 
 }
