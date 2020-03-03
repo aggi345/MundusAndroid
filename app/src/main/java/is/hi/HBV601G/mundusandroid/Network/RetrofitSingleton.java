@@ -3,6 +3,7 @@ package is.hi.HBV601G.mundusandroid.Network;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 
+import okhttp3.CookieJar;
 import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -19,11 +20,11 @@ public class RetrofitSingleton {
 
        // SimpleCookieJar simpleCookieJar = new SimpleCookieJar();
         CookieHandler cookieHandler = new CookieManager();
-
+        CookieJar cookieJar = new JavaNetCookieJar(cookieHandler);
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .client(new OkHttpClient().newBuilder().cookieJar(new JavaNetCookieJar(cookieHandler)).build())
+                .client(new OkHttpClient().newBuilder().cookieJar(cookieJar).build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

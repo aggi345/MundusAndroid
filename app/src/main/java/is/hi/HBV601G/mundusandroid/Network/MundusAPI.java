@@ -38,7 +38,10 @@ public interface MundusAPI {
     Call<Integer> getPersonType();
 
     @GET("getSmallChild")
-    Call<Child> getChild();
+    Call<Child> getSmallChild();
+
+    @GET("getSmallParent")
+    Call<Parent> getSmallParent();
 
 
 

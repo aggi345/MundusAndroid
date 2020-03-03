@@ -2,7 +2,10 @@ package is.hi.HBV601G.mundusandroid.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import is.hi.HBV601G.mundusandroid.Entities.Child;
@@ -28,6 +31,10 @@ public class ChildMainMenuActivity extends AppCompatActivity {
     private TextView mLevel;
 
 
+    private ImageButton mQuestLog;
+    private ImageButton mMarketplace;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,17 +51,32 @@ public class ChildMainMenuActivity extends AppCompatActivity {
         mCoins = findViewById(R.id.coins_textView);
         mLevel = findViewById(R.id.level_textView);
 
+        mQuestLog = findViewById(R.id.quest_imageButton);
+        mMarketplace = findViewById(R.id.marketplace_imageButton);
+
         updateChildInfo();
 
 
+        //Handler
+        mQuestLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveToQuestLog();;
+            }
+        });
 
-
+        mMarketplace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveToMarketPlace();
+            }
+        });
     }
 
 
     private void updateChildInfo(){
 
-        Call<Child> getChildCall = mundusAPI.getChild();
+        Call<Child> getChildCall = mundusAPI.getSmallChild();
 
 
         getChildCall.enqueue(new Callback<Child>() {
@@ -82,16 +104,26 @@ public class ChildMainMenuActivity extends AppCompatActivity {
                 //TODO vantar að gera þetta.
             }
         });
-
-
-
-
     }
+
+
+    private void moveToQuestLog(){
+        Intent intent = new Intent(ChildMainMenuActivity.this, QuestLogParentActivity.class);
+        startActivity(intent);
+    }
+
+    private void moveToMarketPlace(){
+        Intent intent = new Intent(ChildMainMenuActivity.this, MarketplaceParentActivity.class);
+        startActivity(intent);
+    }
+
+
 
 
     private void moveToLogin()
     {
-
+        Intent intent = new Intent(ChildMainMenuActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
 
