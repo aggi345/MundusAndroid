@@ -1,7 +1,5 @@
 package is.hi.HBV601G.mundusandroid.Entities;
 
-import java.time.LocalDate;
-
 public class Quest {
 
 
@@ -16,9 +14,9 @@ public class Quest {
 
     private int coins; // Coins gained for completing the quest
 
-    private LocalDate dateCreated; // Breyta í data format eða e-h þannig
+    private String dateCreated; // Breyta í data format eða e-h þannig
 
-    private LocalDate deadline; // Due date of the quest
+    private String deadline; // Due date of the quest
 
     private Child assignee; // The child that the quest has been assigned to
 
@@ -29,7 +27,7 @@ public class Quest {
     private Parent maker; // Creator of the quest
 
 
-    public Quest(String name, String description, int xp, int coins, LocalDate deadline, Parent maker) {
+    public Quest(String name, String description, int xp, int coins, String deadline, Parent maker) {
         this.name = name;
         this.description = description;
         this.xp = xp;
@@ -86,19 +84,19 @@ public class Quest {
         this.coins = coins;
     }
 
-    public LocalDate getDateCreated() {
+    public String getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(LocalDate dateCreated) {
+    public void setDateCreated(String dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public LocalDate getDeadline() {
+    public String getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(LocalDate deadline) {
+    public void setDeadline(String deadline) {
         this.deadline = deadline;
     }
 

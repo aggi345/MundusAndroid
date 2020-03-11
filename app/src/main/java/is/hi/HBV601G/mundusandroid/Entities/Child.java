@@ -25,6 +25,11 @@ public class Child extends Person {
 
     }
 
+    public Child() {
+        super();
+
+    }
+
 
     public Set<Quest> getQuests() {
         return quests;
@@ -71,4 +76,8 @@ public class Child extends Person {
         return xp / 1000 + 1;
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

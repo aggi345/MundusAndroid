@@ -30,7 +30,6 @@ public class ChildMainMenuActivity extends AppCompatActivity {
     private TextView mCoins;
     private TextView mLevel;
 
-
     private ImageButton mQuestLog;
     private ImageButton mMarketplace;
 
