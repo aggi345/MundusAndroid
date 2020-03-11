@@ -6,6 +6,7 @@ import is.hi.HBV601G.mundusandroid.Entities.Account;
 import is.hi.HBV601G.mundusandroid.Entities.Child;
 import is.hi.HBV601G.mundusandroid.Entities.Parent;
 import is.hi.HBV601G.mundusandroid.Entities.Quest;
+import is.hi.HBV601G.mundusandroid.Entities.Reward;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -49,6 +50,9 @@ public interface MundusAPI {
 
     @POST("createQuest")
     Call<ResponseBody> createQuest(@Body Quest quest);
+
+    @POST("createReward")
+    Call<ResponseBody> createReward(@Body Reward reward);
 
 
 

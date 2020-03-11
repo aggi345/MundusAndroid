@@ -8,20 +8,13 @@ public class Reward {
     private String description; // Description of the reward
     private int price; // The price of the reward
     private int levelRequired; // Minimum level required to buy the reward
-    private boolean autorenew; // Probably not going to use this
-    private Boolean visible; // Probably not going to use this
-    private Child buyer; // Don't think we are going to use this anymore
     private Parent maker; // Creator of the reward
 
-    public Reward(String name, String description, int price, int levelRequired, boolean autorenew, Boolean visible, Child buyer, Parent maker) {
+    public Reward(String name, String description, int price, int levelRequired) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.levelRequired = levelRequired;
-        this.autorenew = autorenew;
-        this.visible = visible;
-        this.buyer = buyer;
-        this.maker = maker;
     }
 
 
@@ -63,30 +56,6 @@ public class Reward {
 
     public void setLevelRequired(int levelRequired) {
         this.levelRequired = levelRequired;
-    }
-
-    public boolean isAutorenew() {
-        return autorenew;
-    }
-
-    public void setAutorenew(boolean autorenew) {
-        this.autorenew = autorenew;
-    }
-
-    public Boolean getVisible() {
-        return visible;
-    }
-
-    public void setVisible(Boolean visible) {
-        this.visible = visible;
-    }
-
-    public Child getBuyer() {
-        return buyer;
-    }
-
-    public void setBuyer(Child buyer) {
-        this.buyer = buyer;
     }
 
     public Parent getMaker() {
