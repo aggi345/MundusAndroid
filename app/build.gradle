@@ -27,6 +27,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'
     //implementation 'androidx.appcompat:design:1.0.2' //Daníel bætti þessu við
+    implementation 'com.android.support:recyclerview-v7:28.3.1'
     implementation 'com.android.support:design:28.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="is.hi.HBV601G.mundusandroid">
 
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.ChildMainMenuActivity"></activity>
+        <activity android:name=".Activities.ParentActivities.QuestLogParentActivity" android:exported="true">
+        </activity>
+        <activity android:name=".Activities.ChildMainMenuActivity" />
         <activity android:name=".Activities.ParentMainMenuActivity" />
         <activity android:name=".Activities.PersonLoginActivity" />
         <activity android:name=".Activities.PersonSelectActivity" />
