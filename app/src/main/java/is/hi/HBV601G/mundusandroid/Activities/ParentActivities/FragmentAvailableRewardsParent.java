@@ -55,10 +55,10 @@ public class FragmentAvailableRewardsParent extends Fragment {
         Account account = new Account("Tester", "test@test.is", "123", null);
         Parent parent = new Parent("Tester", "123", account);
         account.setParent(parent);
-        lstReward.add(new Reward("Ice cream", "Description", 1337, 7, false, true, null, parent));
-        lstReward.add(new Reward("Ice cream", "Description", 1337, 7, false, true, null, parent));
-        lstReward.add(new Reward("Ice cream", "Description", 1337, 7, false, true, null, parent));
-        lstReward.add(new Reward("Ice cream", "Description", 1337, 7, false, true, null, parent));
+        lstReward.add(new Reward("Ice cream", "Description", 1337, 7));
+        lstReward.add(new Reward("Ice cream", "Description", 1337, 7));
+        lstReward.add(new Reward("Ice cream", "Description", 1337, 7));
+        lstReward.add(new Reward("Ice cream", "Description", 1337, 7));
 
 
     }
