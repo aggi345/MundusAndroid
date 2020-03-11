@@ -1,7 +1,6 @@
 package is.hi.HBV601G.mundusandroid;
 
 import android.content.Context;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,18 +9,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import is.hi.HBV601G.mundusandroid.Entities.Quest;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
+public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecyclerViewAdapter.MyViewHolder> {
 
     Context mContext;
     List<Quest> mData;
 
-    public RecyclerViewAdapter(Context mContext, List<Quest> mData) {
+    public QuestRecyclerViewAdapter(Context mContext, List<Quest> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -61,6 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private TextView tv_xp;
         private TextView tv_coins;
         private TextView tv_assignee;
+
         public MyViewHolder(@NonNull View itemView) { // NonNull var ekki í myndbaninu en kemur samt hérna
             super(itemView);
 
