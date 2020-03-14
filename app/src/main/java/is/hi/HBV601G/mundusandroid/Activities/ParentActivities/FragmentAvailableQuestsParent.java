@@ -37,7 +37,7 @@ public class FragmentAvailableQuestsParent extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.availablequests_parent_fragment, container, false);
         myreyclerview = (RecyclerView) v.findViewById(R.id.availableQuestsParentRecycleView);
-        QuestRecyclerViewAdapter recyclerAdapter = new QuestRecyclerViewAdapter(getContext(), lstQuest);
+        QuestRecyclerViewAdapter recyclerAdapter = new QuestRecyclerViewAdapter(getContext(), lstQuest, 3);
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myreyclerview.setAdapter(recyclerAdapter);
         return v;

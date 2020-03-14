@@ -36,7 +36,7 @@ public class FragmentAssignedQuestsChild extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.assignedquests_child_fragment, container, false);
         myreyclerview = (RecyclerView) v.findViewById(R.id.assignedQuestsChildRecycleView);
-        QuestRecyclerViewAdapter recyclerAdapter = new QuestRecyclerViewAdapter(getContext(), lstQuest);
+        QuestRecyclerViewAdapter recyclerAdapter = new QuestRecyclerViewAdapter(getContext(), lstQuest, 1);
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myreyclerview.setAdapter(recyclerAdapter);
         return v;
@@ -53,8 +53,6 @@ public class FragmentAssignedQuestsChild extends Fragment {
         account.setParent(parent);
         lstQuest.add(new Quest("Vaccum", "Description", 1337, 69, "Deadline", parent));
         lstQuest.add(new Quest("Clean", "Description", 1337, 69, "Deadline", parent));
-        lstQuest.add(new Quest("Mow the lawn", "Description", 1337, 69, "Deadline", parent));
-        lstQuest.add(new Quest("Do the dishes", "Description", 1337, 69, "Deadline", parent));
 
     }
 
