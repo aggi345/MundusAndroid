@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -14,9 +15,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import is.hi.HBV601G.mundusandroid.Entities.Child;
 import is.hi.HBV601G.mundusandroid.Entities.Quest;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecyclerViewAdapter.MyViewHolder> {
 
@@ -68,7 +75,26 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
     }
 
     private void showDialogFinshedQuestsParent(Dialog questDialog, MyViewHolder vHolder) {
-        //TODO
+        questDialog.setContentView(R.layout.dialog_questitem_finished_parent);
+
+        vHolder.item_quest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                TextView dialog_quest_name = (TextView) questDialog.findViewById(R.id.dialog_questitem_finished_parent_questName);
+                TextView dialog_quest_Description = (TextView) questDialog.findViewById(R.id.dialog_questitem_finished_parent_questDescription);
+                TextView dialog_quest_XP = (TextView) questDialog.findViewById(R.id.dialog_questitem_finished_parent_questXP);
+                TextView dialog_quest_coins = (TextView) questDialog.findViewById(R.id.dialog_questitem_finished_parent_questCoins);
+
+                dialog_quest_name.setText(mData.get(vHolder.getAdapterPosition()).getName());
+                dialog_quest_Description.setText(mData.get(vHolder.getAdapterPosition()).getDescription());
+                dialog_quest_XP.setText("XP: " + mData.get(vHolder.getAdapterPosition()).getXp());
+                dialog_quest_coins.setText("Coins: " + mData.get(vHolder.getAdapterPosition()).getCoins());
+
+                questDialog.show();
+
+            }
+        });
     }
 
     private void showDialogAInprogressQuestsParent(Dialog questDialog, MyViewHolder vHolder) {
@@ -76,8 +102,29 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
     }
 
     private void showDialogAvailableQuestsParent(Dialog questDialog, MyViewHolder vHolder) {
-        //TODO
+        /*questDialog.setContentView(R.layout.dialog_questitem_available_parent);
+
+        vHolder.item_quest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                TextView dialog_quest_name = (TextView) questDialog.findViewById(R.id.dialog_questitem_available_parent_questName);
+                TextView dialog_quest_Description = (TextView) questDialog.findViewById(R.id.dialog_questitem_available_parent_questDescription);
+                TextView dialog_quest_XP = (TextView) questDialog.findViewById(R.id.dialog_questitem_available_parent_questXP);
+                TextView dialog_quest_coins = (TextView) questDialog.findViewById(R.id.dialog_questitem_available_parent_questCoins);
+
+                dialog_quest_name.setText(mData.get(vHolder.getAdapterPosition()).getName());
+                dialog_quest_Description.setText(mData.get(vHolder.getAdapterPosition()).getDescription());
+                dialog_quest_XP.setText("XP: " + mData.get(vHolder.getAdapterPosition()).getXp());
+                dialog_quest_coins.setText("Coins: " + mData.get(vHolder.getAdapterPosition()).getCoins());
+
+                questDialog.show();
+
+            }
+        });*/
     }
+
+
 
     private void showDialogFinishedQuestsChild(Dialog questDialog, MyViewHolder vHolder) {
         questDialog.setContentView(R.layout.dialog_questitem_finished_child);
