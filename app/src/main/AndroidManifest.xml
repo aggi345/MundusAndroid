@@ -12,19 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.CreateRewardActivity"></activity>
+        <activity android:name=".Activities.ChildActivities.QuestLogChildActivity"
+            android:exported="true"/>
+        <activity android:name=".Activities.ChildActivities.MarketplaceChildActivity"
+
+            />
+
+
+        <activity android:name=".Activities.CreateRewardActivity" />
         <activity android:name=".Activities.CreateQuestActivity" />
         <activity android:name=".Activities.MarketplaceParentActivity" />
-
         <activity android:name=".Activities.ProfileManagementActivity" />
         <activity android:name=".Activities.StatisticsActivity" />
-        <activity android:name=".Activities.ParentActivities.MarketplaceParentActivity"
-            android:exported="true"
-            ></activity>
         <activity
-            android:name=".Activities.ParentActivities.QuestLogParentActivity"/>
-<!--            android:exported="true" -->
-
+            android:name=".Activities.ParentActivities.MarketplaceParentActivity"
+            />
+        <activity android:name=".Activities.ParentActivities.QuestLogParentActivity" /> <!-- android:exported="true" -->
         <activity android:name=".Activities.ChildMainMenuActivity" />
         <activity android:name=".Activities.ParentMainMenuActivity" />
         <activity android:name=".Activities.PersonLoginActivity" />

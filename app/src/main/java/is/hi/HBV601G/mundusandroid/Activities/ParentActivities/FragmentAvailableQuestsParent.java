@@ -52,10 +52,10 @@ public class FragmentAvailableQuestsParent extends Fragment {
         Account account = new Account("Tester", "test@test.is", "123", null);
         Parent parent = new Parent("Tester", "123", account);
         account.setParent(parent);
-        lstQuest.add(new Quest("Vaccum", "Description", 1337, 69, LocalDate.now(), parent));
-        lstQuest.add(new Quest("Clean", "Description", 1337, 69, LocalDate.now(), parent));
-        lstQuest.add(new Quest("Mow the lawn", "Description", 1337, 69, LocalDate.now(), parent));
-        lstQuest.add(new Quest("Do the dishes", "Description", 1337, 69, LocalDate.now(), parent));
+        lstQuest.add(new Quest("Vaccum", "Description", 1337, 69, "Deadline", parent));
+        lstQuest.add(new Quest("Clean", "Description", 1337, 69, "Deadline", parent));
+        lstQuest.add(new Quest("Mow the lawn", "Description", 1337, 69, "Deadline", parent));
+        lstQuest.add(new Quest("Do the dishes", "Description", 1337, 69, "Deadline", parent));
 
     }
 }

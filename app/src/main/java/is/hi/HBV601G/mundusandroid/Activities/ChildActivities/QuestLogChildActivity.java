@@ -7,29 +7,32 @@ import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 
-import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.FragmentAvailableRewardsParent;
-import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.FragmentPurchasedRewardsParent;
+import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.FragmentAvailableQuestsParent;
+import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.FragmentFinishedQuestsParent;
+import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.FragmentInProgressQuestsParent;
 import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.ViewPagerAdapter;
 import is.hi.HBV601G.mundusandroid.R;
 
-public class MarketplaceChildActivity extends AppCompatActivity {
+public class QuestLogChildActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_marketplace_child);
+        setContentView(R.layout.activity_quest_log_child);
 
-        tabLayout = (TabLayout) findViewById(R.id.marketPlaceChildTablayout_id);
-        viewPager = (ViewPager) findViewById(R.id.marketPlaceChild_viewpager_id);
+        tabLayout = (TabLayout) findViewById(R.id.questLogChildTablayout_id);
+        viewPager = (ViewPager) findViewById(R.id.questLogChild_viewpager_id);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         // Add Fragment Here
-        adapter.AddFragment(new FragmentAvailableRewardsChild(),"Available");
-        adapter.AddFragment(new FragmentPurchasedRewardsChild(),"My Rewards");
-
+        adapter.AddFragment(new FragmentAvailableQuestsChild(), "Available");
+        adapter.AddFragment(new FragmentAssignedQuestsChild(), "My Quests");
+        adapter.AddFragment(new FragmentFinishedQuestsChild(), "Finished");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -37,6 +40,8 @@ public class MarketplaceChildActivity extends AppCompatActivity {
         // Remove Shadow From the action bar
 
         //ActionBar actionBar = getSupportActionBar();
-        //actionBar.setElevation(0);tentView(R.layout.activity_marketplace_parent);
+        //actionBar.setElevation(0);
+
+
     }
 }

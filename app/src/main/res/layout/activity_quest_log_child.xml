@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".Activities.ChildActivities.MarketplaceChildActivity">
+    android:orientation="vertical"
+    tools:context=".Activities.ChildActivities.QuestLogChildActivity">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/marketPlaceChildTablayout_id"
+        android:id="@+id/questLogChildTablayout_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -16,7 +17,7 @@
         app:tabMode="fixed"></com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/marketPlaceChild_viewpager_id"
+        android:id="@+id/questLogChild_viewpager_id"
         android:layout_width="406dp"
         android:layout_height="596dp"
         android:layout_marginTop="8dp"
@@ -25,6 +26,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/marketPlaceChildTablayout_id"></androidx.viewpager.widget.ViewPager>
+        app:layout_constraintTop_toBottomOf="@+id/questLogChildTablayout_id"></androidx.viewpager.widget.ViewPager>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

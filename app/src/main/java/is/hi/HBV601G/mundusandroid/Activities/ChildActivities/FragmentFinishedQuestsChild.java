@@ -1,4 +1,4 @@
-package is.hi.HBV601G.mundusandroid.Activities.ParentActivities;
+package is.hi.HBV601G.mundusandroid.Activities.ChildActivities;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -22,20 +22,20 @@ import is.hi.HBV601G.mundusandroid.Entities.Quest;
 import is.hi.HBV601G.mundusandroid.QuestRecyclerViewAdapter;
 import is.hi.HBV601G.mundusandroid.R;
 
-public class FragmentFinishedQuestsParent extends Fragment {
+public class FragmentFinishedQuestsChild extends Fragment {
     View v;
     private RecyclerView myreyclerview;
     private List<Quest> lstQuest;
 
-    public FragmentFinishedQuestsParent() {
+    public FragmentFinishedQuestsChild() {
 
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.availablequests_parent_fragment, container, false);
-        myreyclerview = (RecyclerView) v.findViewById(R.id.availableQuestsParentRecycleView);
+        v = inflater.inflate(R.layout.availablequests_child_fragment, container, false);
+        myreyclerview = (RecyclerView) v.findViewById(R.id.availableQuestsChildRecycleView);
         QuestRecyclerViewAdapter recyclerAdapter = new QuestRecyclerViewAdapter(getContext(), lstQuest);
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myreyclerview.setAdapter(recyclerAdapter);
@@ -57,5 +57,4 @@ public class FragmentFinishedQuestsParent extends Fragment {
         lstQuest.add(new Quest("Do the dishes", "Description", 1337, 69, "Deadline", parent));
 
     }
-
 }
