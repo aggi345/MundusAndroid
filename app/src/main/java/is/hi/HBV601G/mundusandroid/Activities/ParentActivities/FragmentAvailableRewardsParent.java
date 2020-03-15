@@ -16,17 +16,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import is.hi.HBV601G.mundusandroid.Entities.Account;
 import is.hi.HBV601G.mundusandroid.Entities.Parent;
 import is.hi.HBV601G.mundusandroid.Entities.Reward;
+import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
+import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
 import is.hi.HBV601G.mundusandroid.R;
 import is.hi.HBV601G.mundusandroid.RewardRecyclerViewAdapter;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class FragmentAvailableRewardsParent extends Fragment {
     View v;
     private RecyclerView myreyclerview;
     private List<Reward> lstReward;
+    private RewardRecyclerViewAdapter recyclerAdapter;
+
+
+    //Http
+    private Retrofit retrofit;
+    private MundusAPI mundusAPI;
+
+
 
     public FragmentAvailableRewardsParent() {
 
@@ -37,7 +53,7 @@ public class FragmentAvailableRewardsParent extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.availablerewards_parent_fragment, container, false);
         myreyclerview = (RecyclerView) v.findViewById(R.id.availableRewardsParentRecycleView);
-        RewardRecyclerViewAdapter recyclerAdapter = new RewardRecyclerViewAdapter(getContext(), lstReward);
+        recyclerAdapter = new RewardRecyclerViewAdapter(getContext(), lstReward);
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myreyclerview.setAdapter(recyclerAdapter);
         return v;
@@ -48,17 +64,41 @@ public class FragmentAvailableRewardsParent extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Network
+        retrofit = RetrofitSingleton.getInstance().getRetrofit();
+        mundusAPI = retrofit.create(MundusAPI.class);
+
 
         lstReward = new ArrayList<>();
 
+        Call<Set<Reward>> call = mundusAPI.getRewardsOfParent();
 
-        Account account = new Account("Tester", "test@test.is", "123", null);
-        Parent parent = new Parent("Tester", "123", account);
-        account.setParent(parent);
-        lstReward.add(new Reward("Ice cream", "Description", 1337, 7));
-        lstReward.add(new Reward("Ice cream", "Description", 1337, 7));
-        lstReward.add(new Reward("Ice cream", "Description", 1337, 7));
-        lstReward.add(new Reward("Ice cream", "Description", 1337, 7));
+        call.enqueue(new Callback<Set<Reward>>() {
+            @Override
+            public void onResponse(Call<Set<Reward>> call, Response<Set<Reward>> response) {
+                if(!response.isSuccessful()){
+                    //TODO Her tharf ad gera stoff
+                    System.out.println("Her1");
+                    return;
+                }
+
+
+                Set<Reward> rewards = response.body();
+                lstReward.addAll(rewards);
+                recyclerAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<Set<Reward>> call, Throwable t) {
+                //TODO Her tharf ad gera stoff
+                System.out.println("Her2");
+            }
+        });
+
+
+
+
+
 
 
     }

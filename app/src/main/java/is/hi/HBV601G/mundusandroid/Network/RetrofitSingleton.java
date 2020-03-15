@@ -22,7 +22,7 @@ public class RetrofitSingleton {
         CookieHandler cookieHandler = new CookieManager();
         CookieJar cookieJar = new JavaNetCookieJar(cookieHandler);
 
-        cookieJar.loadForRequest(BASE_URL).
+
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
