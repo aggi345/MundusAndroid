@@ -24,13 +24,18 @@ import is.hi.HBV601G.mundusandroid.Entities.Quest;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+/**
+ * An adapter for the quests in a recyclerview
+ */
 public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecyclerViewAdapter.MyViewHolder> {
 
     Context mContext;
     List<Quest> mData;
-    Dialog questDialog;
-    int mType;
+    Dialog questDialog; // A dialog that pops up when a quest is pressed
+    int mType; // Type of recyclerview 0: AvailableQuests for child, 1: Quests in progress for a child
+    // 2: Finished quests for a child, 3: Available quests for parent, 4: In progress quests for parent,
+    //5: finished quests for parent.
+    // The dialog window is different for these scenarios, the mType indicates what kind of dialog should be used
 
     public QuestRecyclerViewAdapter(Context mContext, List<Quest> mData, int type) {
         this.mContext = mContext;
@@ -73,7 +78,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
 
         return vHolder;
     }
-
+    // Lot of repetitive code in this class, might fix it if we have time.
     private void showDialogFinshedQuestsParent(Dialog questDialog, MyViewHolder vHolder) {
         questDialog.setContentView(R.layout.dialog_questitem_finished_parent);
 

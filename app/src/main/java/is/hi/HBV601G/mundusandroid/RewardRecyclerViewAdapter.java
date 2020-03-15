@@ -13,6 +13,9 @@ import java.util.List;
 
 import is.hi.HBV601G.mundusandroid.Entities.Reward;
 
+/**
+ * An adapter for the rewards in a recyclerview
+ */
 public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecyclerViewAdapter.MyRewardViewHolder> {
 
     Context mContext;
