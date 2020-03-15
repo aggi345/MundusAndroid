@@ -20,20 +20,19 @@ import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
 
+    //Network
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
 
-
+    //View
     private Button mCheckButton;
     private Button mLoginButton;
     private Button mSignupButton;
-
     private EditText mPassword;
     private EditText mEmail;
-
     private TextView mStatus;
 
-    private String cookie = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +81,9 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Gets login information from the screen and sends a login request to the server.
+     */
     private void login() {
         String email = mEmail.getText().toString();
         String password = mPassword.getText().toString();
@@ -91,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if(!response.isSuccessful()){
+                    //TODO Her þarf að meðhöndla vandamál.
                     return;
                 }
                 Integer r = response.body();
@@ -104,11 +107,15 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-
+                //TODO Her þarf að meðhöndla vandamál.
         }
         });
     }
 
+
+    /**
+     * Dummy function that will not be used. Sents a request to the server to check the login status.
+     */
     private void checkLogin() {
         Call<String> loginCall = mundusAPI.login2();
 

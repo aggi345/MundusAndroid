@@ -21,6 +21,7 @@ import android.widget.EditText;
 
 public class SignupActivity extends AppCompatActivity {
 
+    //View
     private EditText mEmail;
     private EditText mName;
     private EditText mPassword;
@@ -28,6 +29,7 @@ public class SignupActivity extends AppCompatActivity {
 
     private Button mButton;
 
+    //Network
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
 
@@ -59,17 +61,21 @@ public class SignupActivity extends AppCompatActivity {
         });
 
 
-
     }
 
 
-    private void createAccount(){
+    /**
+     *
+     */
+    private void createAccount() {
+        //Getting information from the fields.
         String email = mEmail.getText().toString();
         String name = mName.getText().toString();
         String password = mPassword.getText().toString();
         String pin = mPin.getText().toString();
 
 
+        //Creating objects.
         Parent parent = new Parent(name, pin, null);
         Account account = new Account(name, email, password, parent);
 
@@ -78,13 +84,13 @@ public class SignupActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
+                    //TODO Her þarf að meðhöndla vandamál.
                     return;
                 }
 
                 //Back to signin
-                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-                startActivity(intent);
+                startLoginActivity();
             }
 
             @Override
@@ -94,8 +100,15 @@ public class SignupActivity extends AppCompatActivity {
         });
 
 
+    }
 
 
+    /**
+     * Starts the LoginActivity
+     */
+    private void startLoginActivity() {
+        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
 }

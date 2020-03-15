@@ -8,16 +8,13 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import java.util.ArrayList;
-import java.util.Set;
 
-import is.hi.HBV601G.mundusandroid.Entities.Child;
 import is.hi.HBV601G.mundusandroid.Entities.Parent;
 import is.hi.HBV601G.mundusandroid.Entities.Person;
 import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
 import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
 import is.hi.HBV601G.mundusandroid.PersonAdapter;
 import is.hi.HBV601G.mundusandroid.R;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,7 +22,7 @@ import retrofit2.Retrofit;
 
 public class PersonSelectActivity extends AppCompatActivity {
 
-
+    //Information about person trying to login. For intent.
     private static final String PERSONID = "personId";
     private static final String PERSONNAME = "personName";
 
@@ -35,10 +32,10 @@ public class PersonSelectActivity extends AppCompatActivity {
     private PersonAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-
+    //List of all available persons.
     ArrayList<Person> persons = new ArrayList<>();
 
-
+    //Network.
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
 
@@ -48,7 +45,7 @@ public class PersonSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_select);
 
-        //Http
+        //Network
         retrofit = RetrofitSingleton.getInstance().getRetrofit();
         mundusAPI = retrofit.create(MundusAPI.class);
 
@@ -63,6 +60,9 @@ public class PersonSelectActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Initializes the person selection list.
+     */
     private void createRecyclerView() {
         mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new PersonAdapter(persons);
@@ -75,12 +75,19 @@ public class PersonSelectActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 long personId = persons.get(position).getId();
                 String personName = persons.get(position).getName();
-                moveToPersonLoginActivity(personId, personName);
+                startPersonLoginActivity(personId, personName);
             }
         });
     }
 
-    private void moveToPersonLoginActivity(long personId, String personName) {
+    /**
+     * Starts person login activity.
+     * Put personId and personName into intent to transfer information to the activity.
+     *
+     * @param personId   id of the person that is logging in.
+     * @param personName namne of the person that is logging in.
+     */
+    private void startPersonLoginActivity(long personId, String personName) {
         Intent intent = new Intent(PersonSelectActivity.this, PersonLoginActivity.class);
         intent.putExtra(PERSONNAME, personName);
         intent.putExtra(PERSONID, personId);
@@ -88,14 +95,18 @@ public class PersonSelectActivity extends AppCompatActivity {
     }
 
 
-    private void loadPersons(){
+    /**
+     * Gets all persons for the logged in account from the server.
+     */
+    private void loadPersons() {
         Call<Parent> parentCall = mundusAPI.getParent();
 
         parentCall.enqueue(new Callback<Parent>() {
             @Override
             public void onResponse(Call<Parent> call, Response<Parent> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     System.out.println(response.code());
+                    //TODO Vantar að meðhöndla vandamál, verðum að gera eh hér.
                     return;
                 }
 
