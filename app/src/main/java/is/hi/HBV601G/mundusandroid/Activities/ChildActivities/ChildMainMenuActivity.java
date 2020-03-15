@@ -1,4 +1,4 @@
-package is.hi.HBV601G.mundusandroid.Activities;
+package is.hi.HBV601G.mundusandroid.Activities.ChildActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import is.hi.HBV601G.mundusandroid.Activities.LoginActivity;
 import is.hi.HBV601G.mundusandroid.Entities.Child;
 import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
 import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
@@ -107,12 +108,12 @@ public class ChildMainMenuActivity extends AppCompatActivity {
 
 
     private void moveToQuestLog(){
-        Intent intent = new Intent(ChildMainMenuActivity.this, QuestLogParentActivity.class);
+        Intent intent = new Intent(ChildMainMenuActivity.this, QuestLogChildActivity.class);
         startActivity(intent);
     }
 
     private void moveToMarketPlace(){
-        Intent intent = new Intent(ChildMainMenuActivity.this, MarketplaceParentActivity.class);
+        Intent intent = new Intent(ChildMainMenuActivity.this, MarketplaceChildActivity.class);
         startActivity(intent);
     }
 

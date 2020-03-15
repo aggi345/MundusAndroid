@@ -1,4 +1,4 @@
-package is.hi.HBV601G.mundusandroid.Activities;
+package is.hi.HBV601G.mundusandroid.Activities.ParentActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

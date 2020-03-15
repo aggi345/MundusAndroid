@@ -1,4 +1,4 @@
-package is.hi.HBV601G.mundusandroid.Activities;
+package is.hi.HBV601G.mundusandroid.Activities.ParentActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -146,6 +146,7 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
 
         ArrayList<Child> list = new ArrayList<Child>();
         list.add(child0);
+
 
         ArrayAdapter<Child> adapter =
                 new ArrayAdapter<Child>(this, android.R.layout.simple_dropdown_item_1line, list);

@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
+import is.hi.HBV601G.mundusandroid.Activities.ChildActivities.ChildMainMenuActivity;
+import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.ParentMainMenuActivity;
 import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
 import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
 import is.hi.HBV601G.mundusandroid.R;
