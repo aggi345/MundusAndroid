@@ -2,6 +2,7 @@ package is.hi.HBV601G.mundusandroid.Activities.ParentActivities;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,20 +17,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import is.hi.HBV601G.mundusandroid.Entities.Account;
+import is.hi.HBV601G.mundusandroid.Entities.Child;
 import is.hi.HBV601G.mundusandroid.Entities.Parent;
 import is.hi.HBV601G.mundusandroid.Entities.Quest;
 import is.hi.HBV601G.mundusandroid.Entities.Reward;
+import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
+import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
 import is.hi.HBV601G.mundusandroid.R;
 import is.hi.HBV601G.mundusandroid.QuestRecyclerViewAdapter;
 import is.hi.HBV601G.mundusandroid.RewardRecyclerViewAdapter;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class FragmentPurchasedRewardsParent extends Fragment {
     View v;
     private RecyclerView myreyclerview;
     private List<Reward> lstReward;
+    private RewardRecyclerViewAdapter recyclerAdapter;
 
+
+    //Http
+    private Retrofit retrofit;
+    private MundusAPI mundusAPI;
     public FragmentPurchasedRewardsParent() {
 
     }
@@ -37,9 +51,9 @@ public class FragmentPurchasedRewardsParent extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.availablerewards_parent_fragment, container, false);
-        myreyclerview = (RecyclerView) v.findViewById(R.id.availableRewardsParentRecycleView);
-        RewardRecyclerViewAdapter recyclerAdapter = new RewardRecyclerViewAdapter(getContext(), lstReward);
+        v = inflater.inflate(R.layout.purchased_rewards_parent_fragment, container, false);
+        myreyclerview = (RecyclerView) v.findViewById(R.id.purchasedRewardsParentRecycleView);
+        recyclerAdapter = new RewardRecyclerViewAdapter(getContext(), lstReward);
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myreyclerview.setAdapter(recyclerAdapter);
         return v;
@@ -50,14 +64,45 @@ public class FragmentPurchasedRewardsParent extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        retrofit = RetrofitSingleton.getInstance().getRetrofit();
+        mundusAPI = retrofit.create(MundusAPI.class);
+
+
         lstReward = new ArrayList<>();
 
+        Call<Set<Pair<Child, Reward>>> call = mundusAPI.getPurchasedRewardOfParent();
 
-        Account account = new Account("Tester", "test@test.is", "123", null);
+        call.enqueue(new Callback<Set<Pair<Child, Reward>>>() {
+            @Override
+            public void onResponse(Call<Set<Pair<Child, Reward>>> call, Response<Set<Pair<Child, Reward>>> response) {
+                if(!response.isSuccessful()){
+                    //TODO Her tharf ad gera stoff
+                    System.out.println("Her1");
+                    return;
+                }
+
+
+                Set<Pair<Child, Reward>> rewardsPairs = response.body();
+                // TODO klára þetta
+                /*lstReward.addAll(rewards);
+                recyclerAdapter.notifyDataSetChanged();*/
+            }
+
+            @Override
+            public void onFailure(Call<Set<Pair<Child, Reward>>> call, Throwable t) {
+                //TODO Her tharf ad gera stoff
+                System.out.println("Her2");
+            }
+        });
+
+
+        /*Account account = new Account("Tester", "test@test.is", "123", null);
         Parent parent = new Parent("Tester", "123", account);
         account.setParent(parent);
         lstReward.add(new Reward("Lollipop", "Description", 1337, 7));
         lstReward.add(new Reward("Lollipop", "Description", 1337, 7));
+
+         */
 
     }
 }

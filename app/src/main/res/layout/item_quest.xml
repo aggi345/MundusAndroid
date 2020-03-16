@@ -37,5 +37,11 @@
             android:layout_height="wrap_content"
             android:text="Assignee: N/A"
             android:id="@+id/item_quest_assignee"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status"
+            android:id="@+id/item_quest_status"
+            />
     </LinearLayout>
     </LinearLayout>

@@ -42,13 +42,9 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
         holder.tv_description.setText(mData.get(position).getDescription()+"");
         holder.tv_lvlreq.setText("Level: " + mData.get(position).getLevelRequired()+"");
         holder.tv_price.setText("Price: " + mData.get(position).getPrice());
-        /*String assigne = mData.get(position).getAssignee().getName();
-        if (assigne == null) {
-            holder.tv_assignee.setText("N/A");
-        }
-        else {
-            holder.tv_assignee.setText(assigne);
-        }*/
+
+
+        // TODO laga svo hægt sé að endurnýta þetta fyrir purchased rewards
     }
 
     @Override
