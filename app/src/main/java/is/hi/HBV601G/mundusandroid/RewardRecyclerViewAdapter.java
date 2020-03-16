@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,7 +27,7 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
         this.mData = mData;
     }
 
-    @NonNull // Non null er hvegi í myndbandinu
+    @NonNull // Non null er hvergi í myndbandinu
     @Override
     public MyRewardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
@@ -42,6 +43,8 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
         holder.tv_description.setText(mData.get(position).getDescription()+"");
         holder.tv_lvlreq.setText("Level: " + mData.get(position).getLevelRequired()+"");
         holder.tv_price.setText("Price: " + mData.get(position).getPrice());
+
+        //TODO: Setja binder á takkana
 
 
         // TODO laga svo hægt sé að endurnýta þetta fyrir purchased rewards
@@ -59,6 +62,8 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
         private TextView tv_description;
         private TextView tv_lvlreq;
         private TextView tv_price;
+        private Button bt_buy;
+        private Button bt_delete;
         public MyRewardViewHolder(@NonNull View itemView) { // NonNull var ekki í myndbaninu en kemur samt hérna
             super(itemView);
 
@@ -66,6 +71,9 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
             tv_description = (TextView) itemView.findViewById(R.id.item_reward_description);
             tv_lvlreq = (TextView) itemView.findViewById(R.id.item_reward_lvlreq);
             tv_price = (TextView) itemView.findViewById(R.id.item_reward_price);
+
+            bt_buy = (Button) itemView.findViewById(R.id.item_reward_buyButton);
+            bt_delete = (Button) itemView.findViewById(R.id.item_reward_deleteButton);
         }
     }
 
