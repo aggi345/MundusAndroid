@@ -44,6 +44,9 @@ public interface MundusAPI {
     @GET("getSmallChild")
     Call<Child> getSmallChild();
 
+    @GET("getChildren")
+    Call<Set<Child>> getChildren();
+
     @GET("getSmallParent")
     Call<Parent> getSmallParent();
 
@@ -80,8 +83,8 @@ public interface MundusAPI {
     @GET("getInFinishedQuestsOfParent")
     Call<Set<Quest>> getInFinishedQuestsOfParent();
 
-    @GET("getAlldQuestsOfParent")
-    Call<Set<Quest>> getAlldQuestsOfParent();
+    @GET("getAllQuestsOfParent")
+    Call<Set<Quest>> getAllQuestsOfParent();
 
     @GET("getAssignedQuestsOfChild")
     Call<Set<Quest>> getAssignedQuestsOfChild();
