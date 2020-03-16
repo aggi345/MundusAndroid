@@ -33,9 +33,9 @@ public class PersonLoginActivity extends AppCompatActivity {
     private Button mLogin;
     private TextView mErrorMessage;
 
+    //Information about the person that is logging in.
     private String personName;
     private long personId;
-
 
 
     @Override
@@ -44,7 +44,7 @@ public class PersonLoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_person_login);
 
 
-        //Http
+        //Network
         retrofit = RetrofitSingleton.getInstance().getRetrofit();
         mundusAPI = retrofit.create(MundusAPI.class);
 
@@ -55,6 +55,7 @@ public class PersonLoginActivity extends AppCompatActivity {
         mErrorMessage = findViewById(R.id.message_textView);
 
 
+        //Handlers
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,24 +63,23 @@ public class PersonLoginActivity extends AppCompatActivity {
             }
         });
 
-
-
         loadExtras();
-
-
 
     }
 
 
-    private void authenticatePin(){
+    /**
+     * Gets the pin that was entered into the field and sends an authentication request to the server.
+     */
+    private void authenticatePin() {
         Call<ResponseBody> authCall = mundusAPI.PinAuth(personId, mPin.getText().toString());
 
         authCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     System.out.println(response.code());
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         mErrorMessage.setText("Wrong pin");
                     }
                     return;
@@ -88,7 +88,6 @@ public class PersonLoginActivity extends AppCompatActivity {
                 mErrorMessage.setText("Worked");
 
                 checkPerson();
-
 
             }
 
@@ -99,30 +98,31 @@ public class PersonLoginActivity extends AppCompatActivity {
         });
 
 
-
     }
 
+    /**
+     * Gets what type of person is logged into the server.
+     * Child or Parent.
+     * If Parent then starts parentMainMenu, else childMainMenu.
+     */
     private void checkPerson() {
         Call<Integer> personCheckCall = mundusAPI.getPersonType();
-        System.out.println("her1");
 
         personCheckCall.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                System.out.println("her");
-                if(!response.isSuccessful()){
-                    System.out.println(response.code());
-                   moveToSelectPerson();
-                   return;
+                if (!response.isSuccessful()) {
+                    startPersonSelectActivity();
+                    return;
                 }
 
                 Integer type = response.body();
                 System.out.println(type);
 
-                if(type == 1){
-                    moveToParentMenu();
-                }else if(type == 0){
-                    moveToChildMenu();
+                if (type == 1) {
+                    startParentMainMenuActivity();
+                } else if (type == 0) {
+                    startChildMainMenuActivity();
                 }
 
             }
@@ -135,10 +135,14 @@ public class PersonLoginActivity extends AppCompatActivity {
         });
     }
 
-    private void loadExtras(){
+    /**
+     * Gets extras from the intent.
+     * personId and personName
+     */
+    private void loadExtras() {
         personId = getIntent().getLongExtra(PersonSelectActivity.getPERSONID(), -1);
-        if(personId == -1){
-            moveToSelectPerson();
+        if (personId == -1) {
+            startPersonSelectActivity();
             return;
         }
 
@@ -148,17 +152,26 @@ public class PersonLoginActivity extends AppCompatActivity {
     }
 
 
-    private void moveToSelectPerson(){
+    /**
+     * Starts PersonSelectActivity.
+     */
+    private void startPersonSelectActivity() {
         Intent intent = new Intent(PersonLoginActivity.this, PersonSelectActivity.class);
         startActivity(intent);
     }
 
-    private void moveToParentMenu(){
+    /**
+     * Starts ParentMainMenuActivity.
+     */
+    private void startParentMainMenuActivity() {
         Intent intent = new Intent(PersonLoginActivity.this, ParentMainMenuActivity.class);
         startActivity(intent);
     }
 
-    private void moveToChildMenu(){
+    /**
+     * Starts ChildMainMenuActivity.
+     */
+    private void startChildMainMenuActivity() {
         Intent intent = new Intent(PersonLoginActivity.this, ChildMainMenuActivity.class);
         startActivity(intent);
     }

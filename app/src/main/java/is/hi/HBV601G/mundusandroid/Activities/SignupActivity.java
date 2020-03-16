@@ -65,7 +65,8 @@ public class SignupActivity extends AppCompatActivity {
 
 
     /**
-     *
+     * Gets information from the screen and creates an Account object from it.
+     * Sends a create request to the server to create the account.
      */
     private void createAccount() {
         //Getting information from the fields.
@@ -81,6 +82,7 @@ public class SignupActivity extends AppCompatActivity {
 
         Call<ResponseBody> call = mundusAPI.signup(account);
 
+        //Http request
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
