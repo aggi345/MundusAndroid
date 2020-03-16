@@ -22,6 +22,8 @@ public class RetrofitSingleton {
         CookieHandler cookieHandler = new CookieManager();
         CookieJar cookieJar = new JavaNetCookieJar(cookieHandler);
 
+
+
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(new OkHttpClient().newBuilder().cookieJar(cookieJar).build())

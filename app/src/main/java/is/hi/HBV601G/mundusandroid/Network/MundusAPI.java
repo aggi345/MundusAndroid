@@ -54,6 +54,9 @@ public interface MundusAPI {
     @POST("createReward")
     Call<ResponseBody> createReward(@Body Reward reward);
 
+    @GET("getRewardsOfParent")
+    Call<Set<Reward>> getRewardsOfParent();
+
 
 
 
