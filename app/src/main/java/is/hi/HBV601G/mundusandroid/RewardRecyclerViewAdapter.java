@@ -21,10 +21,12 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
 
     Context mContext;
     List<Reward> mData;
+    int mType;
 
-    public RewardRecyclerViewAdapter(Context mContext, List<Reward> mData) {
+    public RewardRecyclerViewAdapter(Context mContext, List<Reward> mData, int mType) {
         this.mContext = mContext;
         this.mData = mData;
+        this.mType = mType;
     }
 
     @NonNull // Non null er hvergi í myndbandinu
@@ -44,6 +46,26 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
         holder.tv_lvlreq.setText("Level: " + mData.get(position).getLevelRequired()+"");
         holder.tv_price.setText("Price: " + mData.get(position).getPrice());
 
+
+        switch (mType) {
+            case 0:
+                holder.bt_grant.setVisibility(View.GONE);
+                holder.bt_delete.setVisibility(View.GONE);
+                break;
+            case 1:
+                holder.bt_grant.setVisibility(View.GONE);
+                holder.bt_delete.setVisibility(View.GONE);
+                holder.bt_buy.setVisibility(View.GONE);
+                break;
+            case 2:
+                holder.bt_buy.setVisibility(View.GONE);
+                holder.bt_grant.setVisibility(View.GONE);
+                break;
+            case 3:
+                holder.bt_buy.setVisibility(View.GONE);
+                holder.bt_delete.setVisibility(View.GONE);
+                break;
+        }
         //TODO: Setja binder á takkana
 
 
@@ -64,6 +86,7 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
         private TextView tv_price;
         private Button bt_buy;
         private Button bt_delete;
+        Button bt_grant;
         public MyRewardViewHolder(@NonNull View itemView) { // NonNull var ekki í myndbaninu en kemur samt hérna
             super(itemView);
 
@@ -74,6 +97,7 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
 
             bt_buy = (Button) itemView.findViewById(R.id.item_reward_buyButton);
             bt_delete = (Button) itemView.findViewById(R.id.item_reward_deleteButton);
+            bt_grant = (Button) itemView.findViewById(R.id.item_reward_grantButton);
         }
     }
 

@@ -50,7 +50,7 @@ public class FragmentPurchasedRewardsChild extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.availablerewards_child_fragment, container, false);
         myreyclerview = (RecyclerView) v.findViewById(R.id.availableRewardsChildRecycleView);
-        recyclerAdapter = new RewardRecyclerViewAdapter(getContext(), lstReward);
+        recyclerAdapter = new RewardRecyclerViewAdapter(getContext(), lstReward, 1);
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myreyclerview.setAdapter(recyclerAdapter);
         return v;
