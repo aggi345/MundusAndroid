@@ -1,5 +1,7 @@
 package is.hi.HBV601G.mundusandroid.Network;
 
+import android.util.Pair;
+
 import java.util.Set;
 
 import is.hi.HBV601G.mundusandroid.Entities.Account;
@@ -42,6 +44,9 @@ public interface MundusAPI {
     @GET("getSmallChild")
     Call<Child> getSmallChild();
 
+    @GET("getChildren")
+    Call<Set<Child>> getChildren();
+
     @GET("getSmallParent")
     Call<Parent> getSmallParent();
 
@@ -57,9 +62,35 @@ public interface MundusAPI {
     @GET("getRewardsOfParent")
     Call<Set<Reward>> getRewardsOfParent();
 
+    @GET("getPurchasedRewardOfParent")
+    Call<Set<Pair<Child, Reward>>> getPurchasedRewardOfParent();
+
+    @GET("getRewardsOfChild")
+    Call<Set<Reward>> getRewardsOfChild();
+
+    @GET("getAvailableRewardsOfChild")
+    Call<Set<Reward>> getAvailableRewardsOfChild();
 
 
 
+
+    @GET("getAvailableQuestsOfParent")
+    Call<Set<Quest>> getAvailableQuestsOfParent();
+
+    @GET("getInProgressQuestsOfParent")
+    Call<Set<Quest>> getInProgressQuestsOfParent();
+
+    @GET("getInFinishedQuestsOfParent")
+    Call<Set<Quest>> getInFinishedQuestsOfParent();
+
+    @GET("getAllQuestsOfParent")
+    Call<Set<Quest>> getAllQuestsOfParent();
+
+    @GET("getAssignedQuestsOfChild")
+    Call<Set<Quest>> getAssignedQuestsOfChild();
+
+    @GET("getDoneQuestsOfChild")
+    Call<Set<Quest>> getDoneQuestsOfChild();
 
 
 

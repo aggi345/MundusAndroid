@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -24,13 +26,18 @@ import is.hi.HBV601G.mundusandroid.Entities.Quest;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+/**
+ * An adapter for the quests in a recyclerview
+ */
 public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecyclerViewAdapter.MyViewHolder> {
 
     Context mContext;
     List<Quest> mData;
-    Dialog questDialog;
-    int mType;
+    Dialog questDialog; // A dialog that pops up when a quest is pressed
+    int mType; // Type of recyclerview 0: AvailableQuests for child, 1: Quests in progress for a child
+    // 2: Finished quests for a child, 3: Available quests for parent, 4: In progress quests for parent,
+    //5: finished quests for parent.
+    // The dialog window is different for these scenarios, the mType indicates what kind of dialog should be used
 
     public QuestRecyclerViewAdapter(Context mContext, List<Quest> mData, int type) {
         this.mContext = mContext;
@@ -73,7 +80,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
 
         return vHolder;
     }
-
+    // Lot of repetitive code in this class, might fix it if we have time.
     private void showDialogFinshedQuestsParent(Dialog questDialog, MyViewHolder vHolder) {
         questDialog.setContentView(R.layout.dialog_questitem_finished_parent);
 
@@ -201,13 +208,29 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
         holder.tv_name.setText(mData.get(position).getName());
         holder.tv_xp.setText("XP: "+ mData.get(position).getXp()+"");
         holder.tv_coins.setText("Coins: " + mData.get(position).getCoins()+"");
-        /*String assigne = mData.get(position).getAssignee().getName();
+        Child assigne = mData.get(position).getAssignee();
         if (assigne == null) {
             holder.tv_assignee.setText("N/A");
         }
         else {
-            holder.tv_assignee.setText(assigne);
-        }*/
+            String name = assigne.getName();
+            holder.tv_assignee.setText("Assignee: " + name);
+        }
+
+        boolean done = mData.get(position).getDone();
+        boolean confirmed = mData.get(position).getConfirmed();
+        if (done && !confirmed) {
+            holder.tv_status.setText("Status: Pending Confirmation");
+        }
+        else if (confirmed) {
+            holder.tv_status.setText("Status: Completed");
+        }
+        else if(assigne == null) {
+            holder.tv_status.setText("Status: Available");
+        }
+        else {
+            holder.tv_status.setText("Status: In Progress");
+        }
     }
 
     @Override
@@ -222,6 +245,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
         private TextView tv_xp;
         private TextView tv_coins;
         private TextView tv_assignee;
+        private TextView tv_status;
 
         public MyViewHolder(@NonNull View itemView) { // NonNull var ekki í myndbaninu en kemur samt hérna
             super(itemView);
@@ -231,6 +255,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
             tv_xp = (TextView) itemView.findViewById(R.id.item_quest_xp);
             tv_coins = (TextView) itemView.findViewById(R.id.item_quest_coins);
             tv_assignee = (TextView) itemView.findViewById(R.id.item_quest_assignee);
+            tv_status = (TextView) itemView.findViewById(R.id.item_quest_status);
         }
     }
 
