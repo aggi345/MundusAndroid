@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="is.hi.HBV601G.mundusandroid">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.SignupActivity"></activity>
+        <activity android:name=".Activities.ChildActivities.QuestLogChildActivity"
+            android:exported="true"/>
+        <activity android:name=".Activities.ChildActivities.MarketplaceChildActivity"
+
+            />
+
+
+        <activity android:name=".Activities.ParentActivities.CreateRewardActivity" />
+        <activity android:name=".Activities.ParentActivities.CreateQuestActivity" />
+        <activity android:name=".Activities.MarketplaceParentActivity" />
+        <activity android:name=".Activities.ParentActivities.ProfileManagementActivity" />
+        <activity android:name=".Activities.ParentActivities.StatisticsActivity" />
+        <activity
+            android:name=".Activities.ParentActivities.MarketplaceParentActivity"
+            />
+        <activity android:name=".Activities.ParentActivities.QuestLogParentActivity" /> <!-- android:exported="true" -->
+        <activity android:name=".Activities.ChildActivities.ChildMainMenuActivity" />
+        <activity android:name=".Activities.ParentActivities.ParentMainMenuActivity" />
+        <activity android:name=".Activities.PersonLoginActivity" />
+        <activity android:name=".Activities.PersonSelectActivity" />
+        <activity android:name=".Activities.SignupActivity" />
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +45,5 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

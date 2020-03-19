@@ -2,6 +2,7 @@ package is.hi.HBV601G.mundusandroid.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,31 +20,50 @@ import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
 
+    //Network
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
 
-    private TextView textView;
-    private TextView textView2;
+    //View
     private Button mCheckButton;
     private Button mLoginButton;
-
+    private Button mSignupButton;
     private EditText mPassword;
     private EditText mEmail;
+    private TextView mStatus;
 
-    private String cookie = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        textView = findViewById(R.id.textView2);
-        textView2 = findViewById(R.id.textView3);
 
-        mPassword = findViewById(R.id.password_field);
-        mEmail= findViewById(R.id.email_field);
+        //Network
+        retrofit = RetrofitSingleton.getInstance().getRetrofit();
+        mundusAPI = retrofit.create(MundusAPI.class);
 
+
+        //Find items
+        mPassword = findViewById(R.id.password_editView);
+        mEmail= findViewById(R.id.email_editView);
+        mSignupButton = findViewById(R.id.signup_button);
+        mStatus = findViewById(R.id.status_textView);
         mCheckButton = (Button)findViewById(R.id.check_button);
+        mLoginButton = (Button)findViewById(R.id.login_button);
+
+
+
+        //Events
+        mSignupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
+            }
+        });
+
         mCheckButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mLoginButton = (Button)findViewById(R.id.login_button);
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,12 +79,11 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-         retrofit = RetrofitSingleton.getInstance().getRetrofit();
-
-         mundusAPI = retrofit.create(MundusAPI.class);
-
     }
 
+    /**
+     * Gets login information from the screen and sends a login request to the server.
+     */
     private void login() {
         String email = mEmail.getText().toString();
         String password = mPassword.getText().toString();
@@ -75,21 +93,29 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if(!response.isSuccessful()){
+                    //TODO Her þarf að meðhöndla vandamál.
                     return;
                 }
-
                 Integer r = response.body();
-                textView.setText(r.toString());
+
+                if(r != -1) {
+                    Intent intent = new Intent(LoginActivity.this, PersonSelectActivity.class);
+                    startActivity(intent);
+                }
 
             }
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-                textView.setText(t.getMessage());
-            }
+                //TODO Her þarf að meðhöndla vandamál.
+        }
         });
     }
 
+
+    /**
+     * Dummy function that will not be used. Sents a request to the server to check the login status.
+     */
     private void checkLogin() {
         Call<String> loginCall = mundusAPI.login2();
 
@@ -101,12 +127,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 String r = response.body();
-                textView2.setText(r.toString());
+                mStatus.setText(r + "");
+
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                textView2.setText(t.getMessage());
+
             }
         });
     }
