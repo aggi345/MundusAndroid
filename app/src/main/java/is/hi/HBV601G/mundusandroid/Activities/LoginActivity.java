@@ -25,12 +25,10 @@ public class LoginActivity extends AppCompatActivity {
     private MundusAPI mundusAPI;
 
     //View
-    private Button mCheckButton;
     private Button mLoginButton;
     private Button mSignupButton;
     private EditText mPassword;
     private EditText mEmail;
-    private TextView mStatus;
 
 
 
@@ -49,8 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         mPassword = findViewById(R.id.password_editView);
         mEmail= findViewById(R.id.email_editView);
         mSignupButton = findViewById(R.id.signup_button);
-        mStatus = findViewById(R.id.status_textView);
-        mCheckButton = (Button)findViewById(R.id.check_button);
         mLoginButton = (Button)findViewById(R.id.login_button);
 
 
@@ -64,12 +60,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mCheckButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkLogin();
-            }
-        });
 
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +117,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 String r = response.body();
-                mStatus.setText(r + "");
 
             }
 

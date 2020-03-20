@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.LoginActivity">
+    tools:context=".Activities.LoginActivity"
+    android:background="@drawable/image_desertwatch">
 
     <EditText
         android:id="@+id/email_editView"
@@ -13,6 +14,9 @@
         android:layout_marginTop="76dp"
         android:ems="10"
         android:hint="Email"
+        android:background="@drawable/textedit_background"
+        android:drawableLeft="@drawable/icons_email"
+        android:fontFamily="@font/yatra_one"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -20,23 +24,15 @@
         app:layout_constraintTop_toBottomOf="@+id/singin_textView" />
 
     <Button
-        android:id="@+id/check_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="136dp"
-        android:text="Check Status"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/signup_button"
-        app:layout_constraintHorizontal_bias="0.941"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="84dp"
         android:text="Login"
+        android:fontFamily="@font/yatra_one"
+        android:textColor="#090F6B"
+        android:textSize="40sp"
+        android:background="@drawable/button_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,6 +45,9 @@
         android:layout_marginTop="76dp"
         android:ems="10"
         android:hint="Password"
+        android:background="@drawable/textedit_background"
+        android:drawableLeft="@drawable/icon_pass"
+        android:fontFamily="@font/yatra_one"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +58,11 @@
         style="@android:style/Widget.Material.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Signup"
+        android:text="+"
+        android:fontFamily="@font/yatra_one"
+        android:textColor="#090F6B"
+        android:textSize="40sp"
+        android:background="@drawable/button_round"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -73,19 +76,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
         android:text="Sign In"
-        android:textSize="36sp"
+        android:fontFamily="@font/yatra_one"
+        android:textColor="#CCCC06"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/status_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/email_editView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/singin_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
