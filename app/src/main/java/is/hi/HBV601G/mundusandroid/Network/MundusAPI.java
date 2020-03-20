@@ -6,6 +6,7 @@ import java.util.Set;
 
 import is.hi.HBV601G.mundusandroid.Entities.Account;
 import is.hi.HBV601G.mundusandroid.Entities.Child;
+import is.hi.HBV601G.mundusandroid.Entities.ChildRewardPair;
 import is.hi.HBV601G.mundusandroid.Entities.Parent;
 import is.hi.HBV601G.mundusandroid.Entities.Quest;
 import is.hi.HBV601G.mundusandroid.Entities.Reward;
@@ -71,7 +72,8 @@ public interface MundusAPI {
     @GET("getAvailableRewardsOfChild")
     Call<Set<Reward>> getAvailableRewardsOfChild();
 
-
+    @GET("getChildRewardPair")
+    Call<Set<ChildRewardPair>> getChildRewardPair();
 
 
     @GET("getAvailableQuestsOfParent")

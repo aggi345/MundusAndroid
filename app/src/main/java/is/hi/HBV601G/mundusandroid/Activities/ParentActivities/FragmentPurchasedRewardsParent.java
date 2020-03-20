@@ -22,6 +22,7 @@ import java.util.Set;
 
 import is.hi.HBV601G.mundusandroid.Entities.Account;
 import is.hi.HBV601G.mundusandroid.Entities.Child;
+import is.hi.HBV601G.mundusandroid.Entities.ChildRewardPair;
 import is.hi.HBV601G.mundusandroid.Entities.Parent;
 import is.hi.HBV601G.mundusandroid.Entities.Quest;
 import is.hi.HBV601G.mundusandroid.Entities.Reward;
@@ -39,7 +40,7 @@ import retrofit2.Retrofit;
 public class FragmentPurchasedRewardsParent extends Fragment {
     View v;
     private RecyclerView myreyclerview;
-    private List<Pair<Child, Reward>> pairRewards;
+    private List<ChildRewardPair> pairRewards;
     private RewardPurchasedRecyclerViewAdapter recyclerAdapter;
 
 
@@ -76,26 +77,21 @@ public class FragmentPurchasedRewardsParent extends Fragment {
 
         pairRewards = new ArrayList<>();
 
-        Call<Set<Child>> call = mundusAPI.getChildren();
+        Call<Set<ChildRewardPair>> call = mundusAPI.getChildRewardPair();
 
-        call.enqueue(new Callback<Set<Child>>() {
+        call.enqueue(new Callback<Set<ChildRewardPair>>() {
             @Override
-            public void onResponse(Call<Set<Child>> call, Response<Set<Child>> response) {
+            public void onResponse(Call<Set<ChildRewardPair>> call, Response<Set<ChildRewardPair>> response) {
                 if(!response.isSuccessful()){
                     //TODO Her tharf ad gera stoff
                     System.out.println("Her1");
                     return;
                 }
 
-                Set<Child> children = response.body();
-                Set<Pair<Child, Reward>> childReward = new HashSet<>();
+                Set<ChildRewardPair> childRewardPairs = response.body();
 
-                for (Child c: children) {
-                    List<Long> rewardsID = c.getRewards();
-                    for (Long l: rewardsID) {
-                        Reward r = null;
-                    }
-                }
+                pairRewards.addAll(childRewardPairs);
+
                 recyclerAdapter.notifyDataSetChanged();
                 // TODO klára þetta
                 /*lstReward.addAll(rewards);
@@ -103,7 +99,7 @@ public class FragmentPurchasedRewardsParent extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<Set<Child>> call, Throwable t) {
+            public void onFailure(Call<Set<ChildRewardPair>> call, Throwable t) {
                 //TODO Her tharf ad gera stoff
                 System.out.println("Her2");
             }
