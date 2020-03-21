@@ -119,6 +119,10 @@ public interface MundusAPI {
     Call<ResponseBody> assignQuest(@Field("questId") long questId);
 
     @FormUrlEncoded
+    @POST("unassignQuest")
+    Call<ResponseBody> unassignQuest(@Field("questId") long questId);
+
+    @FormUrlEncoded
     @POST("markQuestAsConfirmed")
     Call<ResponseBody> markQuestAsConfirmed(@Field("questId") long questId);
 

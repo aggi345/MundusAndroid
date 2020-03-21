@@ -150,7 +150,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                     }
                 });
 
-                confirmButton.setOnClickListener(new View.OnClickListener() {
+                denyButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         int position = vHolder.getAdapterPosition();
@@ -355,12 +355,48 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 TextView dialog_quest_Description = (TextView) questDialog.findViewById(R.id.dialog_questitem_finished_child_questDescription);
                 TextView dialog_quest_XP = (TextView) questDialog.findViewById(R.id.dialog_questitem_finished_child_questXP);
                 TextView dialog_quest_coins = (TextView) questDialog.findViewById(R.id.dialog_questitem_finished_child_questCoins);
-
+                Button notDoneButton = (Button)  questDialog.findViewById(R.id.dialog_questitem_finished_child_notCompleteButton);
                 dialog_quest_name.setText(mData.get(vHolder.getAdapterPosition()).getName());
                 dialog_quest_Description.setText(mData.get(vHolder.getAdapterPosition()).getDescription());
                 dialog_quest_XP.setText("XP: " + mData.get(vHolder.getAdapterPosition()).getXp());
                 dialog_quest_coins.setText("Coins: " + mData.get(vHolder.getAdapterPosition()).getCoins());
 
+                notDoneButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int position = vHolder.getAdapterPosition();
+                        long questId = mData.get(position).getId();
+                        System.out.println("Unassign quest with Id: " + questId);
+                        Retrofit retrofit = RetrofitSingleton.getInstance().getRetrofit();
+                        MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
+                        Call<ResponseBody> call = mundusAPI.markQuestAsNotDone(questId);
+
+                        call.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if(!response.isSuccessful()){
+                                    //TODO Her tharf ad gera stoff
+                                    System.out.println("Her1");
+                                    return;
+                                }
+                                int position = vHolder.getAdapterPosition();
+
+
+                                mData.remove(position);
+                                QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
+                                questDialog.dismiss();
+
+
+                            }
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                //TODO Her tharf ad gera stoff
+                                System.out.println("Her2");
+                            }
+                        });
+                        // TODO. Klara þetta
+                    }
+                });
                 questDialog.show();
 
             }
@@ -378,12 +414,87 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 TextView dialog_quest_Description = (TextView) questDialog.findViewById(R.id.dialog_questitem_assigned_child_questDescription);
                 TextView dialog_quest_XP = (TextView) questDialog.findViewById(R.id.dialog_questitem_assigned_child_questXP);
                 TextView dialog_quest_coins = (TextView) questDialog.findViewById(R.id.dialog_questitem_assigned_child_questCoins);
-
+                Button unassignButton = (Button) questDialog.findViewById(R.id.dialog_questitem_assigned_child_assignButton);
+                Button completeButton = (Button) questDialog.findViewById(R.id.dialog_questitem_assigned_child_completeButton);
                 dialog_quest_name.setText(mData.get(vHolder.getAdapterPosition()).getName());
                 dialog_quest_Description.setText(mData.get(vHolder.getAdapterPosition()).getDescription());
                 dialog_quest_XP.setText("XP: " + mData.get(vHolder.getAdapterPosition()).getXp());
                 dialog_quest_coins.setText("Coins: " + mData.get(vHolder.getAdapterPosition()).getCoins());
 
+                unassignButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int position = vHolder.getAdapterPosition();
+                        long questId = mData.get(position).getId();
+                        System.out.println("Unassign quest with Id: " + questId);
+                        Retrofit retrofit = RetrofitSingleton.getInstance().getRetrofit();
+                        MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
+                        Call<ResponseBody> call = mundusAPI.unassignQuest(questId);
+
+                        call.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if(!response.isSuccessful()){
+                                    //TODO Her tharf ad gera stoff
+                                    System.out.println("Her1");
+                                    return;
+                                }
+                                int position = vHolder.getAdapterPosition();
+
+
+                                mData.remove(position);
+                                QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
+                                questDialog.dismiss();
+
+
+                            }
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                //TODO Her tharf ad gera stoff
+                                System.out.println("Her2");
+                            }
+                        });
+                        // TODO. Klara þetta
+                    }
+                });
+
+                completeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int position = vHolder.getAdapterPosition();
+                        long questId = mData.get(position).getId();
+                        System.out.println("Complete quest with Id: " + questId);
+
+                        Retrofit retrofit = RetrofitSingleton.getInstance().getRetrofit();
+                        MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
+                        Call<ResponseBody> call = mundusAPI.markQuestAsDone(questId);
+
+                        call.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if(!response.isSuccessful()){
+                                    //TODO Her tharf ad gera stoff
+                                    System.out.println("Her1");
+                                    return;
+                                }
+                                int position = vHolder.getAdapterPosition();
+
+
+                                mData.remove(position);
+                                QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
+                                questDialog.dismiss();
+
+
+                            }
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                //TODO Her tharf ad gera stoff
+                                System.out.println("Her2");
+                            }
+                        });
+                        // TODO. Klara þetta
+                    }
+                });
                 questDialog.show();
 
             }
@@ -413,8 +524,6 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                         int position = vHolder.getAdapterPosition();
                         long questId = mData.get(position).getId();
                         System.out.println("Delete quest with Id: " + questId);
-                        Child assignee = selectedChild;
-                        long assigneeId = assignee.getId();
                         Retrofit retrofit = RetrofitSingleton.getInstance().getRetrofit();
                         MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
                         Call<ResponseBody> call = mundusAPI.assignQuest(questId);
@@ -432,7 +541,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
 
                                 mData.remove(position);
                                 QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
-
+                                questDialog.dismiss();
 
 
                             }
