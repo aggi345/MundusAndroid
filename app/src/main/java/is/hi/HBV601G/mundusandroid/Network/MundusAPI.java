@@ -45,6 +45,10 @@ public interface MundusAPI {
     @GET("getSmallChild")
     Call<Child> getSmallChild();
 
+    @FormUrlEncoded
+    @POST("getSmallChildById")
+    Call<Child> getSmallChildById(@Field("childId") long childId);
+
     @GET("getChildren")
     Call<Set<Child>> getChildren();
 
@@ -93,6 +97,23 @@ public interface MundusAPI {
 
     @GET("getDoneQuestsOfChild")
     Call<Set<Quest>> getDoneQuestsOfChild();
+
+
+    //Profile
+    @FormUrlEncoded
+    @POST("addCoinsToChild")
+    Call<ResponseBody> addCoinsToChild(@Field("childId") long childId, @Field("amount") long amount);
+
+    @FormUrlEncoded
+
+    @POST("addXpToChild")
+    Call<ResponseBody> addXpToChild(@Field("childId") long childId, @Field("amount") long amount);
+
+    @POST("updateBasicChildInfo")
+    Call<ResponseBody> updateBasicChildInfo(@Body Child child);
+
+    @POST("createChild")
+    Call<ResponseBody> createChild(@Body Child child);
 
 
 

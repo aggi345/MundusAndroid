@@ -19,15 +19,13 @@ public class Child extends Person {
 
     private Parent parent; // The parent of the child
 
-    public Child(String name, String pin, Parent parent) {
+    public Child(String name, String pin) {
         super(name,pin);
-        this.parent = parent;
-
     }
+
 
     public Child() {
         super();
-
     }
 
 
