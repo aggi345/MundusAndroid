@@ -105,7 +105,6 @@ public interface MundusAPI {
     Call<ResponseBody> addCoinsToChild(@Field("childId") long childId, @Field("amount") long amount);
 
     @FormUrlEncoded
-
     @POST("addXpToChild")
     Call<ResponseBody> addXpToChild(@Field("childId") long childId, @Field("amount") long amount);
 
@@ -114,6 +113,10 @@ public interface MundusAPI {
 
     @POST("createChild")
     Call<ResponseBody> createChild(@Body Child child);
+
+    @FormUrlEncoded
+    @POST("removeChild")
+    Call<ResponseBody> removeChild(@Field("childId") long childId);
 
 
 

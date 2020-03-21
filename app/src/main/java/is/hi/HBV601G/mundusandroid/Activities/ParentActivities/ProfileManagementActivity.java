@@ -57,6 +57,7 @@ public class ProfileManagementActivity extends AppCompatActivity {
     Button mConfirmChanges;
     Button mAddCoins;
     Button mAddXp;
+    Button mRemoveChild;
 
 
     //Create Child
@@ -161,6 +162,14 @@ public class ProfileManagementActivity extends AppCompatActivity {
         mConfirmChanges = childDialog.findViewById(R.id.confirmChanges_button);
         mAddCoins = childDialog.findViewById(R.id.addCoins_button);
         mAddXp = childDialog.findViewById(R.id.addXp_button);
+        mRemoveChild = childDialog.findViewById(R.id.remove_button);
+
+        mRemoveChild.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeChild(childId);
+            }
+        });
 
         mAddCoins.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -367,6 +376,31 @@ public class ProfileManagementActivity extends AppCompatActivity {
                 //TODO her thar
             }
         });
+    }
+
+    private void removeChild(long childId) {
+        Call<ResponseBody> call = mundusAPI.removeChild(childId);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (!response.isSuccessful()) {
+                    System.out.println(response.code());
+                    //TODO her thar
+                    return;
+                }
+
+                getAllChildren();
+                childDialog.hide();
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//TODO her thar
+            }
+        });
+
     }
 
 
