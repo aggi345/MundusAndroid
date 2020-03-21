@@ -139,7 +139,7 @@ public class ParentMainMenuActivity extends AppCompatActivity {
     }
 
     private void moveToProfile(){
-        Intent intent = new Intent(ParentMainMenuActivity.this, CreateQuestActivity.class);
+        Intent intent = new Intent(ParentMainMenuActivity.this, ProfileManagementActivity.class);
         startActivity(intent);
     }
 

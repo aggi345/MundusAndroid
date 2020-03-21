@@ -140,7 +140,7 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
 
     private void setAssignToSpinner(){
 
-        Child child0 = new Child("No selection", "0", null);
+        Child child0 = new Child("No selection", "0");
         child0.setId(-1);
 
 
