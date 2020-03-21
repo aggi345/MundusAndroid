@@ -307,7 +307,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
         ArrayList<Child> list = new ArrayList<Child>();
         Child assignee = mData.get(position).getAssignee();
         if (assignee == null) {
-            Child child0 = new Child("No selection", "0", null);
+            Child child0 = new Child("No selection", "0");
             child0.setId(-1);
             list.add(child0);
         }
