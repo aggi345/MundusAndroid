@@ -32,7 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class FragmentAvailableQuestsParent extends Fragment {
+public class FragmentAvailableQuestsParent extends Fragment  {
     View v;
     private RecyclerView myreyclerview;
     private List<Quest> lstQuest;

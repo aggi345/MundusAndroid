@@ -94,6 +94,43 @@ public interface MundusAPI {
     @GET("getDoneQuestsOfChild")
     Call<Set<Quest>> getDoneQuestsOfChild();
 
+    @FormUrlEncoded
+    @POST("deletereward")
+    Call<ResponseBody> deleteReward(@Field("id") long rewardId);
+
+    @FormUrlEncoded
+    @POST("purchaseReward")
+    Call<Boolean> purchaseReward(@Field("id") long rewardId);
+
+    @FormUrlEncoded
+    @POST("grantReward")
+    Call<Boolean> grantReward(@Field("rewardId") long rewardId, @Field("childId") long childId);
+
+    @FormUrlEncoded
+    @POST("deleteQuest")
+    Call<ResponseBody> deleteQuest(@Field("questId") long questId);
+
+    @FormUrlEncoded
+    @POST("assignQuestParent")
+    Call<ResponseBody> assignQuestParent(@Field("childId") long childId, @Field("questId") long questId);
+
+    @FormUrlEncoded
+    @POST("assignQuest")
+    Call<ResponseBody> assignQuest(@Field("questId") long questId);
+
+    @FormUrlEncoded
+    @POST("markQuestAsConfirmed")
+    Call<ResponseBody> markQuestAsConfirmed(@Field("questId") long questId);
+
+    @FormUrlEncoded
+    @POST("markQuestAsNotDone")
+    Call<ResponseBody> markQuestAsNotDone(@Field("questId") long questId);
+
+    @FormUrlEncoded
+    @POST("markQuestAsDone")
+    Call<ResponseBody> markQuestAsDone(@Field("questId") long questId);
+
+
 
 
 

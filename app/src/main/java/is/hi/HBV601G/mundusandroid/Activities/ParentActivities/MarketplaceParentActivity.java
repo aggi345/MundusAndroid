@@ -31,6 +31,9 @@ public class MarketplaceParentActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
+
+
+
         // Remove Shadow From the action bar
 
         //ActionBar actionBar = getSupportActionBar();

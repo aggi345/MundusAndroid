@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,6 +45,7 @@ public class FragmentAvailableRewardsParent extends Fragment {
 
 
 
+
     public FragmentAvailableRewardsParent() {
 
     }
@@ -56,6 +58,8 @@ public class FragmentAvailableRewardsParent extends Fragment {
         recyclerAdapter = new RewardRecyclerViewAdapter(getContext(), lstReward, 2);
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myreyclerview.setAdapter(recyclerAdapter);
+
+
         return v;
     }
 
@@ -95,12 +99,8 @@ public class FragmentAvailableRewardsParent extends Fragment {
             }
         });
 
-
-
-
-
-
-
     }
+
+
 }
 

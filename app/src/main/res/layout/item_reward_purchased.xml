@@ -48,5 +48,17 @@
             android:text="Grant"
             android:id="@+id/item_reward_purchased_grantButton"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reward Id"
+            android:id="@+id/item_reward_purchased_rewardId"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Child Id"
+            android:id="@+id/item_reward_purchased_childId"
+            />
     </LinearLayout>
 </LinearLayout>

@@ -18,6 +18,13 @@ import java.util.List;
 import is.hi.HBV601G.mundusandroid.Entities.Child;
 import is.hi.HBV601G.mundusandroid.Entities.ChildRewardPair;
 import is.hi.HBV601G.mundusandroid.Entities.Reward;
+import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
+import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An adapter for the rewards in a recyclerview
@@ -26,6 +33,8 @@ public class RewardPurchasedRecyclerViewAdapter extends RecyclerView.Adapter<Rew
 
     Context mContext;
     List<ChildRewardPair> mData;
+
+    private Button grantButton;
 
     public RewardPurchasedRecyclerViewAdapter(Context mContext, List<ChildRewardPair> mData) {
         this.mContext = mContext;
@@ -52,8 +61,51 @@ public class RewardPurchasedRecyclerViewAdapter extends RecyclerView.Adapter<Rew
         holder.tv_price.setText("Price: " + mData.get(position).getReward().getPrice());
 
         holder.tv_buyer.setText("Buyer: " + mData.get(position).getChild().getName());
+
+        holder.tv_rewardId.setText(""+mData.get(position).getReward().getId());
+        holder.tv_rewardId.setVisibility(View.GONE); // Hide the ID
+        holder.tv_childId.setText(""+mData.get(position).getChild().getId());
+        holder.tv_childId.setVisibility(View.GONE); // Hide the ID
         //TODO: Setja binder á takkana
 
+        grantButton = holder.itemView.findViewById(R.id.item_reward_purchased_grantButton);
+
+        grantButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long rewardId = Long.parseLong(holder.tv_rewardId.getText().toString());
+                long childId = Long.parseLong(holder.tv_childId.getText().toString());
+                System.out.println("Grant reward with Id: " + rewardId + " to child with id: " + childId);
+
+                Retrofit retrofit = RetrofitSingleton.getInstance().getRetrofit();
+                MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
+                Call<Boolean> call = mundusAPI.grantReward(rewardId, childId);
+
+                call.enqueue(new Callback<Boolean>() {
+                    @Override
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        if(!response.isSuccessful()){
+                            //TODO Her tharf ad gera stoff
+                            System.out.println("Grant Reward failed");
+                            return;
+                        }
+                        // TODO kannski þarf að gera eitthvað hérna
+
+                        int position = holder.getAdapterPosition();
+
+                        mData.remove(position);
+
+                        RewardPurchasedRecyclerViewAdapter.this.notifyItemRemoved(position);
+                    }
+                    @Override
+                    public void onFailure(Call<Boolean> call, Throwable t) {
+                        //TODO Her tharf ad gera stoff
+                        System.out.println("Her2");
+                    }
+                });
+                // TODO. Klara þetta
+            }
+        });
 
         // TODO laga svo hægt sé að endurnýta þetta fyrir purchased rewards
     }
@@ -72,6 +124,8 @@ public class RewardPurchasedRecyclerViewAdapter extends RecyclerView.Adapter<Rew
         private TextView tv_price;
         private TextView tv_buyer;
         private Button bt_grant;
+        private TextView tv_rewardId;
+        private TextView tv_childId;
 
         public MyRewardPurchasedViewHolder(@NonNull View itemView) { // NonNull var ekki í myndbaninu en kemur samt hérna
             super(itemView);
@@ -82,6 +136,9 @@ public class RewardPurchasedRecyclerViewAdapter extends RecyclerView.Adapter<Rew
             tv_price = (TextView) itemView.findViewById(R.id.item_reward_purchased_price);
             tv_buyer = (TextView) itemView.findViewById(R.id.item_reward_purchased_buyer);
             bt_grant = (Button) itemView.findViewById(R.id.item_reward_purchased_grantButton);
+
+            tv_rewardId = (TextView) itemView.findViewById(R.id.item_reward_purchased_rewardId);
+            tv_childId = (TextView) itemView.findViewById(R.id.item_reward_purchased_childId);
         }
     }
 
