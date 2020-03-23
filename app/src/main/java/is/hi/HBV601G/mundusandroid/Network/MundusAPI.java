@@ -139,6 +139,11 @@ public interface MundusAPI {
     Call<ResponseBody> markQuestAsDone(@Field("questId") long questId);
 
 
+    //Login
+    @GET("getLoginStatus")
+    Call<Integer> getLoginStatus();
+
+
 
     //Profile
     @FormUrlEncoded
