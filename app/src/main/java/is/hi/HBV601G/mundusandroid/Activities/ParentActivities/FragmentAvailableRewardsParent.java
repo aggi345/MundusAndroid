@@ -1,5 +1,6 @@
 package is.hi.HBV601G.mundusandroid.Activities.ParentActivities;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -69,7 +70,7 @@ public class FragmentAvailableRewardsParent extends Fragment {
         super.onCreate(savedInstanceState);
 
         //Network
-        retrofit = RetrofitSingleton.getInstance().getRetrofit();
+        retrofit = RetrofitSingleton.getInstance(getActivity().getApplicationContext()).getRetrofit();
         mundusAPI = retrofit.create(MundusAPI.class);
 
 

@@ -74,7 +74,7 @@ public class ProfileManagementActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile_management);
 
         //Network
-        retrofit = RetrofitSingleton.getInstance().getRetrofit();
+        retrofit = RetrofitSingleton.getInstance(getApplicationContext()).getRetrofit();
         mundusAPI = retrofit.create(MundusAPI.class);
 
         //Find
@@ -99,6 +99,28 @@ public class ProfileManagementActivity extends AppCompatActivity {
 
 
     }
+
+
+
+    private void updateAccountInfoInActivity(){
+
+
+
+    }
+
+    private void openEditAccountDialog(){
+
+
+
+    }
+
+    private void openEditParentDialog(){
+
+
+
+    }
+
+
 
 
     private void getAllChildren() {

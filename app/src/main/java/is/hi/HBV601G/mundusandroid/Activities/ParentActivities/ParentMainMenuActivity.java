@@ -45,7 +45,7 @@ public class ParentMainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_parent_main_menu);
 
         //Http
-        retrofit = RetrofitSingleton.getInstance().getRetrofit();
+        retrofit = RetrofitSingleton.getInstance(getApplicationContext()).getRetrofit();
         mundusAPI = retrofit.create(MundusAPI.class);
 
 

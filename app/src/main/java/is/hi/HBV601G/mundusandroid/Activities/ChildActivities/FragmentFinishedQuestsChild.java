@@ -1,5 +1,6 @@
 package is.hi.HBV601G.mundusandroid.Activities.ChildActivities;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -39,6 +40,8 @@ public class FragmentFinishedQuestsChild extends Fragment {
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
 
+
+
     public FragmentFinishedQuestsChild() {
 
     }
@@ -59,7 +62,7 @@ public class FragmentFinishedQuestsChild extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        retrofit = RetrofitSingleton.getInstance().getRetrofit();
+        retrofit = RetrofitSingleton.getInstance(getActivity().getApplicationContext()).getRetrofit();
         mundusAPI = retrofit.create(MundusAPI.class);
 
 

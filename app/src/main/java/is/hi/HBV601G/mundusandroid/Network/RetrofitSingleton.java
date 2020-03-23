@@ -1,5 +1,13 @@
 package is.hi.HBV601G.mundusandroid.Network;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+
 import java.net.CookieHandler;
 import java.net.CookieManager;
 
@@ -11,17 +19,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitSingleton {
 
-    private static final RetrofitSingleton INSTANCE = new RetrofitSingleton();
+    private static RetrofitSingleton INSTANCE;
 
     private Retrofit retrofit;
     //private String BASE_URL = "http://192.168.1.71:8080/";
     private String BASE_URL = "https://mundus-android.herokuapp.com/";
 
-    private RetrofitSingleton(){
+    private RetrofitSingleton(Context context){
 
        // SimpleCookieJar simpleCookieJar = new SimpleCookieJar();
-        CookieHandler cookieHandler = new CookieManager();
-        CookieJar cookieJar = new JavaNetCookieJar(cookieHandler);
+      //  CookieHandler cookieHandler = new CookieManager();
+       // cookieJar = new JavaNetCookieJar(cookieHandler);
+        ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context));
+
+        SharedPrefsCookiePersistor sp = new SharedPrefsCookiePersistor(context);
+        SetCookieCache sc = new SetCookieCache();
+
+
 
 
 
@@ -33,7 +47,12 @@ public class RetrofitSingleton {
 
     }
 
-    public static RetrofitSingleton getInstance(){
+
+    public static RetrofitSingleton getInstance(Context context){
+        if(INSTANCE == null){
+            INSTANCE = new RetrofitSingleton(context);
+        }
+
         return INSTANCE;
     }
 

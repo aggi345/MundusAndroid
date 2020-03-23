@@ -42,7 +42,7 @@ public class ChildMainMenuActivity extends AppCompatActivity {
 
 
         //Http
-        retrofit = RetrofitSingleton.getInstance().getRetrofit();
+        retrofit = RetrofitSingleton.getInstance(getApplicationContext()).getRetrofit();
         mundusAPI = retrofit.create(MundusAPI.class);
 
 

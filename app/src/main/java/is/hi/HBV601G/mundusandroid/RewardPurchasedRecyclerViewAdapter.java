@@ -77,7 +77,7 @@ public class RewardPurchasedRecyclerViewAdapter extends RecyclerView.Adapter<Rew
                 long childId = Long.parseLong(holder.tv_childId.getText().toString());
                 System.out.println("Grant reward with Id: " + rewardId + " to child with id: " + childId);
 
-                Retrofit retrofit = RetrofitSingleton.getInstance().getRetrofit();
+                Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
                 MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
                 Call<Boolean> call = mundusAPI.grantReward(rewardId, childId);
 

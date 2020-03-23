@@ -89,7 +89,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 break;
         }
 
-        retrofit = RetrofitSingleton.getInstance().getRetrofit();
+        retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
         mundusAPI = retrofit.create(MundusAPI.class);
         return vHolder;
     }
@@ -121,7 +121,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                         long questId = mData.get(position).getId();
                         System.out.println("Delete quest with Id: " + questId);
 
-                        Retrofit retrofit = RetrofitSingleton.getInstance().getRetrofit();
+                        Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
                         MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
                         Call<ResponseBody> call = mundusAPI.markQuestAsConfirmed(questId);
 
@@ -157,7 +157,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                         long questId = mData.get(position).getId();
                         System.out.println("Delete quest with Id: " + questId);
 
-                        Retrofit retrofit = RetrofitSingleton.getInstance().getRetrofit();
+                        Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
                         MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
                         Call<ResponseBody> call = mundusAPI.markQuestAsNotDone(questId);
 
@@ -226,7 +226,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                         long questId = mData.get(position).getId();
                         System.out.println("Delete quest with Id: " + questId);
 
-                        Retrofit retrofit = RetrofitSingleton.getInstance().getRetrofit();
+                        Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
                         MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
                         Call<ResponseBody> call = mundusAPI.deleteQuest(questId);
 
@@ -263,7 +263,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                         System.out.println("Delete quest with Id: " + questId);
                         Child assignee = selectedChild;
                         long assigneeId = assignee.getId();
-                        Retrofit retrofit = RetrofitSingleton.getInstance().getRetrofit();
+                        Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
                         MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
                         Call<ResponseBody> call = mundusAPI.assignQuestParent(assigneeId, questId);
 
@@ -367,7 +367,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                         int position = vHolder.getAdapterPosition();
                         long questId = mData.get(position).getId();
                         System.out.println("Unassign quest with Id: " + questId);
-                        Retrofit retrofit = RetrofitSingleton.getInstance().getRetrofit();
+                        Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
                         MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
                         Call<ResponseBody> call = mundusAPI.markQuestAsNotDone(questId);
 
@@ -427,7 +427,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                         int position = vHolder.getAdapterPosition();
                         long questId = mData.get(position).getId();
                         System.out.println("Unassign quest with Id: " + questId);
-                        Retrofit retrofit = RetrofitSingleton.getInstance().getRetrofit();
+                        Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
                         MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
                         Call<ResponseBody> call = mundusAPI.unassignQuest(questId);
 
@@ -465,7 +465,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                         long questId = mData.get(position).getId();
                         System.out.println("Complete quest with Id: " + questId);
 
-                        Retrofit retrofit = RetrofitSingleton.getInstance().getRetrofit();
+                        Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
                         MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
                         Call<ResponseBody> call = mundusAPI.markQuestAsDone(questId);
 
@@ -524,7 +524,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                         int position = vHolder.getAdapterPosition();
                         long questId = mData.get(position).getId();
                         System.out.println("Delete quest with Id: " + questId);
-                        Retrofit retrofit = RetrofitSingleton.getInstance().getRetrofit();
+                        Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
                         MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
                         Call<ResponseBody> call = mundusAPI.assignQuest(questId);
 

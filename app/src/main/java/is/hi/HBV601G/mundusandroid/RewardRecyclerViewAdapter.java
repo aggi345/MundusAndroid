@@ -92,7 +92,7 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
                 long rewardId = Long.parseLong(holder.tv_rewardId.getText().toString());
                 System.out.println("Delete reward with Id: " + rewardId);
 
-                Retrofit retrofit = RetrofitSingleton.getInstance().getRetrofit();
+                Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
                 MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
                 Call<ResponseBody> call = mundusAPI.deleteReward(rewardId);
 
@@ -132,7 +132,7 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
                  long rewardId = Long.parseLong(holder.tv_rewardId.getText().toString());
                  System.out.println("Buy reward with Id: " + rewardId);
 
-                 Retrofit retrofit = RetrofitSingleton.getInstance().getRetrofit();
+                 Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
                  MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
                  Call<Boolean> call = mundusAPI.purchaseReward(rewardId);
 
