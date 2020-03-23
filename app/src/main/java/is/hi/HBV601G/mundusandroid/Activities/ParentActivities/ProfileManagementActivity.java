@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Set;
 
+import is.hi.HBV601G.mundusandroid.Entities.Account;
 import is.hi.HBV601G.mundusandroid.Entities.Child;
 import is.hi.HBV601G.mundusandroid.Entities.Person;
 import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
@@ -67,6 +69,10 @@ public class ProfileManagementActivity extends AppCompatActivity {
     EditText mCreatePin;
     Button mCreateChild;
 
+    //Account info in activity
+    TextView mNameOfParent;
+    TextView mEmailOfAccount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +88,11 @@ public class ProfileManagementActivity extends AppCompatActivity {
         mChildRecyclerView = findViewById(R.id.childs_recyclerView);
         mAddChild = findViewById(R.id.addChild_button);
 
+        mNameOfParent = findViewById(R.id.parentName_textView);
+        mEmailOfAccount = findViewById(R.id.email_textView);
+
+
+
         childDialog = new Dialog(this);
         createChildDialog = new Dialog(this);
 
@@ -96,6 +107,7 @@ public class ProfileManagementActivity extends AppCompatActivity {
 
         getAllChildren();
         createRecyclerView();
+        updateAccountInfoInActivity();
 
 
     }
@@ -103,7 +115,30 @@ public class ProfileManagementActivity extends AppCompatActivity {
 
 
     private void updateAccountInfoInActivity(){
+    Call<Account> call = mundusAPI.getBasicAccountInfo();
 
+    call.enqueue(new Callback<Account>() {
+        @Override
+        public void onResponse(Call<Account> call, Response<Account> response) {
+            if (!response.isSuccessful()) {
+                System.out.println(response.code());
+                //TODO Vantar að meðhöndla vandamál, verðum að gera eh hér.
+                return;
+            }
+
+            Account account = response.body();
+
+            mNameOfParent.setText(account.getParent().getName());
+            mEmailOfAccount.setText(account.getEmail());
+
+        }
+
+        @Override
+        public void onFailure(Call<Account> call, Throwable t) {
+            //TODO Vantar að meðhöndla vandamál, verðum að gera eh hér.
+
+        }
+    });
 
 
     }

@@ -164,6 +164,9 @@ public interface MundusAPI {
     @POST("removeChild")
     Call<ResponseBody> removeChild(@Field("childId") long childId);
 
+    @GET("getBasicAccountInfo")
+    Call<Account> getBasicAccountInfo();
+
 
 
 
