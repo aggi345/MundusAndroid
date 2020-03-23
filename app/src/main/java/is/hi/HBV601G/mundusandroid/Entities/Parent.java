@@ -21,6 +21,8 @@ public class Parent extends Person {
         this.account = account;
     }
 
+    public Parent(){}
+
     public Set<Child> getChildren() {
         return children;
     }

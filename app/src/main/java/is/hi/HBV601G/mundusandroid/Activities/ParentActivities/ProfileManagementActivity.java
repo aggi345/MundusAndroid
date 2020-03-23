@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +17,7 @@ import java.util.Set;
 
 import is.hi.HBV601G.mundusandroid.Entities.Account;
 import is.hi.HBV601G.mundusandroid.Entities.Child;
+import is.hi.HBV601G.mundusandroid.Entities.Parent;
 import is.hi.HBV601G.mundusandroid.Entities.Person;
 import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
 import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
@@ -46,6 +46,7 @@ public class ProfileManagementActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
 
+
     //Child update Dialog
     Dialog childDialog;
     EditText mName;
@@ -72,6 +73,29 @@ public class ProfileManagementActivity extends AppCompatActivity {
     //Account info in activity
     TextView mNameOfParent;
     TextView mEmailOfAccount;
+    Button mEditAccount;
+
+    //Edit Account
+    Dialog editAccountDialog;
+
+    EditText mChangeEmail;
+    EditText mChangeParentName;
+
+    EditText mCurrentPassword;
+    EditText mNewPassword;
+    EditText mConfirmPassword;
+
+    EditText mCurrentPin;
+    EditText mNewPin;
+    EditText mConfirmPin;
+
+    Button mConfirmAccountChanges;
+    Button mChangePassword;
+    Button mChangePin;
+
+
+
+
 
 
     @Override
@@ -90,11 +114,13 @@ public class ProfileManagementActivity extends AppCompatActivity {
 
         mNameOfParent = findViewById(R.id.parentName_textView);
         mEmailOfAccount = findViewById(R.id.email_textView);
+        mEditAccount = findViewById(R.id.editAccount_button);
 
 
 
         childDialog = new Dialog(this);
         createChildDialog = new Dialog(this);
+        editAccountDialog = new Dialog(this);
 
         //Events
         mAddChild.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +129,14 @@ public class ProfileManagementActivity extends AppCompatActivity {
                 openCreateChild();
             }
         });
+
+        mEditAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openEditAccountDialog();
+            }
+        });
+
 
 
         getAllChildren();
@@ -144,15 +178,177 @@ public class ProfileManagementActivity extends AppCompatActivity {
     }
 
     private void openEditAccountDialog(){
+        editAccountDialog.setContentView(R.layout.dialog_edit_account);
+
+        mChangeEmail = editAccountDialog.findViewById(R.id.changeEmail_editText);
+        mChangeParentName = editAccountDialog.findViewById(R.id.changeParentName_editText);
+
+        mCurrentPassword = editAccountDialog.findViewById(R.id.currentPassword_editText);
+        mNewPassword = editAccountDialog.findViewById(R.id.newPassword_editText);
+        mConfirmPassword = editAccountDialog.findViewById(R.id.confirmPassword_editText);
+
+        mCurrentPin = editAccountDialog.findViewById(R.id.currentPin_editText);
+        mNewPin = editAccountDialog.findViewById(R.id.newPin_editText);
+        mConfirmPin = editAccountDialog.findViewById(R.id.confirmPin_editText);
+
+        mConfirmAccountChanges = editAccountDialog.findViewById(R.id.confirmAccountChanges_button);
+        mChangePassword = editAccountDialog.findViewById(R.id.changePassword_button);
+        mChangePin = editAccountDialog.findViewById(R.id.changePin_button);
+
+        mChangeEmail.setText(mEmailOfAccount.getText().toString());
+        mChangeParentName.setText(mNameOfParent.getText().toString());
+
+
+        mConfirmAccountChanges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmAccountChanges();
+            }
+        });
+
+        mChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmChangePassword();
+            }
+        });
+
+        mChangePin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmChangePin();
+            }
+        });
+
+
+
+        editAccountDialog.show();
+        
+
+
+    }
+
+    private void confirmChangePin(){
+        String currentPin = mCurrentPin.getText().toString();
+        String newPin = mNewPin.getText().toString();
+        String confirmPin = mConfirmPin.getText().toString();
+
+        if(currentPin.equals("") || newPin.equals("")){
+            return;
+        }
+
+        if(!confirmPin.equals(newPin)){
+            showToast("Pin must match.");
+            return;
+        }
+
+        Call<ResponseBody> call = mundusAPI.changePinOnParent(currentPin, newPin);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (!response.isSuccessful()) {
+                    if(response.code() == 422){
+                        showToast("Wrong pin.");
+                    }
+                    //TODO Vantar að meðhöndla vandamál, verðum að gera eh hér.
+                    return;
+                }
+
+                showToast("Pin changed.");
+                editAccountDialog.hide();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                //TODO Vantar að meðhöndla vandamál, verðum að gera eh hér.
+            }
+        });
+
+
+    }
+
+    private void confirmAccountChanges(){
+        String email = mChangeEmail.getText().toString();
+        String parentName = mChangeParentName.getText().toString();
+        if(email.equals(mEmailOfAccount.getText().toString()) && parentName.equals(mNameOfParent.getText().toString())){
+            showToast("Nothing has been changed.");
+            return;
+        }
+        Account account = new Account();
+        account.setEmail(email);
+        Parent tempParent = new Parent();
+        tempParent.setName(parentName);
+        account.setParent(tempParent);
+
+        Call<ResponseBody> call = mundusAPI.updateAccountInfo(account);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (!response.isSuccessful()) {
+                    System.out.println(response.code());
+                    //TODO Vantar að meðhöndla vandamál, verðum að gera eh hér.
+                    return;
+                }
+                updateAccountInfoInActivity();
+                editAccountDialog.hide();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    //TODO Vantar að meðhöndla vandamál, verðum að gera eh hér.
+            }
+        });
+    }
+
+    private void confirmChangePassword(){
+        String currentPassword = mCurrentPassword.getText().toString();
+        String newPassword = mNewPassword.getText().toString();
+        String confirmPassword = mConfirmPassword.getText().toString();
+
+        if(currentPassword.equals("") || newPassword.equals("")){
+            return;
+        }
+
+        if(!confirmPassword.equals(newPassword)){
+            showToast("Password must match.");
+            return;
+        }
+
+        Call<ResponseBody> call = mundusAPI.changeAccountPassword(currentPassword, newPassword);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (!response.isSuccessful()) {
+                    if(response.code() == 422){
+                        showToast("Wrong password.");
+                    }
+                    //TODO Vantar að meðhöndla vandamál, verðum að gera eh hér.
+                    return;
+                }
+
+                showToast("Password changed.");
+                editAccountDialog.hide();
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                 //TODO Vantar að meðhöndla vandamál, verðum að gera eh hér.
+            }
+        });
 
 
 
     }
 
-    private void openEditParentDialog(){
 
 
-
+    private void showToast(String string){
+        Toast toast = Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG);
+        toast.show();
     }
 
 

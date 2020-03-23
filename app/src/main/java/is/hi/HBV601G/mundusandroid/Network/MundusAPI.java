@@ -167,6 +167,21 @@ public interface MundusAPI {
     @GET("getBasicAccountInfo")
     Call<Account> getBasicAccountInfo();
 
+    @POST("updateAccountInfo")
+    Call<ResponseBody> updateAccountInfo(@Body Account account);
+
+    @FormUrlEncoded
+    @POST("changeAccountPassword")
+    Call<ResponseBody> changeAccountPassword(@Field("currentPassword") String currentPassword, @Field("newPassword") String newPassword);
+
+    @FormUrlEncoded
+    @POST("changePinOnParent")
+    Call<ResponseBody> changePinOnParent(@Field("currentPin") String currentPin, @Field("newPin") String newPin);
+
+
+
+
+
 
 
 

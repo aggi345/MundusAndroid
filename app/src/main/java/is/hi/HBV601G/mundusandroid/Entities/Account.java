@@ -20,6 +20,8 @@ public class Account {
         this.parent = parent;
     }
 
+    public Account(){};
+
     public long getId() {
         return id;
     }
