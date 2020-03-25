@@ -22,7 +22,8 @@ public class RetrofitSingleton {
     private static RetrofitSingleton INSTANCE;
 
     private Retrofit retrofit;
-    private String BASE_URL = "http://192.168.1.71:8080/";
+    //private String BASE_URL = "http://192.168.1.71:8080/";
+    private String BASE_URL = "http://192.168.56.1:8080/";
     //private String BASE_URL = "https://mundus-android.herokuapp.com/";
 
     private RetrofitSingleton(Context context){
