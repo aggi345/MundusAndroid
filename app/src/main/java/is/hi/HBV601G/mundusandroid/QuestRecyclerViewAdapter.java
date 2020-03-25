@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import is.hi.HBV601G.mundusandroid.Activities.RecyclerStorage;
 import is.hi.HBV601G.mundusandroid.Entities.Child;
 import is.hi.HBV601G.mundusandroid.Entities.Quest;
 import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
@@ -170,9 +171,10 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                                     return;
                                 }
                                 int position = vHolder.getAdapterPosition();
-
+                                Quest q= mData.get(position);
                                 mData.remove(position);
                                 QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
+                                RecyclerStorage.getInProgressQuestsParent().addItem(q); // Add the quest back to in progress quests
                                 questDialog.dismiss();
 
                             }
@@ -277,9 +279,12 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                                 }
                                 int position = vHolder.getAdapterPosition();
 
+                                // Þessi if setning gæti verið óþörf, man ekki alveg hvað ég vara að pæla hérna (Daníel)
                                 if(mType == 3) { // Quest moves from available to in progress
+                                    Quest q = mData.get(position);
                                     mData.remove(position);
                                     QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
+                                    RecyclerStorage.getInProgressQuestsParent().addItem(q);
                                 }
 
 
@@ -381,9 +386,10 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                                 }
                                 int position = vHolder.getAdapterPosition();
 
-
+                                Quest q = mData.get(position);
                                 mData.remove(position);
                                 QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
+                                RecyclerStorage.getAssignedQuestsChild().addItem(q);
                                 questDialog.dismiss();
 
 
@@ -441,9 +447,10 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                                 }
                                 int position = vHolder.getAdapterPosition();
 
-
+                                Quest q = mData.get(position);
                                 mData.remove(position);
                                 QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
+                                RecyclerStorage.getAvailableQuestsChild().addItem(q);
                                 questDialog.dismiss();
 
 
@@ -479,9 +486,10 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                                 }
                                 int position = vHolder.getAdapterPosition();
 
-
+                                Quest q = mData.get(position);
                                 mData.remove(position);
                                 QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
+                                RecyclerStorage.getCompletedQuestsChild().addItem(q);
                                 questDialog.dismiss();
 
 
@@ -538,9 +546,10 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                                 }
                                 int position = vHolder.getAdapterPosition();
 
-
+                                Quest q = mData.get(position);
                                 mData.remove(position);
                                 QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
+                                RecyclerStorage.getAssignedQuestsChild().addItem(q);
                                 questDialog.dismiss();
 
 
@@ -594,6 +603,11 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    public void addItem(Quest quest) {
+        mData.add(quest);
+        this.notifyDataSetChanged();
     }
 
     @Override

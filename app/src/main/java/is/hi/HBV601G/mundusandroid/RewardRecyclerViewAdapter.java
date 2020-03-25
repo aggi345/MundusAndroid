@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.FragmentAvailableRewardsParent;
+import is.hi.HBV601G.mundusandroid.Activities.RecyclerStorage;
 import is.hi.HBV601G.mundusandroid.Entities.ChildRewardPair;
+import is.hi.HBV601G.mundusandroid.Entities.Quest;
 import is.hi.HBV601G.mundusandroid.Entities.Reward;
 import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
 import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
@@ -104,7 +106,7 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
                             System.out.println("Her1");
                             return;
                         }
-                        int position = holder.getAdapterPosition();
+                        //int position = holder.getAdapterPosition();
 
                         mData.remove(position);
                         RewardRecyclerViewAdapter.this.notifyItemRemoved(position);
@@ -151,12 +153,16 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
                          if (status == true) {
                              Toast.makeText(mContext,
                                      "Reward purchases", Toast.LENGTH_SHORT).show();
+                             mData.remove(position);
+                             RewardRecyclerViewAdapter.this.notifyItemRemoved(position);
                          }
                          else {
                              Toast.makeText(mContext,
                                      "You broke bitch!", Toast.LENGTH_SHORT).show();
                          }
-                            // TODO uppfæra listann í My rewards jafnóðum
+                         int position = holder.getAdapterPosition();
+                         Reward r = mData.get(position);
+                         RecyclerStorage.getMyRewardsChild().addItem(r);
                      }
                      @Override
                      public void onFailure(Call<Boolean> call, Throwable t) {
@@ -175,6 +181,11 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
         //return 0;
         return mData.size();
     }
+    public void addItem(Reward reward) {
+        mData.add(reward);
+        this.notifyDataSetChanged();
+    }
+
 
     public static class MyRewardViewHolder extends RecyclerView.ViewHolder {
 

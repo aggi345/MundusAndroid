@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import is.hi.HBV601G.mundusandroid.Activities.RecyclerStorage;
 import is.hi.HBV601G.mundusandroid.Entities.Reward;
 import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
 import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
+import is.hi.HBV601G.mundusandroid.QuestRecyclerViewAdapter;
 import is.hi.HBV601G.mundusandroid.R;
+import is.hi.HBV601G.mundusandroid.RewardRecyclerViewAdapter;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -80,7 +83,8 @@ public class CreateRewardActivity extends AppCompatActivity {
 
         Call<ResponseBody> call = mundusAPI.createReward(reward);
 
-
+        RewardRecyclerViewAdapter temp = RecyclerStorage.getAvailableRewardsParent();
+        temp.addItem(reward);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

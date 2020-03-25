@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import is.hi.HBV601G.mundusandroid.Activities.RecyclerStorage;
 import is.hi.HBV601G.mundusandroid.Entities.Account;
 import is.hi.HBV601G.mundusandroid.Entities.Parent;
 import is.hi.HBV601G.mundusandroid.Entities.Quest;
@@ -54,6 +55,8 @@ public class FragmentAvailableQuestsParent extends Fragment  {
         v = inflater.inflate(R.layout.availablequests_parent_fragment, container, false);
         myreyclerview = (RecyclerView) v.findViewById(R.id.availableQuestsParentRecycleView);
         recyclerAdapter = new QuestRecyclerViewAdapter(getContext(), lstQuest, 3);
+        RecyclerStorage.setAvailableQuestsParent(recyclerAdapter);
+
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myreyclerview.setAdapter(recyclerAdapter);
         return v;

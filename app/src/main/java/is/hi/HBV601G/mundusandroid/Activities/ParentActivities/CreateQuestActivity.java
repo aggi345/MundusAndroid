@@ -2,11 +2,14 @@ package is.hi.HBV601G.mundusandroid.Activities.ParentActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+
+import is.hi.HBV601G.mundusandroid.Activities.RecyclerStorage;
 import is.hi.HBV601G.mundusandroid.DatePickerFragment;
 import is.hi.HBV601G.mundusandroid.Entities.Child;
 import is.hi.HBV601G.mundusandroid.Entities.Quest;
 import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
 import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
+import is.hi.HBV601G.mundusandroid.QuestRecyclerViewAdapter;
 import is.hi.HBV601G.mundusandroid.R;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -112,6 +115,14 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
         Quest quest = new Quest(questName, questDescription, xp, coins, deadline, null);
         quest.setAssignee(child);
 
+        if(childId == -1) {
+            QuestRecyclerViewAdapter temp = RecyclerStorage.getAvailableQuestsParent();
+            temp.addItem(quest);
+        }
+        else {
+            QuestRecyclerViewAdapter temp = RecyclerStorage.getInProgressQuestsParent();
+            temp.addItem(quest);
+        }
 
         Call<ResponseBody> call = mundusAPI.createQuest(quest);
 
