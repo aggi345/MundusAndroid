@@ -1,10 +1,12 @@
 package is.hi.HBV601G.mundusandroid.Activities.ParentActivities;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,6 +46,7 @@ public class FragmentAvailableRewardsParent extends Fragment {
 
 
 
+
     public FragmentAvailableRewardsParent() {
 
     }
@@ -56,6 +59,8 @@ public class FragmentAvailableRewardsParent extends Fragment {
         recyclerAdapter = new RewardRecyclerViewAdapter(getContext(), lstReward, 2);
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myreyclerview.setAdapter(recyclerAdapter);
+
+
         return v;
     }
 
@@ -65,7 +70,7 @@ public class FragmentAvailableRewardsParent extends Fragment {
         super.onCreate(savedInstanceState);
 
         //Network
-        retrofit = RetrofitSingleton.getInstance().getRetrofit();
+        retrofit = RetrofitSingleton.getInstance(getActivity().getApplicationContext()).getRetrofit();
         mundusAPI = retrofit.create(MundusAPI.class);
 
 
@@ -95,12 +100,8 @@ public class FragmentAvailableRewardsParent extends Fragment {
             }
         });
 
-
-
-
-
-
-
     }
+
+
 }
 

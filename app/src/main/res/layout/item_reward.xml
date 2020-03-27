@@ -55,5 +55,13 @@
             android:text="Grant"
             android:id="@+id/item_reward_grantButton"
             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reward ID"
+            android:id="@+id/item_reward_rewardId"
+            />
+
     </LinearLayout>
 </LinearLayout>

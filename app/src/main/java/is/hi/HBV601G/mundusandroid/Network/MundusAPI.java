@@ -6,6 +6,7 @@ import java.util.Set;
 
 import is.hi.HBV601G.mundusandroid.Entities.Account;
 import is.hi.HBV601G.mundusandroid.Entities.Child;
+import is.hi.HBV601G.mundusandroid.Entities.ChildRewardPair;
 import is.hi.HBV601G.mundusandroid.Entities.Parent;
 import is.hi.HBV601G.mundusandroid.Entities.Quest;
 import is.hi.HBV601G.mundusandroid.Entities.Reward;
@@ -44,6 +45,10 @@ public interface MundusAPI {
     @GET("getSmallChild")
     Call<Child> getSmallChild();
 
+    @FormUrlEncoded
+    @POST("getSmallChildById")
+    Call<Child> getSmallChildById(@Field("childId") long childId);
+
     @GET("getChildren")
     Call<Set<Child>> getChildren();
 
@@ -71,7 +76,8 @@ public interface MundusAPI {
     @GET("getAvailableRewardsOfChild")
     Call<Set<Reward>> getAvailableRewardsOfChild();
 
-
+    @GET("getChildRewardPair")
+    Call<Set<ChildRewardPair>> getChildRewardPair();
 
 
     @GET("getAvailableQuestsOfParent")
@@ -91,6 +97,90 @@ public interface MundusAPI {
 
     @GET("getDoneQuestsOfChild")
     Call<Set<Quest>> getDoneQuestsOfChild();
+
+    @FormUrlEncoded
+    @POST("deletereward")
+    Call<ResponseBody> deleteReward(@Field("id") long rewardId);
+
+    @FormUrlEncoded
+    @POST("purchaseReward")
+    Call<Boolean> purchaseReward(@Field("id") long rewardId);
+
+    @FormUrlEncoded
+    @POST("grantReward")
+    Call<Boolean> grantReward(@Field("rewardId") long rewardId, @Field("childId") long childId);
+
+    @FormUrlEncoded
+    @POST("deleteQuest")
+    Call<ResponseBody> deleteQuest(@Field("questId") long questId);
+
+    @FormUrlEncoded
+    @POST("assignQuestParent")
+    Call<ResponseBody> assignQuestParent(@Field("childId") long childId, @Field("questId") long questId);
+
+    @FormUrlEncoded
+    @POST("assignQuest")
+    Call<ResponseBody> assignQuest(@Field("questId") long questId);
+
+    @FormUrlEncoded
+    @POST("unassignQuest")
+    Call<ResponseBody> unassignQuest(@Field("questId") long questId);
+
+    @FormUrlEncoded
+    @POST("markQuestAsConfirmed")
+    Call<ResponseBody> markQuestAsConfirmed(@Field("questId") long questId);
+
+    @FormUrlEncoded
+    @POST("markQuestAsNotDone")
+    Call<ResponseBody> markQuestAsNotDone(@Field("questId") long questId);
+
+    @FormUrlEncoded
+    @POST("markQuestAsDone")
+    Call<ResponseBody> markQuestAsDone(@Field("questId") long questId);
+
+
+    //Login
+    @GET("getLoginStatus")
+    Call<Integer> getLoginStatus();
+
+
+
+    //Profile
+    @FormUrlEncoded
+    @POST("addCoinsToChild")
+    Call<ResponseBody> addCoinsToChild(@Field("childId") long childId, @Field("amount") long amount);
+
+    @FormUrlEncoded
+    @POST("addXpToChild")
+    Call<ResponseBody> addXpToChild(@Field("childId") long childId, @Field("amount") long amount);
+
+    @POST("updateBasicChildInfo")
+    Call<ResponseBody> updateBasicChildInfo(@Body Child child);
+
+    @POST("createChild")
+    Call<ResponseBody> createChild(@Body Child child);
+
+    @FormUrlEncoded
+    @POST("removeChild")
+    Call<ResponseBody> removeChild(@Field("childId") long childId);
+
+    @GET("getBasicAccountInfo")
+    Call<Account> getBasicAccountInfo();
+
+    @POST("updateAccountInfo")
+    Call<ResponseBody> updateAccountInfo(@Body Account account);
+
+    @FormUrlEncoded
+    @POST("changeAccountPassword")
+    Call<ResponseBody> changeAccountPassword(@Field("currentPassword") String currentPassword, @Field("newPassword") String newPassword);
+
+    @FormUrlEncoded
+    @POST("changePinOnParent")
+    Call<ResponseBody> changePinOnParent(@Field("currentPin") String currentPin, @Field("newPin") String newPin);
+
+
+
+
 
 
 

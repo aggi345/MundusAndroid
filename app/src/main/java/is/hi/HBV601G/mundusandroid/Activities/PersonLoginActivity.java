@@ -45,7 +45,7 @@ public class PersonLoginActivity extends AppCompatActivity {
 
 
         //Network
-        retrofit = RetrofitSingleton.getInstance().getRetrofit();
+        retrofit = RetrofitSingleton.getInstance(getApplicationContext()).getRetrofit();
         mundusAPI = retrofit.create(MundusAPI.class);
 
         //Find

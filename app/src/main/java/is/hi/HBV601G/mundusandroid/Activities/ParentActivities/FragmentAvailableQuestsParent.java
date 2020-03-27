@@ -1,5 +1,6 @@
 package is.hi.HBV601G.mundusandroid.Activities.ParentActivities;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class FragmentAvailableQuestsParent extends Fragment {
+public class FragmentAvailableQuestsParent extends Fragment  {
     View v;
     private RecyclerView myreyclerview;
     private List<Quest> lstQuest;
@@ -40,6 +41,8 @@ public class FragmentAvailableQuestsParent extends Fragment {
 
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
+
+
 
     public FragmentAvailableQuestsParent() {
 
@@ -61,7 +64,7 @@ public class FragmentAvailableQuestsParent extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        retrofit = RetrofitSingleton.getInstance().getRetrofit();
+        retrofit = RetrofitSingleton.getInstance(getActivity().getApplicationContext()).getRetrofit();
         mundusAPI = retrofit.create(MundusAPI.class);
 
 

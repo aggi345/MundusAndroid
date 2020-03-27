@@ -46,7 +46,7 @@ public class PersonSelectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_person_select);
 
         //Network
-        retrofit = RetrofitSingleton.getInstance().getRetrofit();
+        retrofit = RetrofitSingleton.getInstance(getApplicationContext()).getRetrofit();
         mundusAPI = retrofit.create(MundusAPI.class);
 
         //Find
