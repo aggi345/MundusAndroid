@@ -1,7 +1,9 @@
 package is.hi.HBV601G.mundusandroid.Network;
 
+import android.graphics.Bitmap;
 import android.util.Pair;
 
+import java.io.ByteArrayInputStream;
 import java.util.Set;
 
 import is.hi.HBV601G.mundusandroid.Entities.Account;
@@ -10,6 +12,8 @@ import is.hi.HBV601G.mundusandroid.Entities.ChildRewardPair;
 import is.hi.HBV601G.mundusandroid.Entities.Parent;
 import is.hi.HBV601G.mundusandroid.Entities.Quest;
 import is.hi.HBV601G.mundusandroid.Entities.Reward;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -17,7 +21,10 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public interface MundusAPI {
 
@@ -178,8 +185,16 @@ public interface MundusAPI {
     @POST("changePinOnParent")
     Call<ResponseBody> changePinOnParent(@Field("currentPin") String currentPin, @Field("newPin") String newPin);
 
+   //@FormUrlEncoded
+    //@POST("uploadImage/{name}")
+    //Call<ResponseBody> uploadImage(@Body ByteArrayInputStream image, @Path("name") String name);
 
+    //@POST("uploadImage/{name}")
+   // Call<ResponseBody> uploadImage(@Body byte[] byteImg, @Path("name") String name);
 
+    @Multipart
+    @POST("uploadImage")
+    Call<ResponseBody> uploadImage(@Part MultipartBody.Part filePart);//, @Part("name") RequestBody requestBody);
 
 
 

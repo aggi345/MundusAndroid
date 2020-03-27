@@ -1,6 +1,8 @@
 package is.hi.HBV601G.mundusandroid.Activities.ParentActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
 import is.hi.HBV601G.mundusandroid.Activities.RecyclerStorage;
@@ -11,22 +13,45 @@ import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
 import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
 import is.hi.HBV601G.mundusandroid.QuestRecyclerViewAdapter;
 import is.hi.HBV601G.mundusandroid.R;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.http.Multipart;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -45,6 +70,9 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
     private EditText mDeadline;
     private Spinner mAssignTo;
     private Button mCreateQuest;
+
+    private ImageView mImg;
+    private Button mAddPhotoButton;
 
 
     //Http
@@ -78,7 +106,21 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
         mAssignTo = findViewById(R.id.assignTo_spinner);
         mCreateQuest = findViewById(R.id.createQuest_button);
 
+        mImg = findViewById(R.id.questImgParentImageView);
+        mAddPhotoButton = findViewById(R.id.addQuestPhotoParent);
 
+        mAddPhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= 23) {
+                    int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
+                    if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(CreateQuestActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                    }
+                }
+                takePhoto();
+            }
+        });
         //Listeners
         mCreateQuest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +149,7 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
         int xp = Integer.valueOf("0" + mXp.getText().toString());
         int coins = Integer.valueOf("0" + mCoins.getText().toString());
         String deadline = new SimpleDateFormat("yyyy-MM-dd").format(selectedCalendar.getTime());
+
         long childId = selectedChild.getId();
 
 
@@ -114,6 +157,12 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
         child.setId(childId);
         Quest quest = new Quest(questName, questDescription, xp, coins, deadline, null);
         quest.setAssignee(child);
+        String imageName = quest.getId()+"p";
+        if(mImg.getDrawable() != null) {
+
+            quest.setImageParent(imageName);
+            // Todo save image
+        }
 
         if(childId == -1) {
             QuestRecyclerViewAdapter temp = RecyclerStorage.getAvailableQuestsParent();
@@ -129,10 +178,83 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     //TODO Her tharf ad gera stoff
                     System.out.println("Her1");
                     return;
+                }
+
+                if (mImg.getDrawable() != null) {
+
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    BitmapDrawable drawable = (BitmapDrawable) mImg.getDrawable();
+                    Bitmap photo = drawable.getBitmap();
+
+                    //File file = savebitmap(photo, imageName);
+                    try
+                    {
+                        File file=new File("your file name");
+                        InputStream inputStream = getResources().openRawResource(mImg.getDrawable());
+                        OutputStream out=new FileOutputStream(file);
+                        byte buf[]=new byte[1024];
+                        int len;
+                        while((len=inputStream.read(buf))>0)
+                            out.write(buf,0,len);
+                        out.close();
+                        inputStream.close();
+                    }
+                    catch (IOException e){}
+                }
+
+
+                    MultipartBody.Part filePart = MultipartBody.Part.createFormData("photo", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+                    // RequestBody description = RequestBody.create(MediaType.parse("text/plain"), "image-type")
+
+                    Call call2 = mundusAPI.uploadImage(filePart);
+
+                    call2.enqueue(new Callback() {
+                        @Override
+                        public void onResponse(Call call, Response response) {
+                            if (!response.isSuccessful()) {
+                                //TODO Her tharf ad gera stoff
+                                System.out.println("image !response.isSuccessful()");
+                                return;
+                            }
+                            System.out.println("Upload image successful");
+
+                        }
+                        @Override
+                        public void onFailure(Call call, Throwable t) {
+                            System.out.println("image onFailure");
+                        }
+                    });
+
+
+                    /*bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream);
+                    byte[] byteArray = stream.toByteArray();
+                    System.out.println(byteArray);
+                    Call<ResponseBody> callUpload = mundusAPI.uploadImage(byteArray, imageName );
+
+                    callUpload.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (!response.isSuccessful()) {
+                                //TODO Her tharf ad gera stoff
+                                System.out.println("Unable to save image");
+                                return;
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            //TODO Her tharf ad gera stoff
+                            System.out.println("Her2");
+                        }
+                    });*/
+
+
+
                 }
             }
 
@@ -142,10 +264,31 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
                 System.out.println("Her2");
             }
         });
+    }
 
+    private File savebitmap(Bitmap bmp, String name) {
 
+        String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+        OutputStream outStream = null;
+        // String temp = null;
+        File file = new File(extStorageDirectory, name+".png");
+        if (file.exists()) {
+            file.delete();
+            file = new File(extStorageDirectory, name+".png");
 
+        }
 
+        try {
+            outStream = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+            outStream.flush();
+            outStream.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return file;
     }
 
 
@@ -189,6 +332,22 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
             }
         });
 
+    }
+
+    public void takePhoto() {
+        Intent takePicture = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(takePicture, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode != RESULT_CANCELED) {
+            if (resultCode == RESULT_OK && data != null) {
+                Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
+                mImg.setImageBitmap(selectedImage);
+
+            }
+        }
     }
 
 
