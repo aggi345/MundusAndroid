@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 
+import is.hi.HBV601G.mundusandroid.InfoBar;
 import is.hi.HBV601G.mundusandroid.R;
 
 public class MarketplaceParentActivity extends AppCompatActivity {
@@ -30,6 +31,8 @@ public class MarketplaceParentActivity extends AppCompatActivity {
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        InfoBar infoBar = new InfoBar(this, "parent");
 
 
 

@@ -11,6 +11,7 @@ import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.FragmentAvailable
 import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.FragmentFinishedQuestsParent;
 import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.FragmentInProgressQuestsParent;
 import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.ViewPagerAdapter;
+import is.hi.HBV601G.mundusandroid.InfoBar;
 import is.hi.HBV601G.mundusandroid.R;
 
 public class QuestLogChildActivity extends AppCompatActivity {
@@ -36,6 +37,8 @@ public class QuestLogChildActivity extends AppCompatActivity {
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        InfoBar infoBar = new InfoBar(this, "child");
 
         // Remove Shadow From the action bar
 

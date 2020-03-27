@@ -10,6 +10,7 @@ import com.google.android.material.tabs.TabLayout;
 import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.FragmentAvailableRewardsParent;
 import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.FragmentPurchasedRewardsParent;
 import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.ViewPagerAdapter;
+import is.hi.HBV601G.mundusandroid.InfoBar;
 import is.hi.HBV601G.mundusandroid.R;
 
 public class MarketplaceChildActivity extends AppCompatActivity {
@@ -33,6 +34,8 @@ public class MarketplaceChildActivity extends AppCompatActivity {
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        InfoBar infoBar = new InfoBar(this, "child");
 
         // Remove Shadow From the action bar
 

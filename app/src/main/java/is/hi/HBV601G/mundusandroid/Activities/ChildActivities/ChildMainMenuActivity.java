@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import is.hi.HBV601G.mundusandroid.Activities.LoginActivity;
 import is.hi.HBV601G.mundusandroid.Entities.Child;
+import is.hi.HBV601G.mundusandroid.InfoBar;
 import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
 import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
 import is.hi.HBV601G.mundusandroid.R;
@@ -26,10 +27,7 @@ public class ChildMainMenuActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
 
-    //View
-    private TextView mName;
-    private TextView mCoins;
-    private TextView mLevel;
+
 
     private ImageButton mQuestLog;
     private ImageButton mMarketplace;
@@ -46,15 +44,12 @@ public class ChildMainMenuActivity extends AppCompatActivity {
         mundusAPI = retrofit.create(MundusAPI.class);
 
 
-        //Find
-        mName = findViewById(R.id.personName_textView);
-        mCoins = findViewById(R.id.coins_textView);
-        mLevel = findViewById(R.id.level_textView);
+
 
         mQuestLog = findViewById(R.id.quest_imageButton);
         mMarketplace = findViewById(R.id.marketplace_imageButton);
 
-        updateChildInfo();
+        InfoBar infoBar = new InfoBar(this, "child");
 
 
         //Handler
@@ -73,38 +68,6 @@ public class ChildMainMenuActivity extends AppCompatActivity {
         });
     }
 
-
-    private void updateChildInfo(){
-
-        Call<Child> getChildCall = mundusAPI.getSmallChild();
-
-
-        getChildCall.enqueue(new Callback<Child>() {
-            @Override
-            public void onResponse(Call<Child> call, Response<Child> response) {
-                if(!response.isSuccessful()){
-                    System.out.println(response.code());
-                    if(response.code() == 401){
-                       moveToLogin();
-                    }
-                    return;
-                }
-
-                Child child = response.body();
-
-                mName.setText(child.getName());
-                mCoins.setText("Coins: " + child.getTotalCoins());
-                System.out.println(child.getTotalCoins());
-                mLevel.setText("Level: " + child.getLevel());
-
-            }
-
-            @Override
-            public void onFailure(Call<Child> call, Throwable t) {
-                //TODO vantar að gera þetta.
-            }
-        });
-    }
 
 
     private void moveToQuestLog(){

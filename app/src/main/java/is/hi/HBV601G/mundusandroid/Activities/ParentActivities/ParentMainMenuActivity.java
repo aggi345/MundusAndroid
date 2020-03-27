@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import is.hi.HBV601G.mundusandroid.Entities.Parent;
+import is.hi.HBV601G.mundusandroid.InfoBar;
 import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
 import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
 import is.hi.HBV601G.mundusandroid.R;
@@ -55,10 +56,10 @@ public class ParentMainMenuActivity extends AppCompatActivity {
         mStatistics = findViewById(R.id.statistics_imageButton);
         mProfile = findViewById(R.id.profile_imageButton);
 
-        mName = findViewById(R.id.personName_textView);
 
+        //Infobar
+        InfoBar infoBar = new InfoBar(this, "parent");
 
-        updateParentInfo();
 
 
         //Handler
@@ -92,36 +93,6 @@ public class ParentMainMenuActivity extends AppCompatActivity {
     }
 
 
-    private void updateParentInfo(){
-        Call<Parent> getParentCall = mundusAPI.getSmallParent();
-
-        getParentCall.enqueue(new Callback<Parent>() {
-            @Override
-            public void onResponse(Call<Parent> call, Response<Parent> response) {
-                if(!response.isSuccessful()){
-                    System.out.println(response.code());
-                    if(response.code() == 401){
-                        moveToLogin();
-                    }
-                    return;
-                }
-
-                Parent parent = response.body();
-
-                mName.setText(parent.getName());
-            }
-
-            @Override
-            public void onFailure(Call<Parent> call, Throwable t) {
-                //TODO vantar að gera þetta.
-            }
-        });
-
-
-
-
-    }
-
 
     private void moveToQuestLog(){
         Intent intent = new Intent(ParentMainMenuActivity.this, QuestLogParentActivity.class);
@@ -143,10 +114,6 @@ public class ParentMainMenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void moveToLogin()
-    {
-
-    }
 
 
 
