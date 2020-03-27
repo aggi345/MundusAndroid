@@ -53,6 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/questName_editText"
         android:background="@drawable/textedit_background"
         android:fontFamily="@font/yatra_one"
+        android:drawableEnd="@drawable/icon_hand_write_30"
         />
 
     <EditText

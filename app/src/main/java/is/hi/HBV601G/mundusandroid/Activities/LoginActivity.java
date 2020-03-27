@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import is.hi.HBV601G.mundusandroid.Activities.ChildActivities.ChildMainMenuActivity;
+import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.ParentMainMenuActivity;
 import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
 import is.hi.HBV601G.mundusandroid.R;
 import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
@@ -29,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button mSignupButton;
     private EditText mPassword;
     private EditText mEmail;
-
+    private TextView mStatus;
 
 
     @Override
@@ -39,16 +41,17 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //Network
-        retrofit = RetrofitSingleton.getInstance().getRetrofit();
+        retrofit = RetrofitSingleton.getInstance(getApplicationContext()).getRetrofit();
         mundusAPI = retrofit.create(MundusAPI.class);
+
+        checkLoginStatus();
 
 
         //Find items
         mPassword = findViewById(R.id.password_editView);
-        mEmail= findViewById(R.id.email_editView);
+        mEmail = findViewById(R.id.email_editView);
         mSignupButton = findViewById(R.id.signup_button);
-        mLoginButton = (Button)findViewById(R.id.login_button);
-
+        mLoginButton = (Button) findViewById(R.id.login_button);
 
 
         //Events
@@ -60,16 +63,64 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
             }
         });
+    }
 
+
+    private void checkLoginStatus() {
+        Call<Integer> call = mundusAPI.getLoginStatus();
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (!response.isSuccessful()) {
+                    //TODO Her þarf að meðhöndla vandamál.
+                    return;
+                }
+
+                int statusCode = response.body();
+
+                switch (statusCode) {
+                    case 3:
+                        startChildMainMenuActivity();
+                        break;
+                    case 2:
+                        startParentMainMenuActivity();
+                        break;
+                    case 1:
+                        startPersonSelectActivity();
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                //TODO Her þarf að meðhöndla vandamál.
+            }
+        });
 
     }
+
+    private void startPersonSelectActivity() {
+        Intent intent = new Intent(LoginActivity.this, PersonSelectActivity.class);
+        startActivity(intent);
+    }
+
+    private void startChildMainMenuActivity() {
+        Intent intent = new Intent(LoginActivity.this, ChildMainMenuActivity.class);
+        startActivity(intent);
+    }
+
+    private void startParentMainMenuActivity() {
+        Intent intent = new Intent(LoginActivity.this, ParentMainMenuActivity.class);
+        startActivity(intent);
+    }
+
 
     /**
      * Gets login information from the screen and sends a login request to the server.
@@ -82,13 +133,13 @@ public class LoginActivity extends AppCompatActivity {
         call.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     //TODO Her þarf að meðhöndla vandamál.
                     return;
                 }
                 Integer r = response.body();
 
-                if(r != -1) {
+                if (r != -1) {
                     Intent intent = new Intent(LoginActivity.this, PersonSelectActivity.class);
                     startActivity(intent);
                 }
@@ -98,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
                 //TODO Her þarf að meðhöndla vandamál.
-        }
+            }
         });
     }
 
@@ -112,11 +163,12 @@ public class LoginActivity extends AppCompatActivity {
         loginCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     return;
                 }
 
                 String r = response.body();
+                mStatus.setText(r + "");
 
             }
 
