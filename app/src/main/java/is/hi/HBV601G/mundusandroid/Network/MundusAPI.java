@@ -194,7 +194,7 @@ public interface MundusAPI {
 
     @Multipart
     @POST("uploadImage")
-    Call<ResponseBody> uploadImage(@Part MultipartBody.Part filePart);//, @Part("name") RequestBody requestBody);
+    Call<ResponseBody> uploadImage(@Part MultipartBody.Part file);//, @Part("name") RequestBody requestBody);
 
 
 
