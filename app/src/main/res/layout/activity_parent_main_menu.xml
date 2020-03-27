@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.ParentActivities.ParentMainMenuActivity"
-    android:background="@drawable/image_desertwatch">
+    android:background="@drawable/gradient_background">
 
 
     <include
@@ -51,11 +51,10 @@
 
     <ImageButton
         android:id="@+id/quest_imageButton"
-        android:layout_width="160dp"
-        android:layout_height="150dp"
+        android:layout_width="167dp"
+        android:layout_height="149dp"
         android:layout_marginTop="76dp"
         android:background="@drawable/button_background"
-        android:pic
         app:layout_constraintEnd_toStartOf="@+id/marketplace_imageButton"
         app:layout_constraintHorizontal_bias="0.024"
         app:layout_constraintStart_toStartOf="@+id/guideline"
