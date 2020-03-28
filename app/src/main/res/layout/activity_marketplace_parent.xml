@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".Activities.ParentActivities.MarketplaceParentActivity">
+    tools:context=".Activities.ParentActivities.MarketplaceParentActivity"
+    android:background="@drawable/gradient_background"
+    >
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/marketPlaceParentTablayout_id"

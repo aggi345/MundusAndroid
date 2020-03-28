@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
 
     android:orientation="vertical"
-    tools:context=".Activities.ChildActivities.QuestLogChildActivity">
+    tools:context=".Activities.ChildActivities.QuestLogChildActivity"
+    android:background="@drawable/gradient_background"
+    >
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/questLogChildTablayout_id"

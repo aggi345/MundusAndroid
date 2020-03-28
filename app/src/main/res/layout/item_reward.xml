@@ -1,67 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2sp"
+    android:layout_marginBottom="2sp"
+    android:background="@drawable/quest_background"
+    android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:src = "@mipmap/ic_launcher_round"
-        android:id ="@+id/item_reward_img"/>
+        android:id="@+id/item_reward_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher_round" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="16dp">
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/item_reward_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:text="Reward Name"
-            android:id="@+id/item_reward_name"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Insert description here"
-            android:id="@+id/item_reward_description"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="7"
-            android:id="@+id/item_reward_lvlreq"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="500"
-            android:id="@+id/item_reward_price"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Buy"
-            android:id="@+id/item_reward_buyButton"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Delete"
-            android:id="@+id/item_reward_deleteButton"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grant"
-            android:id="@+id/item_reward_grantButton"
-            />
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/item_reward_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reward ID"
+            android:text="Insert description here" />
+
+        <TextView
+            android:id="@+id/item_reward_lvlreq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7" />
+
+        <TextView
+            android:id="@+id/item_reward_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="500" />
+
+        <TextView
             android:id="@+id/item_reward_rewardId"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reward ID" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/item_reward_buyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:text="Buy" />
+
+        <Button
+            android:id="@+id/item_reward_deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:text="Delete" />
+
+        <Button
+            android:id="@+id/item_reward_grantButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grant" />
     </LinearLayout>
 </LinearLayout>

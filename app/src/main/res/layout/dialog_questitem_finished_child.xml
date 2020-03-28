@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#232323"
+        android:background="@drawable/gradient_background"
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quest Name"
-            android:textColor="@android:color/white"
+            android:textColor="@color/sexyblue"
             android:textStyle="bold"
             android:textSize="24sp"
             android:layout_marginTop="5dp"/>
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:text="Description"
-            android:textColor="@android:color/white"
+            android:textColor="@color/sexyblue"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"/>
         <TextView
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:text="XP"
-            android:textColor="@android:color/white"
+            android:textColor="@color/sexyblue"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp" />
         <TextView
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:text="Coins"
-            android:textColor="@android:color/white"
+            android:textColor="@color/sexyblue"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp" />
 
@@ -56,6 +56,8 @@
             android:layout_marginBottom="5dp"
             android:text="Not Completed"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:background="@drawable/button_background_yr"
+            />
     </LinearLayout>
 </RelativeLayout>

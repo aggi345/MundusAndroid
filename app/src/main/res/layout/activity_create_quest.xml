@@ -20,6 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:fontFamily="@font/yatra_one"
+        android:textColor="@color/sexyblue"
         />
 
     <EditText

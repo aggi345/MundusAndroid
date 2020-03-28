@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -56,7 +58,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/changeParentName_editText" />
+                app:layout_constraintTop_toBottomOf="@+id/changeParentName_editText"
+                android:background="@drawable/button_background"
+                />
 
             <TextView
                 android:id="@+id/textView6"
@@ -67,6 +71,7 @@
                 android:layout_marginEnd="32dp"
                 android:text="Change password"
                 android:textSize="18sp"
+                android:textColor="@color/sexyblue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +88,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/confirmPassword_editText" />
+                app:layout_constraintTop_toBottomOf="@+id/confirmPassword_editText"
+                android:background="@drawable/button_background"
+                />
 
             <EditText
                 android:id="@+id/confirmPassword_editText"
@@ -112,7 +119,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/sexyblue"
+                />
 
             <EditText
                 android:id="@+id/currentPassword_editText"
@@ -153,6 +162,7 @@
                 android:layout_marginEnd="32dp"
                 android:text="Change pin"
                 android:textSize="18sp"
+                android:textColor="@color/sexyblue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -216,7 +226,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/confirmPin_editText" />
+                app:layout_constraintTop_toBottomOf="@+id/confirmPin_editText"
+                android:background="@drawable/button_background"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

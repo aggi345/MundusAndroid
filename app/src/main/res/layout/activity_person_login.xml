@@ -18,7 +18,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:fontFamily="@font/yatra_one"/>
+        android:fontFamily="@font/yatra_one"
+        android:textColor="@color/sexyblue"/>
 
     <EditText
         android:id="@+id/pin_editText"
@@ -48,7 +49,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/message_textView"
         android:background="@drawable/button_background"
-        android:fontFamily="@font/yatra_one"/>
+        android:fontFamily="@font/yatra_one"
+        android:textColor="#FFFFFF"/>
 
     <TextView
         android:id="@+id/message_textView"

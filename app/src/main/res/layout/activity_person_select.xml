@@ -30,6 +30,6 @@
         app:layout_constraintTop_toTopOf="parent"
         android:fontFamily="@font/yatra_one"
         android:textSize="30sp"
-        android:textColor="#ffea29"
+        android:textColor="@color/sexyblue"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/quest_background"
+    >
 
     <ImageView
         android:layout_width="56dp"
@@ -42,12 +44,7 @@
             android:text="Buyer"
             android:id="@+id/item_reward_purchased_buyer"
             />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grant"
-            android:id="@+id/item_reward_purchased_grantButton"
-            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,5 +57,18 @@
             android:text="Child Id"
             android:id="@+id/item_reward_purchased_childId"
             />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/item_reward_purchased_grantButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grant" />
     </LinearLayout>
 </LinearLayout>
