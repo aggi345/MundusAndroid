@@ -60,6 +60,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/changeParentName_editText"
                 android:background="@drawable/button_background"
+                android:textColor="@color/white"
                 />
 
             <TextView
@@ -90,6 +91,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/confirmPassword_editText"
                 android:background="@drawable/button_background"
+                android:textColor="@color/white"
                 />
 
             <EditText

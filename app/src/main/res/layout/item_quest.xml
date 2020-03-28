@@ -1,58 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:id="@+id/item_quest_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/item_quest_id"
+    android:layout_marginTop="1sp"
+    android:layout_marginBottom="1sp"
     android:background="@drawable/quest_background"
-    >
+    android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:src = "@drawable/icon_quest"
-        android:id ="@+id/item_quest_img"/>
+        android:id="@+id/item_quest_img"
+        android:layout_width="96dp"
+        android:layout_height="97dp"
+        android:src="@drawable/icon_quest" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="16dp">
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Quest Name"
             android:id="@+id/item_quest_name"
-            android:fontFamily="@font/yatra_one"
-            />
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="XP: 1337"
+            android:fontFamily="@font/yatra_one"
+            android:text="Quest Name"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/item_quest_xp"
-            android:fontFamily="@font/yatra_one"
-            />
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Coins: 69"
+            android:fontFamily="@font/yatra_one"
+            android:text="XP: 1337" />
+
+        <TextView
             android:id="@+id/item_quest_coins"
-            android:fontFamily="@font/yatra_one"
-            />
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Assignee: N/A"
+            android:fontFamily="@font/yatra_one"
+            android:text="Coins: 69" />
+
+        <TextView
             android:id="@+id/item_quest_assignee"
-            android:fontFamily="@font/yatra_one"
-            />
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Status"
-            android:id="@+id/item_quest_status"
             android:fontFamily="@font/yatra_one"
-            />
+            android:text="Assignee: N/A" />
+
+        <TextView
+            android:id="@+id/item_quest_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/yatra_one"
+            android:text="Status" />
     </LinearLayout>
-    </LinearLayout>
+</LinearLayout>

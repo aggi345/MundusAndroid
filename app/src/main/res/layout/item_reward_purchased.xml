@@ -1,62 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/quest_background"
-    >
+    android:layout_marginTop="1sp"
+    android:layout_marginBottom="1sp"
+    android:background="@drawable/reward_background"
+    android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:src = "@mipmap/ic_launcher_round"
-        android:id ="@+id/item_reward_purchased_img"/>
+        android:id="@+id/item_reward_purchased_img"
+        android:layout_width="98dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/icon_cart_52" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="16dp">
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/item_reward_purchased_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:text="Reward Name"
-            android:id="@+id/item_reward_purchased_name"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Insert description here"
-            android:id="@+id/item_reward_purchased_description"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="7"
-            android:id="@+id/item_reward_purchased_lvlreq"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="500"
-            android:id="@+id/item_reward_purchased_price"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Buyer"
-            android:id="@+id/item_reward_purchased_buyer"
-            />
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/item_reward_purchased_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reward Id"
-            android:id="@+id/item_reward_purchased_rewardId"
-            />
+            android:text="Insert description here" />
+
         <TextView
+            android:id="@+id/item_reward_purchased_lvlreq"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Child Id"
+            android:text="7" />
+
+        <TextView
+            android:id="@+id/item_reward_purchased_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="500" />
+
+        <TextView
+            android:id="@+id/item_reward_purchased_buyer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buyer" />
+
+        <TextView
+            android:id="@+id/item_reward_purchased_rewardId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reward Id" />
+
+        <TextView
             android:id="@+id/item_reward_purchased_childId"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Child Id" />
 
     </LinearLayout>
 
@@ -67,8 +71,9 @@
 
         <Button
             android:id="@+id/item_reward_purchased_grantButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="131dp"
+            android:layout_height="75dp"
+            android:background="@drawable/button_background_gy"
             android:text="Grant" />
     </LinearLayout>
 </LinearLayout>

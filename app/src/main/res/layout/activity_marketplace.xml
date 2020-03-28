@@ -9,18 +9,22 @@
     >
 
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tableLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tableLayout">
+        app:tabSelectedTextColor="@color/sexygreen"
+        app:tabTextColor="@color/sexyblue">
+
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/rewardsTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rewards"
-            android:id="@+id/rewardsTab"/>
+            android:text="Rewards" />
+
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/purchasedRewardsTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Purchased Rewards"
-            android:id="@+id/purchasedRewardsTab"/>
+            android:text="Purchased Rewards" />
     </com.google.android.material.tabs.TabLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
