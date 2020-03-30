@@ -66,10 +66,10 @@ public interface MundusAPI {
     Call<Set<Child>> getSmallChildrenOfParent();
 
     @POST("createQuest")
-    Call<ResponseBody> createQuest(@Body Quest quest);
+    Call<Quest> createQuest(@Body Quest quest);
 
     @POST("createReward")
-    Call<ResponseBody> createReward(@Body Reward reward);
+    Call<Reward> createReward(@Body Reward reward);
 
     @GET("getRewardsOfParent")
     Call<Set<Reward>> getRewardsOfParent();

@@ -81,22 +81,23 @@ public class CreateRewardActivity extends AppCompatActivity {
 
         Reward reward = new Reward(rewardName, rewardDescription, price, LevelRequired);
 
-        Call<ResponseBody> call = mundusAPI.createReward(reward);
+        Call<Reward> call = mundusAPI.createReward(reward);
 
-        RewardRecyclerViewAdapter temp = RecyclerStorage.getAvailableRewardsParent();
-        temp.addItem(reward);
-        call.enqueue(new Callback<ResponseBody>() {
+
+        call.enqueue(new Callback<Reward>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<Reward> call, Response<Reward> response) {
                 if(!response.isSuccessful()){
                     //TODO Her tharf ad gera stoff
                     System.out.println("Her1");
                     return;
                 }
+                RewardRecyclerViewAdapter temp = RecyclerStorage.getAvailableRewardsParent();
+                temp.addItem(response.body());
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<Reward> call, Throwable t) {
                 //TODO Her tharf ad gera stoff
                 System.out.println("Her2");
             }

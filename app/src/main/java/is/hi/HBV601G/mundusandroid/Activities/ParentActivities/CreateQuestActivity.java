@@ -59,6 +59,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Random;
 import java.util.Set;
 
 public class CreateQuestActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener {
@@ -87,6 +88,8 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
     DatePickerDialog.OnDateSetListener date;
     Uri image_uri;
     File file;
+
+    private boolean withImg = false;
 
 
     @Override
@@ -185,38 +188,44 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
         child.setId(childId);
         Quest quest = new Quest(questName, questDescription, xp, coins, deadline, null);
         quest.setAssignee(child);
-        String imageName = quest.getId() + "p";
-        if (mImg.getDrawable() != null) {
-
+        System.out.println(mImg.getDrawable());
+        final String imageName;
+        final long generatedLong  = new Random().nextLong();
+        if (withImg) {
+            imageName = generatedLong + "p";
             quest.setImageParent(imageName);
             // Todo save image
         }
 
-        if (childId == -1) {
-            QuestRecyclerViewAdapter temp = RecyclerStorage.getAvailableQuestsParent();
-            temp.addItem(quest);
-        } else {
-            QuestRecyclerViewAdapter temp = RecyclerStorage.getInProgressQuestsParent();
-            temp.addItem(quest);
-        }
-
-        Call<ResponseBody> call = mundusAPI.createQuest(quest);
 
 
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<Quest> call = mundusAPI.createQuest(quest);
+
+
+        call.enqueue(new Callback<Quest>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<Quest> call, Response<Quest> response) {
                 if (!response.isSuccessful()) {
                     //TODO Her tharf ad gera stoff
                     System.out.println("Her1");
+                    withImg = false;
                     return;
                 }
-
-                if (mImg.getDrawable() != null) {
+                Quest newQuest = response.body();
+                System.out.println("New quest is " + newQuest.getName());
+                if (childId == -1) {
+                    QuestRecyclerViewAdapter temp = RecyclerStorage.getAvailableQuestsParent();
+                    temp.addItem(newQuest);
+                } else {
+                    QuestRecyclerViewAdapter temp = RecyclerStorage.getInProgressQuestsParent();
+                    temp.addItem(newQuest);
+                }
+                if (withImg) {
 
                     BitmapDrawable drawable = (BitmapDrawable) mImg.getDrawable();
                     Bitmap photo = drawable.getBitmap();
-                    file = savebitmap(photo, "test2");
+                    String imageName = generatedLong + "p";
+                    file = savebitmap(photo, imageName);
 
 
 
@@ -230,23 +239,28 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
                         @Override
                         public void onResponse(Call call, Response response) {
                             System.out.println("Her40");
+                            withImg = false;
                         }
 
                         @Override
                         public void onFailure(Call call, Throwable t) {
-                            System.out.println(t);
+                            withImg = false;System.out.println(t);
                         }
+
                     });
 
                 }
+                withImg = false;
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<Quest> call, Throwable t) {
                 //TODO Her tharf ad gera stoff
                 System.out.println("Her2");
+                withImg = false;
             }
         });
+
     }
 
     private File savebitmap(Bitmap bmp, String name) {
@@ -334,6 +348,7 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
             if (resultCode == RESULT_OK) {
                 System.out.println("asdasd");
                 mImg.setImageURI(image_uri);
+                withImg = true;
             }
         }
     }
