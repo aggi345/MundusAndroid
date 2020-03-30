@@ -2,6 +2,10 @@ package is.hi.HBV601G.mundusandroid;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -20,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -218,7 +224,11 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 dialog_quest_Description.setText(mData.get(vHolder.getAdapterPosition()).getDescription());
                 dialog_quest_XP.setText("XP: " + mData.get(vHolder.getAdapterPosition()).getXp());
                 dialog_quest_coins.setText("Coins: " + mData.get(vHolder.getAdapterPosition()).getCoins());
-
+                String imgname = mData.get(vHolder.getAdapterPosition()).getImageParent();
+                ImageView imgview = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_available_parent);
+                if(imgname != null) {
+                    setImage(imgview, imgname);
+                }
                 initSpinner(vHolder, assignTo);
 
 
@@ -521,10 +531,13 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 TextView dialog_quest_XP = (TextView) questDialog.findViewById(R.id.dialog_questitem_available_child_questXP);
                 TextView dialog_quest_coins = (TextView) questDialog.findViewById(R.id.dialog_questitem_available_child_questCoins);
                 Button assignToMeButton = (Button) questDialog.findViewById(R.id.dialog_questitem_available_child_assignButton);
+
                 dialog_quest_name.setText(mData.get(vHolder.getAdapterPosition()).getName());
                 dialog_quest_Description.setText(mData.get(vHolder.getAdapterPosition()).getDescription());
                 dialog_quest_XP.setText("XP: " + mData.get(vHolder.getAdapterPosition()).getXp());
                 dialog_quest_coins.setText("Coins: " + mData.get(vHolder.getAdapterPosition()).getCoins());
+                String imgname = mData.get(vHolder.getAdapterPosition()).getImageParent();
+
 
                 assignToMeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -567,6 +580,44 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
 
             }
         });
+    }
+
+
+    public void setImage(ImageView imgview, String name) {
+        Call<ResponseBody> call = mundusAPI.downloadImage(name);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(!response.isSuccessful()){
+                    //TODO Her tharf ad gera stoff
+                    System.out.println("set image response not successful");
+                    return;
+                }
+
+                ResponseBody file = response.body();
+                InputStream stream = file.byteStream();
+                System.out.println(file);
+
+
+                Bitmap bitmap = BitmapFactory.decodeStream(stream);
+                Drawable d =  new BitmapDrawable(mContext.getResources(), bitmap);
+                imgview.setImageDrawable(d);
+
+
+
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                //TODO Her tharf ad gera stoff
+                System.out.println("set Image onFailuer");
+            }
+        });
+
+        // Ná í file
+        // Búa til bitmap úr file
+        // Setja bitmap í imgview
+
+
     }
 
     @Override

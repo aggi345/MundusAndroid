@@ -238,7 +238,7 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
                     call2.enqueue(new Callback() {
                         @Override
                         public void onResponse(Call call, Response response) {
-                            System.out.println("Her40");
+                            //System.out.println("Her40");
                             withImg = false;
                         }
 

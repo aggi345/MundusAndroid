@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.util.Pair;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Set;
 
 import is.hi.HBV601G.mundusandroid.Entities.Account;
@@ -16,6 +17,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -195,6 +197,10 @@ public interface MundusAPI {
     @Multipart
     @POST("uploadImage")
     Call<ResponseBody> uploadImage(@Part MultipartBody.Part file);//, @Part("name") RequestBody requestBody);
+
+    @FormUrlEncoded
+    @POST("downloadImage")
+    Call<ResponseBody> downloadImage(@Field("name") String name);
 
 
 
