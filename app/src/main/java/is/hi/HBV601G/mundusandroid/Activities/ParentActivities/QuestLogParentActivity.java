@@ -34,9 +34,9 @@ public class QuestLogParentActivity extends AppCompatActivity {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         // Add Fragment Here
-        adapter.AddFragment(new FragmentAvailableQuestsParent(),"Available");
-        adapter.AddFragment(new FragmentInProgressQuestsParent(),"In Progress");
-        adapter.AddFragment(new FragmentFinishedQuestsParent(),"Finished");
+        adapter.AddFragment(new FragmentAvailableQuestsParent(this),"Available");
+        adapter.AddFragment(new FragmentInProgressQuestsParent(this),"In Progress");
+        adapter.AddFragment(new FragmentFinishedQuestsParent(this),"Finished");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

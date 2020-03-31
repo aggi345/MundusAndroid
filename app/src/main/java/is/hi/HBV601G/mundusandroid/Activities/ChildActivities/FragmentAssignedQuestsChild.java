@@ -39,10 +39,11 @@ public class FragmentAssignedQuestsChild extends Fragment {
 
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
+    QuestLogChildActivity activity;
 
 
-    public FragmentAssignedQuestsChild() {
-
+    public FragmentAssignedQuestsChild(QuestLogChildActivity a) {
+        this.activity =a;
     }
 
     @Nullable
@@ -50,7 +51,7 @@ public class FragmentAssignedQuestsChild extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.assignedquests_child_fragment, container, false);
         myreyclerview = (RecyclerView) v.findViewById(R.id.assignedQuestsChildRecycleView);
-        recyclerAdapter = new QuestRecyclerViewAdapter(getContext(), lstQuest, 1);
+        recyclerAdapter = new QuestRecyclerViewAdapter(getContext(), lstQuest, 1, activity, null);
         RecyclerStorage.setAssignedQuestsChild(recyclerAdapter);
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myreyclerview.setAdapter(recyclerAdapter);
@@ -93,14 +94,7 @@ public class FragmentAssignedQuestsChild extends Fragment {
             }
         });
 
-        /*lstQuest = new ArrayList<>();
-        Account account = new Account("Tester", "test@test.is", "123", null);
-        Parent parent = new Parent("Tester", "123", account);
-        account.setParent(parent);
-        lstQuest.add(new Quest("Vaccum", "Description", 1337, 69, "Deadline", parent));
-        lstQuest.add(new Quest("Clean", "Description", 1337, 69, "Deadline", parent));
 
-         */
 
     }
 

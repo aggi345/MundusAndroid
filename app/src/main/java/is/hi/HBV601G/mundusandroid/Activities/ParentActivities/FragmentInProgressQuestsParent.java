@@ -34,14 +34,14 @@ public class FragmentInProgressQuestsParent extends Fragment {
     View v;
     private RecyclerView myreyclerview;
     private List<Quest> lstQuest;
-
+    private QuestLogParentActivity activity;
     private QuestRecyclerViewAdapter recyclerAdapter;
 
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
 
-    public FragmentInProgressQuestsParent() {
-
+    public FragmentInProgressQuestsParent(QuestLogParentActivity a) {
+        this.activity = a;
     }
 
     @Nullable
@@ -49,7 +49,7 @@ public class FragmentInProgressQuestsParent extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.inprogressquests_parent_fragment, container, false);
         myreyclerview = (RecyclerView) v.findViewById(R.id.inprogressQuestsParentRecycleView);
-        recyclerAdapter = new QuestRecyclerViewAdapter(getContext(), lstQuest, 4);
+        recyclerAdapter = new QuestRecyclerViewAdapter(getContext(), lstQuest, 4,null,activity);
         RecyclerStorage.setInProgressQuestsParent(recyclerAdapter);
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myreyclerview.setAdapter(recyclerAdapter);

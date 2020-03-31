@@ -1,11 +1,17 @@
 package is.hi.HBV601G.mundusandroid;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,16 +31,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import is.hi.HBV601G.mundusandroid.Activities.ChildActivities.QuestLogChildActivity;
+import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.QuestLogParentActivity;
 import is.hi.HBV601G.mundusandroid.Activities.RecyclerStorage;
 import is.hi.HBV601G.mundusandroid.Entities.Child;
 import is.hi.HBV601G.mundusandroid.Entities.Quest;
 import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
 import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,15 +67,28 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
     // 2: Finished quests for a child, 3: Available quests for parent, 4: In progress quests for parent,
     //5: finished quests for parent.
     // The dialog window is different for these scenarios, the mType indicates what kind of dialog should be used
-
+    Uri image_uri;
+    File file;
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
     private Child selectedChild;
-
-    public QuestRecyclerViewAdapter(Context mContext, List<Quest> mData, int type) {
+    private MyViewHolder vHolder;
+    private QuestLogChildActivity activity;
+    private QuestLogParentActivity activityp;
+    public QuestRecyclerViewAdapter(Context mContext, List<Quest> mData, int type, QuestLogChildActivity ac, QuestLogParentActivity ap) {
         this.mContext = mContext;
         this.mData = mData;
         this.mType = type;
+        this.activity = ac;
+        this.activityp = ap;
+    }
+
+    public MyViewHolder getvHolder() {
+        return vHolder;
+    }
+
+    public List<Quest> getData() {
+        return mData;
     }
 
     @NonNull // Non null er hvegi í myndbandinu
@@ -69,8 +96,8 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
         v = LayoutInflater.from(mContext).inflate(R.layout.item_quest, parent, false); // Parent í þessari línu tengist okkar parent ekki neitt
-        final MyViewHolder vHolder = new MyViewHolder(v);
-
+        //final MyViewHolder vHolder = new MyViewHolder(v);
+        vHolder = new MyViewHolder(v);
         // Init dialog
 
         questDialog = new Dialog(mContext);
@@ -119,7 +146,11 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 dialog_quest_Description.setText(mData.get(vHolder.getAdapterPosition()).getDescription());
                 dialog_quest_XP.setText("XP: " + mData.get(vHolder.getAdapterPosition()).getXp());
                 dialog_quest_coins.setText("Coins: " + mData.get(vHolder.getAdapterPosition()).getCoins());
-
+                String imgnameP = mData.get(vHolder.getAdapterPosition()).getImageParent();
+                ImageView imgviewP = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_finished_parent);
+                if(imgnameP != null) {
+                    setImage(imgviewP, imgnameP);
+                }
 
                 confirmButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -224,10 +255,10 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 dialog_quest_Description.setText(mData.get(vHolder.getAdapterPosition()).getDescription());
                 dialog_quest_XP.setText("XP: " + mData.get(vHolder.getAdapterPosition()).getXp());
                 dialog_quest_coins.setText("Coins: " + mData.get(vHolder.getAdapterPosition()).getCoins());
-                String imgname = mData.get(vHolder.getAdapterPosition()).getImageParent();
-                ImageView imgview = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_available_parent);
-                if(imgname != null) {
-                    setImage(imgview, imgname);
+                String imgnameP = mData.get(vHolder.getAdapterPosition()).getImageParent();
+                ImageView imgviewP = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_available_parent);
+                if(imgnameP != null) {
+                    setImage(imgviewP, imgnameP);
                 }
                 initSpinner(vHolder, assignTo);
 
@@ -375,7 +406,11 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 dialog_quest_Description.setText(mData.get(vHolder.getAdapterPosition()).getDescription());
                 dialog_quest_XP.setText("XP: " + mData.get(vHolder.getAdapterPosition()).getXp());
                 dialog_quest_coins.setText("Coins: " + mData.get(vHolder.getAdapterPosition()).getCoins());
-
+                String imgnameP = mData.get(vHolder.getAdapterPosition()).getImageParent();
+                ImageView imgviewP = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_finished_child);
+                if(imgnameP != null) {
+                    setImage(imgviewP, imgnameP);
+                }
                 notDoneButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -413,11 +448,28 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                         // TODO. Klara þetta
                     }
                 });
+                ImageView imgview_child = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_finished_child_2);
+                Button addPhotoButton = (Button) questDialog.findViewById(R.id.dialog_finished_child_addPhoto_button);
+                addPhotoButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Quest quest = mData.get(vHolder.getAdapterPosition());
+                        long questId = quest.getId();
+                        boolean withImg = activity.takePhoto(imgview_child, questId);
+                        /*if (imgview_child.getDrawable() != null) {
+
+                            String name = questId+"c";
+                            uploadImage(imgview_child, questId);
+
+                        }*/
+                    }});
                 questDialog.show();
 
             }
         });
     }
+
+
 
     private void showDialogAssignedQuestsChild(Dialog questDialog, MyViewHolder vHolder) {
         questDialog.setContentView(R.layout.dialog_questitem_assigned_child);
@@ -432,11 +484,16 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 TextView dialog_quest_coins = (TextView) questDialog.findViewById(R.id.dialog_questitem_assigned_child_questCoins);
                 Button unassignButton = (Button) questDialog.findViewById(R.id.dialog_questitem_assigned_child_assignButton);
                 Button completeButton = (Button) questDialog.findViewById(R.id.dialog_questitem_assigned_child_completeButton);
+                Button addPhotoButton = (Button) questDialog.findViewById(R.id.dialog_assigned_child_addPhoto_button);
                 dialog_quest_name.setText(mData.get(vHolder.getAdapterPosition()).getName());
                 dialog_quest_Description.setText(mData.get(vHolder.getAdapterPosition()).getDescription());
                 dialog_quest_XP.setText("XP: " + mData.get(vHolder.getAdapterPosition()).getXp());
                 dialog_quest_coins.setText("Coins: " + mData.get(vHolder.getAdapterPosition()).getCoins());
-
+                String imgnameP = mData.get(vHolder.getAdapterPosition()).getImageParent();
+                ImageView imgviewP = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_assigned_child);
+                if(imgnameP != null) {
+                    setImage(imgviewP, imgnameP);
+                }
                 unassignButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -513,6 +570,14 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                         // TODO. Klara þetta
                     }
                 });
+                ImageView imgview_child = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_assigned_child_2);
+                addPhotoButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Quest quest = mData.get(vHolder.getAdapterPosition());
+                        long questId = quest.getId();
+                        boolean withImg = activity.takePhoto(imgview_child, questId);
+                }});
                 questDialog.show();
 
             }
@@ -536,7 +601,12 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 dialog_quest_Description.setText(mData.get(vHolder.getAdapterPosition()).getDescription());
                 dialog_quest_XP.setText("XP: " + mData.get(vHolder.getAdapterPosition()).getXp());
                 dialog_quest_coins.setText("Coins: " + mData.get(vHolder.getAdapterPosition()).getCoins());
-                String imgname = mData.get(vHolder.getAdapterPosition()).getImageParent();
+                String imgnameP = mData.get(vHolder.getAdapterPosition()).getImageParent();
+                ImageView imgviewP = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_available_child);
+                if(imgnameP != null) {
+                    setImage(imgviewP, imgnameP);
+                }
+
 
 
                 assignToMeButton.setOnClickListener(new View.OnClickListener() {
@@ -690,6 +760,12 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
             tv_assignee = (TextView) itemView.findViewById(R.id.item_quest_assignee);
             tv_status = (TextView) itemView.findViewById(R.id.item_quest_status);
         }
+
+        public LinearLayout getLinearLayout() {
+            return  item_quest;
+        }
+
+
     }
 
 }

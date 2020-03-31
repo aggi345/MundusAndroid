@@ -35,7 +35,7 @@ public class FragmentFinishedQuestsChild extends Fragment {
     View v;
     private RecyclerView myreyclerview;
     private List<Quest> lstQuest;
-
+    private QuestLogChildActivity activity;
     private QuestRecyclerViewAdapter recyclerAdapter;
 
     private Retrofit retrofit;
@@ -43,8 +43,8 @@ public class FragmentFinishedQuestsChild extends Fragment {
 
 
 
-    public FragmentFinishedQuestsChild() {
-
+    public FragmentFinishedQuestsChild(QuestLogChildActivity a) {
+        this.activity = a;
     }
 
     @Nullable
@@ -52,7 +52,7 @@ public class FragmentFinishedQuestsChild extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.availablequests_child_fragment, container, false);
         myreyclerview = (RecyclerView) v.findViewById(R.id.availableQuestsChildRecycleView);
-        recyclerAdapter = new QuestRecyclerViewAdapter(getContext(), lstQuest, 2);
+        recyclerAdapter = new QuestRecyclerViewAdapter(getContext(), lstQuest, 2,activity, null);
         RecyclerStorage.setCompletedQuestsChild(recyclerAdapter);
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myreyclerview.setAdapter(recyclerAdapter);

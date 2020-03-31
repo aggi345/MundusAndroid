@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import is.hi.HBV601G.mundusandroid.Activities.ChildActivities.QuestLogChildActivity;
 import is.hi.HBV601G.mundusandroid.Activities.RecyclerStorage;
 import is.hi.HBV601G.mundusandroid.Entities.Account;
 import is.hi.HBV601G.mundusandroid.Entities.Parent;
@@ -39,14 +40,15 @@ public class FragmentAvailableQuestsParent extends Fragment  {
     private RecyclerView myreyclerview;
     private List<Quest> lstQuest;
     private QuestRecyclerViewAdapter recyclerAdapter;
+    private QuestLogParentActivity activity;
 
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
 
 
 
-    public FragmentAvailableQuestsParent() {
-
+    public FragmentAvailableQuestsParent(QuestLogParentActivity a) {
+        this.activity = a;
     }
 
     @Nullable
@@ -54,7 +56,7 @@ public class FragmentAvailableQuestsParent extends Fragment  {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.availablequests_parent_fragment, container, false);
         myreyclerview = (RecyclerView) v.findViewById(R.id.availableQuestsParentRecycleView);
-        recyclerAdapter = new QuestRecyclerViewAdapter(getContext(), lstQuest, 3);
+        recyclerAdapter = new QuestRecyclerViewAdapter(getContext(), lstQuest, 3, null, activity);
         RecyclerStorage.setAvailableQuestsParent(recyclerAdapter);
 
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
