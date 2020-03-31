@@ -35,7 +35,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textAlignment="center"
-        android:textColor="@color/sexyblue"
+        android:textColor="@color/main_color"
         />
 
     <androidx.constraintlayout.widget.Barrier
@@ -106,6 +106,8 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/price_number"
-        tools:layout_editor_absoluteX="158dp" />
+        tools:layout_editor_absoluteX="158dp"
+        android:textColor="@color/white"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

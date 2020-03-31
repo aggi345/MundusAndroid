@@ -19,7 +19,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/sexyblue"
+        android:textColor="@color/main_color"
         />
 
     <TextView
@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toStartOf="@+id/level_textView"
         app:layout_constraintStart_toEndOf="@+id/personName_textView"
         app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/sexyblue"
+        android:textColor="@color/main_color"
         />
 
     <TextView
@@ -45,6 +45,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/personName_textView"
         app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/sexyblue"
+        android:textColor="@color/main_color"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

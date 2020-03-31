@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:fontFamily="@font/yatra_one"
-        android:textColor="@color/sexyblue"/>
+        android:textColor="@color/main_color"/>
 
     <EditText
         android:id="@+id/pin_editText"

@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:fontFamily="@font/yatra_one"
-        android:textColor="@color/sexyblue"
+        android:textColor="@color/main_color"
         />
 
     <EditText
@@ -136,6 +136,7 @@
         android:background="@drawable/button_background"
         android:fontFamily="@font/yatra_one"
         android:textSize="20sp"
+        android:textColor="@color/white"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
