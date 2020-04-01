@@ -116,7 +116,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 showDialogAvailableQuestsParent(questDialog, vHolder);
                 break;
             case 4:
-                showDialogAvailableQuestsParent(questDialog, vHolder); // Reuse the same dialog
+                showDialogAInprogressQuestsParent(questDialog, vHolder); // Reuse the same dialog
                 break;
             case 5:
                 showDialogFinshedQuestsParent(questDialog, vHolder);
@@ -151,7 +151,11 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 if(imgnameP != null) {
                     setImage(imgviewP, imgnameP);
                 }
-
+                String imgnameC = mData.get(vHolder.getAdapterPosition()).getImageChild();
+                ImageView imgviewC = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_finished_parent_2);
+                if(imgnameC != null) {
+                    setImage(imgviewC, imgnameC);
+                }
                 confirmButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -233,7 +237,119 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
     }
 
     private void showDialogAInprogressQuestsParent(Dialog questDialog, MyViewHolder vHolder) {
-        //TODO
+        questDialog.setContentView(R.layout.dialog_questitem_inprogress_parent);
+
+        vHolder.item_quest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = vHolder.getAdapterPosition();
+                TextView dialog_quest_name = (TextView) questDialog.findViewById(R.id.dialog_questitem_inprogress_parent_questName);
+                TextView dialog_quest_Description = (TextView) questDialog.findViewById(R.id.dialog_questitem_inprogress_parent_questDescription);
+                TextView dialog_quest_XP = (TextView) questDialog.findViewById(R.id.dialog_questitem_inprogress_parent_questXP);
+                TextView dialog_quest_coins = (TextView) questDialog.findViewById(R.id.dialog_questitem_inprogress_parent_questCoins);
+                Spinner assignTo = (Spinner) questDialog.findViewById(R.id.dialog_questitem_inprogress_spinner);
+                Button deleteButton = (Button) questDialog.findViewById(R.id.dialog_questitem_inprogress_parent_deleteButton);
+                Button assignButton = (Button) questDialog.findViewById(R.id.dialog_questitem_inprogress_parent_assignButton);
+
+                dialog_quest_name.setText(mData.get(vHolder.getAdapterPosition()).getName());
+                dialog_quest_Description.setText(mData.get(vHolder.getAdapterPosition()).getDescription());
+                dialog_quest_XP.setText("XP: " + mData.get(vHolder.getAdapterPosition()).getXp());
+                dialog_quest_coins.setText("Coins: " + mData.get(vHolder.getAdapterPosition()).getCoins());
+                String imgnameP = mData.get(vHolder.getAdapterPosition()).getImageParent();
+                ImageView imgviewP = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_inprogress_parent);
+                if(imgnameP != null) {
+                    setImage(imgviewP, imgnameP);
+                }
+                initSpinner(vHolder, assignTo);
+                String imgnameC = mData.get(vHolder.getAdapterPosition()).getImageChild();
+                ImageView imgviewC = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_inprogress_parent_2);
+                if(imgnameC != null) {
+                    setImage(imgviewC, imgnameC);
+                }
+
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        long questId = mData.get(position).getId();
+                        System.out.println("Delete quest with Id: " + questId);
+
+                        Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
+                        MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
+                        Call<ResponseBody> call = mundusAPI.deleteQuest(questId);
+
+                        call.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if(!response.isSuccessful()){
+                                    //TODO Her tharf ad gera stoff
+                                    System.out.println("Her1");
+                                    return;
+                                }
+                                int position = vHolder.getAdapterPosition();
+
+                                mData.remove(position);
+                                QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
+                                questDialog.dismiss();
+
+                            }
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                //TODO Her tharf ad gera stoff
+                                System.out.println("Her2");
+                            }
+                        });
+                        // TODO. Klara þetta
+                    }
+                });
+
+
+                assignButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        long questId = mData.get(position).getId();
+                        System.out.println("Delete quest with Id: " + questId);
+                        Child assignee = selectedChild;
+                        long assigneeId = assignee.getId();
+                        Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
+                        MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
+                        Call<ResponseBody> call = mundusAPI.assignQuestParent(assigneeId, questId);
+
+                        call.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if(!response.isSuccessful()){
+                                    //TODO Her tharf ad gera stoff
+                                    System.out.println("Her1");
+                                    return;
+                                }
+                                int position = vHolder.getAdapterPosition();
+
+                                // Þessi if setning gæti verið óþörf, man ekki alveg hvað ég vara að pæla hérna (Daníel)
+                                if(mType == 3) { // Quest moves from available to in progress //Todo skoða betur
+                                    Quest q = mData.get(position);
+                                    mData.remove(position);
+                                    QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
+                                    RecyclerStorage.getInProgressQuestsParent().addItem(q);
+                                }
+
+
+                            }
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                //TODO Her tharf ad gera stoff
+                                System.out.println("Her2");
+                            }
+                        });
+                        // TODO. Klara þetta
+                    }
+                });
+
+
+
+                questDialog.show();
+
+            }
+        });
     }
 
     private void showDialogAvailableQuestsParent(Dialog questDialog, MyViewHolder vHolder) {
@@ -411,6 +527,11 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 if(imgnameP != null) {
                     setImage(imgviewP, imgnameP);
                 }
+                String imgnameC = mData.get(vHolder.getAdapterPosition()).getImageChild();
+                ImageView imgviewC = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_finished_child_2);
+                if(imgnameC != null) {
+                    setImage(imgviewC, imgnameC);
+                }
                 notDoneButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -493,6 +614,11 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 ImageView imgviewP = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_assigned_child);
                 if(imgnameP != null) {
                     setImage(imgviewP, imgnameP);
+                }
+                String imgnameC = mData.get(vHolder.getAdapterPosition()).getImageChild();
+                ImageView imgviewC = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_assigned_child_2);
+                if(imgnameC != null) {
+                    setImage(imgviewC, imgnameC);
                 }
                 unassignButton.setOnClickListener(new View.OnClickListener() {
                     @Override

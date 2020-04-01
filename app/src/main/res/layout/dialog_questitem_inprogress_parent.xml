@@ -12,12 +12,12 @@
         android:background="#232323"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-<!--        android:layout_height="486dp"-->
+        <!--        android:layout_height="486dp"-->
 
 
 
         <TextView
-            android:id="@+id/dialog_questitem_available_parent_questName"
+            android:id="@+id/dialog_questitem_inprogress_parent_questName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -27,7 +27,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/dialog_questitem_available_parent_questDescription"
+            android:id="@+id/dialog_questitem_inprogress_parent_questDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -37,7 +37,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/dialog_questitem_available_parent_questXP"
+            android:id="@+id/dialog_questitem_inprogress_parent_questXP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -47,7 +47,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/dialog_questitem_available_parent_questCoins"
+            android:id="@+id/dialog_questitem_inprogress_parent_questCoins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -57,7 +57,7 @@
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/dialog_questitem_available_parent_deleteButton"
+            android:id="@+id/dialog_questitem_inprogress_parent_deleteButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -67,13 +67,13 @@
             android:textSize="18sp" />
 
         <Spinner
-            android:id="@+id/dialog_questitem_available_spinner"
+            android:id="@+id/dialog_questitem_inprogress_spinner"
             android:layout_width="196dp"
             android:layout_height="30dp"
             android:layout_marginTop="16dp" />
 
         <Button
-            android:id="@+id/dialog_questitem_available_parent_assignButton"
+            android:id="@+id/dialog_questitem_inprogress_parent_assignButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -86,7 +86,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/dialog_quest_imgview_available_parent"
+                android:id="@+id/dialog_quest_imgview_inprogress_parent"
                 android:layout_width="106dp"
                 android:layout_height="113dp"
                 app:layout_constraintEnd_toStartOf="@+id/dialog_quest_imgview_assigned_child_2"
@@ -95,7 +95,7 @@
                 tools:layout_editor_absoluteY="29dp" />
 
             <ImageView
-                android:id="@+id/dialog_quest_imgview_available_parent_2"
+                android:id="@+id/dialog_quest_imgview_inprogress_parent_2"
                 android:layout_width="112dp"
                 android:layout_height="106dp"
                 android:layout_marginEnd="16dp"
