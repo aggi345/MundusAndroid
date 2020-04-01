@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "807372121148",
+    "firebase_url": "https://mundusandroid.firebaseio.com",
+    "project_id": "mundusandroid",
+    "storage_bucket": "mundusandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807372121148:android:0ac49a225c27766e8e8f39",
+        "android_client_info": {
+          "package_name": "is.hi.HBV601G.mundusandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807372121148-jsc55ucl859onkhjf4krp37q4tsgkl3h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "is.hi.HBV601G.mundusandroid",
+            "certificate_hash": "e032981b210c1f837e39a4942a92172c715c66a2"
+          }
+        },
+        {
+          "client_id": "807372121148-qreltig2uo6l6kb4flnq6e77dt2dal8i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJVWqCtvIGAS3puibd4PEE6eCwfWKlpzo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807372121148-qreltig2uo6l6kb4flnq6e77dt2dal8i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

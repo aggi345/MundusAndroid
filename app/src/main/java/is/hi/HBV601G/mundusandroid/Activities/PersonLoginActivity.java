@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+
 import is.hi.HBV601G.mundusandroid.Activities.ChildActivities.ChildMainMenuActivity;
 import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.ParentMainMenuActivity;
 import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
@@ -87,6 +91,14 @@ public class PersonLoginActivity extends AppCompatActivity {
 
                 mErrorMessage.setText("Worked");
 
+                FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( PersonLoginActivity.this,  new OnSuccessListener<InstanceIdResult>() {
+                    @Override
+                    public void onSuccess(InstanceIdResult instanceIdResult) {
+                        String mToken = instanceIdResult.getToken();
+                        sendTokenToServer(mToken);
+                    }
+                });
+
                 checkPerson();
 
             }
@@ -96,9 +108,28 @@ public class PersonLoginActivity extends AppCompatActivity {
                 //TODO Vantar að meðhöndla vandamál, verðum að gera eh hér.
             }
         });
+    }
 
+    private void sendTokenToServer(String tokenId){
+        Call<ResponseBody> call = mundusAPI.addNotiToken(tokenId);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (!response.isSuccessful()) {
+                    //TODO Her tharf
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    //TODO Her tharf
+            }
+        });
 
     }
+
 
     /**
      * Gets what type of person is logged into the server.

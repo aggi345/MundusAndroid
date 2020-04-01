@@ -143,6 +143,10 @@ public interface MundusAPI {
     @GET("getLoginStatus")
     Call<Integer> getLoginStatus();
 
+    @FormUrlEncoded
+    @POST("addNotiToken")
+    Call<ResponseBody> addNotiToken(@Field("tokenId") String tokenId);
+
 
 
     //Profile
