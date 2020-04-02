@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -75,6 +76,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
     private MyViewHolder vHolder;
     private QuestLogChildActivity activity;
     private QuestLogParentActivity activityp;
+    private Dialog imageDialog;
     public QuestRecyclerViewAdapter(Context mContext, List<Quest> mData, int type, QuestLogChildActivity ac, QuestLogParentActivity ap) {
         this.mContext = mContext;
         this.mData = mData;
@@ -122,10 +124,28 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 showDialogFinshedQuestsParent(questDialog, vHolder);
                 break;
         }
-
+        imageDialog = new Dialog(mContext);
+        imageDialog.setContentView(R.layout.dialog_imagefullscreen);
         retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
         mundusAPI = retrofit.create(MundusAPI.class);
         return vHolder;
+    }
+
+
+    public void showImageFullscreen(ImageView imgview) {
+
+        ImageView img = imageDialog.findViewById(R.id.dialog_fullscreenImageview);
+        img.setImageDrawable(imgview.getDrawable());
+        imageDialog.show();
+        /*BitmapDrawable drawable = (BitmapDrawable) imgview.getDrawable();
+        Bitmap bmp = drawable.getBitmap();
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();*/
+
+
+
     }
     // Lot of repetitive code in this class, might fix it if we have time.
     private void showDialogFinshedQuestsParent(Dialog questDialog, MyViewHolder vHolder) {
@@ -150,11 +170,13 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 ImageView imgviewP = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_finished_parent);
                 if(imgnameP != null) {
                     setImage(imgviewP, imgnameP);
+                    clicklistener(imgviewP);
                 }
                 String imgnameC = mData.get(vHolder.getAdapterPosition()).getImageChild();
                 ImageView imgviewC = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_finished_parent_2);
                 if(imgnameC != null) {
                     setImage(imgviewC, imgnameC);
+                    clicklistener(imgviewC);
                 }
                 confirmButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -236,6 +258,15 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
         });
     }
 
+    private void clicklistener(ImageView imgview) {
+        imgview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImageFullscreen(imgview);
+    }
+    });
+    }
+
     private void showDialogAInprogressQuestsParent(Dialog questDialog, MyViewHolder vHolder) {
         questDialog.setContentView(R.layout.dialog_questitem_inprogress_parent);
 
@@ -259,12 +290,14 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 ImageView imgviewP = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_inprogress_parent);
                 if(imgnameP != null) {
                     setImage(imgviewP, imgnameP);
+                    clicklistener(imgviewP);
                 }
                 initSpinner(vHolder, assignTo);
                 String imgnameC = mData.get(vHolder.getAdapterPosition()).getImageChild();
                 ImageView imgviewC = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_inprogress_parent_2);
                 if(imgnameC != null) {
                     setImage(imgviewC, imgnameC);
+                    clicklistener(imgviewC);
                 }
 
                 deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -375,6 +408,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 ImageView imgviewP = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_available_parent);
                 if(imgnameP != null) {
                     setImage(imgviewP, imgnameP);
+                    clicklistener(imgviewP);
                 }
                 initSpinner(vHolder, assignTo);
 
@@ -526,11 +560,13 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 ImageView imgviewP = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_finished_child);
                 if(imgnameP != null) {
                     setImage(imgviewP, imgnameP);
+                    clicklistener(imgviewP);
                 }
                 String imgnameC = mData.get(vHolder.getAdapterPosition()).getImageChild();
                 ImageView imgviewC = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_finished_child_2);
                 if(imgnameC != null) {
                     setImage(imgviewC, imgnameC);
+                    clicklistener(imgviewP);
                 }
                 notDoneButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -614,11 +650,13 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 ImageView imgviewP = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_assigned_child);
                 if(imgnameP != null) {
                     setImage(imgviewP, imgnameP);
+                    clicklistener(imgviewP);
                 }
                 String imgnameC = mData.get(vHolder.getAdapterPosition()).getImageChild();
                 ImageView imgviewC = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_assigned_child_2);
                 if(imgnameC != null) {
                     setImage(imgviewC, imgnameC);
+                    clicklistener(imgviewC);
                 }
                 unassignButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -731,6 +769,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 ImageView imgviewP = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_available_child);
                 if(imgnameP != null) {
                     setImage(imgviewP, imgnameP);
+                    clicklistener(imgviewP);
                 }
 
 
