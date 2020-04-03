@@ -7,32 +7,38 @@
     android:background="@drawable/gradient_background"
     >
 
+
     <EditText
         android:id="@+id/name_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
+        android:drawableLeft="@drawable/icon_user"
         android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/textedit_background"
         android:ems="10"
+
         android:hint="Name"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/pin_editText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/pin_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/textedit_background"
         android:ems="10"
+        android:drawableLeft="@drawable/icon_pin"
         android:hint="Change pin"
         android:inputType="numberPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_editText" />
 
@@ -40,9 +46,14 @@
         android:id="@+id/addCoins_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/textedit_background"
         android:ems="10"
         android:hint="Coins to add"
+        android:drawableLeft="@drawable/icon_coins_24"
         android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/addCoins_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +63,7 @@
         android:id="@+id/coins_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="Total coins: 100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +74,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:background="@drawable/textedit_background"
         android:ems="10"
+        android:hint="Xp to add"
+        android:drawableLeft="@drawable/icon_stairs_30"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -74,66 +88,62 @@
         android:id="@+id/addCoins_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Coins"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addCoins_editText"
+        android:layout_marginTop="12dp"
         android:background="@drawable/button_background_gy"
+        android:text="Add Coins"
         android:textColor="@color/white"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addCoins_editText" />
 
     <Button
         android:id="@+id/addXp_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Xp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addxp_editText"
+        android:layout_marginTop="12dp"
         android:background="@drawable/button_background_gy"
+        android:text="Add Xp"
         android:textColor="@color/white"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addxp_editText" />
 
     <TextView
         android:id="@+id/xp_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:text="Total Xp: 1000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addCoins_button"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/addCoins_button" />
 
     <Button
         android:id="@+id/confirmChanges_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confirm Changes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pin_editText"
+        android:layout_marginTop="12dp"
         android:background="@drawable/button_background"
+        android:text="Confirm Changes"
         android:textColor="@color/white"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/pin_editText"
+        tools:layout_editor_absoluteX="4dp" />
 
     <Button
         android:id="@+id/remove_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
+        android:background="@drawable/button_background_yr"
         android:text="Remove Child"
+        android:drawableBottom="@drawable/icon_skull"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addXp_button"
-        android:background="@drawable/button_background_yr"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/addXp_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

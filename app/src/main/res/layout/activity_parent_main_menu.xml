@@ -20,19 +20,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_begin="16dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_begin="395dp" />
 
     <ImageButton
         android:id="@+id/marketplace_imageButton"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_marginTop="80dp"
         android:background="@drawable/button_background"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -41,8 +41,8 @@
 
     <ImageButton
         android:id="@+id/profile_imageButton"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_background_ppl"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -51,8 +51,8 @@
 
     <ImageButton
         android:id="@+id/quest_imageButton"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_marginTop="80dp"
         android:background="@drawable/button_background_yr"
         app:layout_constraintEnd_toStartOf="@+id/marketplace_imageButton"
@@ -63,8 +63,8 @@
 
     <ImageButton
         android:id="@+id/statistics_imageButton"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_background_gy"
         app:layout_constraintEnd_toStartOf="@+id/marketplace_imageButton"
