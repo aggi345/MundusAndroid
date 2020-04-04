@@ -147,6 +147,11 @@ public interface MundusAPI {
     @POST("addNotiToken")
     Call<ResponseBody> addNotiToken(@Field("tokenId") String tokenId);
 
+    @GET("logoutPerson")
+    Call<ResponseBody> logoutPerson();
+
+    @GET("logoutAccount")
+    Call<ResponseBody> logoutAccount();
 
 
     //Profile

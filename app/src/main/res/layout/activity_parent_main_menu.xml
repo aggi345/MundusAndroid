@@ -7,6 +7,14 @@
     tools:context=".Activities.ParentActivities.ParentMainMenuActivity">
 
 
+    <Button
+        android:id="@+id/logOut_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2" />
+
     <include
         android:id="@+id/include2"
         layout="@layout/infobar_parent"
@@ -73,6 +81,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="quest_imageButton,marketplace_imageButton,statistics_imageButton,profile_imageButton" />
+
+    <Button
+        android:id="@+id/changePerson_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change User"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
