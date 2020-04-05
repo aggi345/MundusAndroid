@@ -26,6 +26,27 @@ public class Quest {
 
     private Parent maker; // Creator of the quest
 
+    private String imageParent;
+    private String imageChild;
+
+    public String getImageParent() {
+        return imageParent;
+    }
+
+    public void setImageParent(String imageParent) {
+        this.imageParent = imageParent;
+    }
+
+    public String getImageChild() {
+        return imageChild;
+    }
+
+    public void setImageChild(String imageChild) {
+        this.imageChild = imageChild;
+    }
+
+
+
 
     public Quest(String name, String description, int xp, int coins, String deadline, Parent maker) {
         this.name = name;
