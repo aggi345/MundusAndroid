@@ -12,51 +12,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="136dp"
+        android:fontFamily="@font/roboto_black"
         android:text="Agnar"
+        android:textColor="@color/main_color"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:fontFamily="@font/yatra_one"
-        android:textColor="@color/main_color"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/pin_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="132dp"
+        android:background="@drawable/textedit_background"
+        android:drawableLeft="@drawable/icon_pin"
         android:ems="10"
+        android:fontFamily="@font/roboto_black"
         android:hint="Pin"
         android:inputType="numberPassword"
         android:maxLength="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personName_textView"
-        android:fontFamily="@font/yatra_one"
-        android:background="@drawable/textedit_background"
-        android:drawableLeft="@drawable/icon_pin"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/personName_textView" />
 
     <Button
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
+        android:background="@drawable/button_background"
+        android:fontFamily="@font/roboto_black"
         android:text="Login"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message_textView"
-        android:background="@drawable/button_background"
-        android:fontFamily="@font/yatra_one"
-        android:textColor="#FFFFFF"/>
+        app:layout_constraintTop_toBottomOf="@+id/message_textView" />
 
     <TextView
         android:id="@+id/message_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
+        android:fontFamily="@font/roboto_black"
         android:textColor="#FF0000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

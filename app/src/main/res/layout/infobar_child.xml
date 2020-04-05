@@ -20,6 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/main_color"
+        android:fontFamily="@font/roboto_black"
         />
 
     <TextView
@@ -32,6 +33,7 @@
         app:layout_constraintStart_toEndOf="@+id/personName_textView"
         app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/main_color"
+        android:fontFamily="@font/roboto_black"
         />
 
     <TextView
@@ -46,5 +48,6 @@
         app:layout_constraintStart_toEndOf="@+id/personName_textView"
         app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/main_color"
+        android:fontFamily="@font/roboto_black"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,38 +15,45 @@
             android:id="@+id/dialog_questitem_available_parent_questName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/roboto_black"
             android:text="Quest Name"
             android:textColor="@color/main_color"
-            android:textStyle="bold"
             android:textSize="24sp"
-            android:layout_marginTop="5dp"/>
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/dialog_questitem_available_parent_questDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/roboto_black"
             android:text="Description"
             android:textColor="@color/main_color"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"/>
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/dialog_questitem_available_parent_questXP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/roboto_black"
             android:text="XP"
             android:textColor="@color/main_color"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp" />
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/dialog_questitem_available_parent_questCoins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/roboto_black"
             android:text="Coins"
             android:textColor="@color/main_color"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/dialog_questitem_available_parent_deleteButton"
@@ -54,27 +61,28 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
+            android:background="@drawable/button_background_yr"
+            android:fontFamily="@font/roboto_black"
             android:text="Delete"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:background="@drawable/button_background_yr"
-            />
+            android:textSize="18sp" />
         <Spinner
             android:id="@+id/dialog_questitem_available_spinner"
             android:layout_width="196dp"
             android:layout_height="30dp"
             android:layout_marginTop="16dp"
             />
+
         <Button
             android:id="@+id/dialog_questitem_available_parent_assignButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
+            android:background="@drawable/button_background_gy"
+            android:fontFamily="@font/roboto_black"
             android:text="Assign"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:background="@drawable/button_background_gy"
-            />
+            android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>

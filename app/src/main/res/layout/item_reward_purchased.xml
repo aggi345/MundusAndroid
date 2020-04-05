@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="1sp"
@@ -24,41 +25,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reward Name"
+            android:fontFamily="@font/roboto_black"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/item_reward_purchased_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_black"
             android:text="Insert description here" />
 
         <TextView
             android:id="@+id/item_reward_purchased_lvlreq"
             android:layout_width="wrap_content"
+            android:fontFamily="@font/roboto_black"
             android:layout_height="wrap_content"
             android:text="7" />
 
         <TextView
             android:id="@+id/item_reward_purchased_price"
             android:layout_width="wrap_content"
+            android:fontFamily="@font/roboto_black"
             android:layout_height="wrap_content"
             android:text="500" />
 
         <TextView
             android:id="@+id/item_reward_purchased_buyer"
             android:layout_width="wrap_content"
+            android:fontFamily="@font/roboto_black"
             android:layout_height="wrap_content"
             android:text="Buyer" />
 
         <TextView
             android:id="@+id/item_reward_purchased_rewardId"
             android:layout_width="wrap_content"
+            android:fontFamily="@font/roboto_black"
             android:layout_height="wrap_content"
             android:text="Reward Id" />
 
         <TextView
             android:id="@+id/item_reward_purchased_childId"
             android:layout_width="wrap_content"
+            android:fontFamily="@font/roboto_black"
             android:layout_height="wrap_content"
             android:text="Child Id" />
 
@@ -67,13 +75,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/linearLayout">
 
         <Button
             android:id="@+id/item_reward_purchased_grantButton"
-            android:layout_width="131dp"
-            android:layout_height="75dp"
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/button_background_gy"
-            android:text="Grant" />
+            android:fontFamily="@font/roboto_black"
+            android:text="Grant"
+            android:layout_gravity="right"
+
+            tools:layout_conversion_absoluteHeight="75dp"
+            tools:layout_conversion_absoluteWidth="131dp"
+            tools:layout_editor_absoluteX="259dp"
+            tools:layout_editor_absoluteY="0dp" />
     </LinearLayout>
 </LinearLayout>

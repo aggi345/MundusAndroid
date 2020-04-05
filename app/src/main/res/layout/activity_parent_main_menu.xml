@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.ParentActivities.ParentMainMenuActivity"
-    android:background="@drawable/gradient_background">
-
+    android:background="@drawable/gradient_background"
+    tools:context=".Activities.ParentActivities.ParentMainMenuActivity">
 
     <include
         android:id="@+id/include2"
@@ -27,57 +26,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="395dp" />
+        app:layout_constraintGuide_begin="435dp" />
 
     <ImageButton
         android:id="@+id/marketplace_imageButton"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/button_background"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/include2"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/quest_imageButton"
         app:srcCompat="@drawable/icon_coins" />
 
     <ImageButton
         android:id="@+id/profile_imageButton"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_background_ppl"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/marketplace_imageButton"
+
         app:srcCompat="@drawable/icon_settings" />
 
     <ImageButton
         android:id="@+id/quest_imageButton"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/button_background_yr"
-        app:layout_constraintEnd_toStartOf="@+id/marketplace_imageButton"
-        app:layout_constraintHorizontal_bias="0.024"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/include2"
-        app:srcCompat="@drawable/icon_quest" />
-
-    <ImageButton
-        android:id="@+id/statistics_imageButton"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_background_gy"
-        app:layout_constraintEnd_toStartOf="@+id/marketplace_imageButton"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="@+id/bottom_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+        app:layout_constraintRight_toRightOf="@+id/right_guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/quest_imageButton"
-        app:srcCompat="@drawable/icon_statistics" />
+        app:layout_constraintTop_toBottomOf="@+id/include2"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/icon_quest" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="quest_imageButton,marketplace_imageButton,statistics_imageButton,profile_imageButton" />
+        app:constraint_referenced_ids="quest_imageButton,marketplace_imageButton,profile_imageButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

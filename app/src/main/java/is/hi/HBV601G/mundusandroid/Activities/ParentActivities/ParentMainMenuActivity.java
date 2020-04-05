@@ -25,7 +25,6 @@ public class ParentMainMenuActivity extends AppCompatActivity {
     //View
     private ImageButton mQuestLog;
     private ImageButton mMarketplace;
-    private ImageButton mStatistics;
     private ImageButton mProfile;
 
     private TextView mName;
@@ -53,7 +52,6 @@ public class ParentMainMenuActivity extends AppCompatActivity {
         //Find
         mQuestLog = findViewById(R.id.quest_imageButton);
         mMarketplace = findViewById(R.id.marketplace_imageButton);
-        mStatistics = findViewById(R.id.statistics_imageButton);
         mProfile = findViewById(R.id.profile_imageButton);
 
 
@@ -77,13 +75,6 @@ public class ParentMainMenuActivity extends AppCompatActivity {
             }
         });
 
-        mStatistics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                moveToStatistics();
-            }
-        });
-
         mProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,11 +92,6 @@ public class ParentMainMenuActivity extends AppCompatActivity {
 
     private void moveToMarketPlace(){
         Intent intent = new Intent(ParentMainMenuActivity.this, MarketplaceParentActivity.class);
-        startActivity(intent);
-    }
-
-    private void moveToStatistics(){
-        Intent intent = new Intent(ParentMainMenuActivity.this, StatisticsActivity.class);
         startActivity(intent);
     }
 
