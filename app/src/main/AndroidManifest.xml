@@ -5,7 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
     <application
@@ -16,29 +17,33 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.ChildActivities.QuestLogChildActivity"
-            android:exported="true"/>
-        <activity android:name=".Activities.ChildActivities.MarketplaceChildActivity"
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
-            />
-
-
+        <activity
+            android:name=".Activities.ChildActivities.QuestLogChildActivity"
+            android:exported="true" />
+        <activity android:name=".Activities.ChildActivities.MarketplaceChildActivity" />
         <activity android:name=".Activities.ParentActivities.CreateRewardActivity" />
         <activity android:name=".Activities.ParentActivities.CreateQuestActivity" />
         <activity android:name=".Activities.ParentActivities.ProfileManagementActivity" />
         <activity android:name=".Activities.ParentActivities.StatisticsActivity" />
-        <activity
-            android:name=".Activities.ParentActivities.MarketplaceParentActivity"
-            />
+        <activity android:name=".Activities.ParentActivities.MarketplaceParentActivity" />
         <activity android:name=".Activities.ParentActivities.QuestLogParentActivity" /> <!-- android:exported="true" -->
         <activity android:name=".Activities.ChildActivities.ChildMainMenuActivity" />
         <activity android:name=".Activities.ParentActivities.ParentMainMenuActivity" />
-        <activity android:name=".Activities.PersonLoginActivity"
-            android:noHistory="true"/>
-        <activity android:name=".Activities.PersonSelectActivity"
-            android:exported="true"/>
+        <activity
+            android:name=".Activities.PersonLoginActivity"
+            android:noHistory="true" />
+        <activity
+            android:name=".Activities.PersonSelectActivity"
+            android:exported="true" />
         <activity android:name=".Activities.SignupActivity" />
-        <activity android:name=".Activities.LoginActivity"
+        <activity
+            android:name=".Activities.LoginActivity"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,6 +51,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher_foreground"/>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@android:color/white"/>
     </application>
+
+
 
 </manifest>
