@@ -13,14 +13,17 @@ import androidx.core.app.NotificationManagerCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.Random;
+
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     private final String CHANNEL_ID = "0";
-    private final int NOTIFICATION_ID = 0;
+    Random notification_id;
 
     public MyFirebaseMessagingService() {
         super();
+        notification_id = new Random();
     }
 
 
@@ -40,7 +43,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
             // notificationId is a unique int for each notification that you must define
-            notificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+            Random notification_id = new Random();
+            notificationManager.notify(notification_id.nextInt(100), mBuilder.build());
         }
     }
 

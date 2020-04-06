@@ -41,6 +41,8 @@ public class ParentMainMenuActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
 
+    InfoBar infoBar;
+
 
 
 
@@ -67,7 +69,7 @@ public class ParentMainMenuActivity extends AppCompatActivity {
 
 
         //Infobar
-        InfoBar infoBar = new InfoBar(this, "parent");
+        infoBar = new InfoBar(this, "parent");
 
 
 
@@ -117,7 +119,11 @@ public class ParentMainMenuActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        infoBar.updateInfoBarView();
+    }
 
     private void moveToQuestLog(){
         Intent intent = new Intent(ParentMainMenuActivity.this, QuestLogParentActivity.class);

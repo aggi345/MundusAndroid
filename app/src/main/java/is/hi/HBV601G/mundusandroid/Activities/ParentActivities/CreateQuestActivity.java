@@ -46,6 +46,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -240,6 +241,7 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
                         public void onResponse(Call call, Response response) {
                             //System.out.println("Her40");
                             withImg = false;
+
                         }
 
                         @Override
@@ -251,6 +253,11 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
 
                 }
                 withImg = false;
+
+                //Shows toast and closes activity on success.
+                Toast toast = Toast.makeText(getApplicationContext(), "Quest created.", Toast.LENGTH_LONG);
+                toast.show();
+                finish();
             }
 
             @Override

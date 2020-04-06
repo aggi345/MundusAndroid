@@ -38,6 +38,8 @@ public class ChildMainMenuActivity extends AppCompatActivity {
     private Button mChangePerson;
     private Button mLogOut;
 
+    InfoBar infoBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class ChildMainMenuActivity extends AppCompatActivity {
         mChangePerson = findViewById(R.id.changePerson_button);
         mLogOut = findViewById(R.id.logOut_button);
 
-        InfoBar infoBar = new InfoBar(this, "child");
+        infoBar = new InfoBar(this, "child");
 
 
         //Handler
@@ -89,6 +91,12 @@ public class ChildMainMenuActivity extends AppCompatActivity {
                 logOut();
             }
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        infoBar.updateInfoBarView();
     }
 
 

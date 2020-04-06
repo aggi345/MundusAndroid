@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import is.hi.HBV601G.mundusandroid.Activities.RecyclerStorage;
 import is.hi.HBV601G.mundusandroid.Entities.Reward;
@@ -94,6 +95,9 @@ public class CreateRewardActivity extends AppCompatActivity {
                 }
                 RewardRecyclerViewAdapter temp = RecyclerStorage.getAvailableRewardsParent();
                 temp.addItem(response.body());
+                Toast toast = Toast.makeText(getApplicationContext(), "Reward created.", Toast.LENGTH_LONG);
+                toast.show();
+                finish();
             }
 
             @Override
