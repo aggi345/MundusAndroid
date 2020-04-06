@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import is.hi.HBV601G.mundusandroid.Activities.ChildActivities.MarketplaceChildActivity;
 import is.hi.HBV601G.mundusandroid.Activities.ParentActivities.FragmentAvailableRewardsParent;
 import is.hi.HBV601G.mundusandroid.Activities.RecyclerStorage;
 import is.hi.HBV601G.mundusandroid.Entities.ChildRewardPair;
@@ -41,10 +42,13 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
     private Button buyButton;
     private Button grantButton;
 
-    public RewardRecyclerViewAdapter(Context mContext, List<Reward> mData, int mType) {
+    private MarketplaceChildActivity activity;
+
+    public RewardRecyclerViewAdapter(Context mContext, List<Reward> mData, int mType, MarketplaceChildActivity a) {
         this.mContext = mContext;
         this.mData = mData;
         this.mType = mType;
+        this.activity = a;
     }
 
     @NonNull // Non null er hvergi í myndbandinu
@@ -133,7 +137,7 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
             public void onClick(View v) {
                  long rewardId = Long.parseLong(holder.tv_rewardId.getText().toString());
                  System.out.println("Buy reward with Id: " + rewardId);
-
+                 int position = holder.getAdapterPosition();
                  Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
                  MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
                  Call<Boolean> call = mundusAPI.purchaseReward(rewardId);
@@ -152,21 +156,23 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
 
                          if (status == true) {
                              Toast.makeText(mContext,
-                                     "Reward purchases", Toast.LENGTH_SHORT).show();
+                                     "Reward purchased", Toast.LENGTH_SHORT).show();
                              mData.remove(position);
                              RewardRecyclerViewAdapter.this.notifyItemRemoved(position);
+                             activity.updateInfoBar();
                          }
                          else {
                              Toast.makeText(mContext,
                                      "You broke bitch!", Toast.LENGTH_SHORT).show();
                          }
-                         int position = holder.getAdapterPosition();
+
                          Reward r = mData.get(position);
                          RecyclerStorage.getMyRewardsChild().addItem(r);
                      }
                      @Override
                      public void onFailure(Call<Boolean> call, Throwable t) {
                          //TODO Her tharf ad gera stoff
+                         t.printStackTrace();
                          System.out.println("Buy on failure");
                      }
                  });

@@ -43,10 +43,10 @@ public class FragmentPurchasedRewardsChild extends Fragment {
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
 
+    private MarketplaceChildActivity activity;
 
-
-    public FragmentPurchasedRewardsChild() {
-
+    public FragmentPurchasedRewardsChild(MarketplaceChildActivity a) {
+            this.activity = a;
     }
 
     @Nullable
@@ -54,7 +54,7 @@ public class FragmentPurchasedRewardsChild extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.availablerewards_child_fragment, container, false);
         myreyclerview = (RecyclerView) v.findViewById(R.id.availableRewardsChildRecycleView);
-        recyclerAdapter = new RewardRecyclerViewAdapter(getContext(), lstReward, 1);
+        recyclerAdapter = new RewardRecyclerViewAdapter(getContext(), lstReward, 1, activity);
         RecyclerStorage.setMyRewardsChild(recyclerAdapter);
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myreyclerview.setAdapter(recyclerAdapter);

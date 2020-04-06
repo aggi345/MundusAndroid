@@ -339,12 +339,14 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 assignButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Quest quest = mData.get(position);
                         long questId = mData.get(position).getId();
                         System.out.println("Delete quest with Id: " + questId);
                         Child assignee = selectedChild;
                         long assigneeId = assignee.getId();
                         Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
                         MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
+
                         Call<ResponseBody> call = mundusAPI.assignQuestParent(assigneeId, questId);
 
                         call.enqueue(new Callback<ResponseBody>() {
@@ -358,12 +360,25 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                                 int position = vHolder.getAdapterPosition();
 
                                 // Þessi if setning gæti verið óþörf, man ekki alveg hvað ég vara að pæla hérna (Daníel)
-                                if(mType == 3) { // Quest moves from available to in progress //Todo skoða betur
+                                /*if(mType == 3) { // Quest moves from available to in progress //Todo skoða betur
                                     Quest q = mData.get(position);
                                     mData.remove(position);
                                     QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
                                     RecyclerStorage.getInProgressQuestsParent().addItem(q);
+                                }*/
+
+                                if(selectedChild.getName().equals("No selection")) {
+                                    Quest q = mData.get(position);
+                                    mData.remove(position);
+                                    q.setAssignee(null);
+                                    QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
+                                    RecyclerStorage.getAvailableQuestsParent().addItem(q);
                                 }
+                                else {
+                                    quest.setAssignee(selectedChild);
+                                    QuestRecyclerViewAdapter.this.notifyItemChanged(position);
+                                }
+
 
 
                             }
@@ -452,10 +467,14 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 assignButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Quest quest = mData.get(position);
                         long questId = mData.get(position).getId();
-                        System.out.println("Delete quest with Id: " + questId);
+                        System.out.println("Assign quest with Id: " + questId);
                         Child assignee = selectedChild;
                         long assigneeId = assignee.getId();
+                        if (selectedChild.getName().equals("No selection")) {
+                            return;
+                        }
                         Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
                         MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
                         Call<ResponseBody> call = mundusAPI.assignQuestParent(assigneeId, questId);
@@ -470,13 +489,14 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                                 }
                                 int position = vHolder.getAdapterPosition();
 
-                                // Þessi if setning gæti verið óþörf, man ekki alveg hvað ég vara að pæla hérna (Daníel)
-                                if(mType == 3) { // Quest moves from available to in progress
-                                    Quest q = mData.get(position);
-                                    mData.remove(position);
-                                    QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
-                                    RecyclerStorage.getInProgressQuestsParent().addItem(q);
-                                }
+
+
+                                Quest q = mData.get(position);
+                                q.setAssignee(selectedChild);
+                                mData.remove(position);
+                                QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
+                                RecyclerStorage.getInProgressQuestsParent().addItem(q);
+
 
 
                             }
@@ -506,9 +526,13 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
             Child child0 = new Child("No selection", "0");
             child0.setId(-1);
             list.add(child0);
+            selectedChild = null;
         }
         else {
             list.add(assignee);
+            Child child0 = new Child("No selection", "0");
+            child0.setId(-1);
+            list.add(child0);
             selectedChild = assignee;
         }
 
@@ -537,6 +561,9 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 System.out.println("Her2");
             }
         });
+        if (assignee != null) {
+            assignTo.setSelection(adapter.getPosition(assignee));
+        }
     }
 
 
@@ -566,7 +593,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                 ImageView imgviewC = (ImageView) questDialog.findViewById(R.id.dialog_quest_imgview_finished_child_2);
                 if(imgnameC != null) {
                     setImage(imgviewC, imgnameC);
-                    clicklistener(imgviewP);
+                    clicklistener(imgviewC);
                 }
                 notDoneButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -680,6 +707,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
 
                                 Quest q = mData.get(position);
                                 mData.remove(position);
+                                q.setAssignee(null);
                                 QuestRecyclerViewAdapter.this.notifyItemRemoved(position);
                                 RecyclerStorage.getAvailableQuestsChild().addItem(q);
                                 questDialog.dismiss();

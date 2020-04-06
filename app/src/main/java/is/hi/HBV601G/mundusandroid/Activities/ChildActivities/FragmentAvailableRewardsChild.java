@@ -42,9 +42,10 @@ public class FragmentAvailableRewardsChild extends Fragment {
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
 
+    private MarketplaceChildActivity activity;
 
-    public FragmentAvailableRewardsChild() {
-
+    public FragmentAvailableRewardsChild(MarketplaceChildActivity a) {
+        this.activity =a;
     }
 
     @Nullable
@@ -52,7 +53,7 @@ public class FragmentAvailableRewardsChild extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.availablerewards_child_fragment, container, false);
         myreyclerview = (RecyclerView) v.findViewById(R.id.availableRewardsChildRecycleView);
-        recyclerAdapter = new RewardRecyclerViewAdapter(getContext(), lstReward, 0);
+        recyclerAdapter = new RewardRecyclerViewAdapter(getContext(), lstReward, 0, activity);
         RecyclerStorage.setAvailableRewardsChild(recyclerAdapter);
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myreyclerview.setAdapter(recyclerAdapter);

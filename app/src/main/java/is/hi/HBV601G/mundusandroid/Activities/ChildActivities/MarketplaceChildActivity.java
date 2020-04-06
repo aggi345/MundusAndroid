@@ -18,6 +18,7 @@ public class MarketplaceChildActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
+    private  InfoBar infoBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,18 +29,24 @@ public class MarketplaceChildActivity extends AppCompatActivity {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         // Add Fragment Here
-        adapter.AddFragment(new FragmentAvailableRewardsChild(),"Available");
-        adapter.AddFragment(new FragmentPurchasedRewardsChild(),"My Rewards");
+        adapter.AddFragment(new FragmentAvailableRewardsChild(this),"Available");
+        adapter.AddFragment(new FragmentPurchasedRewardsChild(this),"My Rewards");
 
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        InfoBar infoBar = new InfoBar(this, "child");
+        infoBar = new InfoBar(this, "child");
 
         // Remove Shadow From the action bar
 
         //ActionBar actionBar = getSupportActionBar();
         //actionBar.setElevation(0);tentView(R.layout.activity_marketplace_parent);
+    }
+
+
+
+    public void updateInfoBar() {
+        infoBar.updateInfoBarView();
     }
 }
