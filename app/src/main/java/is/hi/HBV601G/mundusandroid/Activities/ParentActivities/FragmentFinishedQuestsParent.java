@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import is.hi.HBV601G.mundusandroid.Activities.RecyclerStorage;
 import is.hi.HBV601G.mundusandroid.Entities.Account;
 import is.hi.HBV601G.mundusandroid.Entities.Parent;
 import is.hi.HBV601G.mundusandroid.Entities.Quest;
@@ -39,10 +40,10 @@ public class FragmentFinishedQuestsParent extends Fragment {
 
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
+    private QuestLogParentActivity activity;
 
-
-    public FragmentFinishedQuestsParent() {
-
+    public FragmentFinishedQuestsParent(QuestLogParentActivity a) {
+        this.activity = a;
     }
 
     @Nullable
@@ -50,7 +51,8 @@ public class FragmentFinishedQuestsParent extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.finishedquests_parent_fragment, container, false);
         myreyclerview = (RecyclerView) v.findViewById(R.id.finishedQuestsParentRecycleView);
-        recyclerAdapter = new QuestRecyclerViewAdapter(getContext(), lstQuest, 5);
+        recyclerAdapter = new QuestRecyclerViewAdapter(getContext(), lstQuest, 5,null, activity);
+        RecyclerStorage.setCompletedQuestsParent(recyclerAdapter);
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myreyclerview.setAdapter(recyclerAdapter);
         return v;

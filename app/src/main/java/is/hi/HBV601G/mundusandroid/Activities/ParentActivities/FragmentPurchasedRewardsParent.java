@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import is.hi.HBV601G.mundusandroid.Activities.RecyclerStorage;
 import is.hi.HBV601G.mundusandroid.Entities.Account;
 import is.hi.HBV601G.mundusandroid.Entities.Child;
 import is.hi.HBV601G.mundusandroid.Entities.ChildRewardPair;
@@ -57,6 +58,7 @@ public class FragmentPurchasedRewardsParent extends Fragment {
         v = inflater.inflate(R.layout.purchased_rewards_parent_fragment, container, false);
         myreyclerview = (RecyclerView) v.findViewById(R.id.purchasedRewardsParentRecycleView);
         recyclerAdapter = new RewardPurchasedRecyclerViewAdapter(getContext(), pairRewards);
+        RecyclerStorage.setPurchasedRewardsParent(recyclerAdapter);
         myreyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myreyclerview.setAdapter(recyclerAdapter);
         return v;

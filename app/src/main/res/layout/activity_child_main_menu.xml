@@ -54,4 +54,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icon_quest" />
 
+    <Button
+        android:id="@+id/logOut_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2" />
+
+    <Button
+        android:id="@+id/changePerson_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Change User"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

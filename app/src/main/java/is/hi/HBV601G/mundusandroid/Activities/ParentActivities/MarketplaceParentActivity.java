@@ -3,7 +3,10 @@ package is.hi.HBV601G.mundusandroid.Activities.ParentActivities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -15,6 +18,7 @@ public class MarketplaceParentActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
+    private Button mNewRewardButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +41,14 @@ public class MarketplaceParentActivity extends AppCompatActivity {
 
 
 
-        // Remove Shadow From the action bar
+        mNewRewardButton = (Button) findViewById(R.id.newRewardButton);
 
-        //ActionBar actionBar = getSupportActionBar();
-        //actionBar.setElevation(0);tentView(R.layout.activity_marketplace_parent);
+        mNewRewardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MarketplaceParentActivity.this, CreateRewardActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

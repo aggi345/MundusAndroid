@@ -17,6 +17,7 @@ import java.util.List;
 
 import is.hi.HBV601G.mundusandroid.Entities.Child;
 import is.hi.HBV601G.mundusandroid.Entities.ChildRewardPair;
+import is.hi.HBV601G.mundusandroid.Entities.Quest;
 import is.hi.HBV601G.mundusandroid.Entities.Reward;
 import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
 import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
@@ -114,6 +115,10 @@ public class RewardPurchasedRecyclerViewAdapter extends RecyclerView.Adapter<Rew
     public int getItemCount() {
         //return 0;
         return mData.size();
+    }
+    public void addItem(ChildRewardPair pair) {
+        mData.add(pair);
+        this.notifyDataSetChanged();
     }
 
     public static class MyRewardPurchasedViewHolder extends RecyclerView.ViewHolder {

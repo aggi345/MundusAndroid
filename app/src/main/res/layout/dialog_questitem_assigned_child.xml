@@ -1,25 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="wrap_content"
         android:background="@drawable/gradient_background"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         >
+=======
+        android:layout_height="488dp"
+        android:background="#232323"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+>>>>>>> master
 
         <TextView
             android:id="@+id/dialog_questitem_assigned_child_questName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+<<<<<<< HEAD
             android:fontFamily="@font/roboto_black"
             android:text="Quest Name"
             android:textColor="@color/main_color"
+=======
+            android:text="Quest Name"
+            android:textColor="@android:color/white"
+>>>>>>> master
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -29,9 +43,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
+<<<<<<< HEAD
             android:fontFamily="@font/roboto_black"
             android:text="Description"
             android:textColor="@color/main_color"
+=======
+            android:text="Description"
+            android:textColor="@android:color/white"
+>>>>>>> master
             android:textSize="18sp" />
 
         <TextView
@@ -40,9 +59,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
+<<<<<<< HEAD
             android:fontFamily="@font/roboto_black"
             android:text="XP"
             android:textColor="@color/main_color"
+=======
+            android:text="XP"
+            android:textColor="@android:color/white"
+>>>>>>> master
             android:textSize="18sp" />
 
         <TextView
@@ -51,9 +75,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
+<<<<<<< HEAD
             android:fontFamily="@font/roboto_black"
             android:text="Coins"
             android:textColor="@color/main_color"
+=======
+            android:text="Coins"
+            android:textColor="@android:color/white"
+>>>>>>> master
             android:textSize="18sp" />
 
         <Button
@@ -79,6 +108,35 @@
             android:text="Completed"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/dialog_assigned_child_addPhoto_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Photo" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/dialog_quest_imgview_assigned_child"
+                android:layout_width="106dp"
+                android:layout_height="113dp"
+                app:layout_constraintEnd_toStartOf="@+id/dialog_quest_imgview_assigned_child_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@android:drawable/divider_horizontal_dark"
+                tools:layout_editor_absoluteY="29dp" />
+
+            <ImageView
+                android:id="@+id/dialog_quest_imgview_assigned_child_2"
+                android:layout_width="112dp"
+                android:layout_height="106dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@android:drawable/divider_horizontal_dark"
+                tools:layout_editor_absoluteY="32dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
 </RelativeLayout>

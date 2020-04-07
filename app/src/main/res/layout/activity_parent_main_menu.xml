@@ -7,6 +7,18 @@
     android:background="@drawable/gradient_background"
     tools:context=".Activities.ParentActivities.ParentMainMenuActivity">
 
+<<<<<<< HEAD
+=======
+
+    <Button
+        android:id="@+id/logOut_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2" />
+
+>>>>>>> master
     <include
         android:id="@+id/include2"
         layout="@layout/infobar_parent"
@@ -73,7 +85,19 @@
         android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         app:constraint_referenced_ids="quest_imageButton,marketplace_imageButton,profile_imageButton" />
+=======
+        app:constraint_referenced_ids="quest_imageButton,marketplace_imageButton,statistics_imageButton,profile_imageButton" />
+
+    <Button
+        android:id="@+id/changePerson_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change User"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
+>>>>>>> master
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
