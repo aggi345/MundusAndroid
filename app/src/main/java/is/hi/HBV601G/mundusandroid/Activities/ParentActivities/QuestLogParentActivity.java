@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import is.hi.HBV601G.mundusandroid.InfoBar;
@@ -22,7 +23,7 @@ public class QuestLogParentActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
-    private Button newQuestButton;
+    private FloatingActionButton newQuestButton;
 
 
     @Override
@@ -48,7 +49,7 @@ public class QuestLogParentActivity extends AppCompatActivity {
 
         //ActionBar actionBar = getSupportActionBar();
         //actionBar.setElevation(0);
-        newQuestButton = (Button) findViewById(R.id.newQuestButton);
+        newQuestButton = findViewById(R.id.newQuestButton);
 
         newQuestButton.setOnClickListener(new View.OnClickListener() {
             @Override

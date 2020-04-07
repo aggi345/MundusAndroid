@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/gradient_background">
+    android:background="@drawable/gradient_background"
+    >
 
 
     <TextView
@@ -25,33 +26,13 @@
         android:fontFamily="@font/roboto_black"
         />
 
-    <Button
-        android:id="@+id/newRewardButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/mini_button_blue"
-        android:drawableLeft="@drawable/icon_coins_24"
-        android:isScrollContainer="false"
-        android:text="+"
-        android:textAlignment="viewStart"
-        android:textColor="@color/white"
-        android:textSize="20dp"
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/icon_mundus_50"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="1dp" />
-
-    <Button
-        android:id="@+id/newQuestButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/mini_button_red"
-        android:drawableLeft="@drawable/icon_quest_24"
-        android:text="+"
-        android:textAlignment="viewStart"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/newRewardButton" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
