@@ -126,14 +126,12 @@ public class ParentMainMenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-<<<<<<< HEAD
-=======
+
     private void moveToStatistics(){
         Intent intent = new Intent(ParentMainMenuActivity.this, CreateRewardActivity.class);
         startActivity(intent);
     }
 
->>>>>>> master
     private void moveToProfile(){
         Intent intent = new Intent(ParentMainMenuActivity.this, ProfileManagementActivity.class);
         startActivity(intent);

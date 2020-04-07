@@ -11,7 +11,7 @@
         android:id="@+id/item_reward_img"
         android:layout_width="87dp"
         android:layout_height="match_parent"
-        android:src="@drawable/icon_cart_52" />
+        android:src="@drawable/icon_treasure_chest_64" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -65,20 +65,22 @@
 
         <Button
             android:id="@+id/item_reward_buyButton"
-            android:layout_width="121dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
+            android:layout_gravity="right"
             android:background="@drawable/button_background_gy"
             android:fontFamily="@font/roboto_black"
+            android:textColor="@color/white"
             android:text="Buy" />
 
         <Button
             android:id="@+id/item_reward_deleteButton"
-            android:layout_width="111dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_black"
+            android:layout_gravity="right"
+            android:textColor="@color/white"
             android:background="@drawable/button_background_yr"
-            android:layout_gravity="left"
+            android:fontFamily="@font/roboto_black"
             android:text="Delete" />
 
         <Button
@@ -86,7 +88,8 @@
             android:layout_width="wrap_content"
             android:fontFamily="@font/roboto_black"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
+            android:textColor="@color/white"
+            android:layout_gravity="right"
             android:text="Grant" />
     </LinearLayout>
 </LinearLayout>

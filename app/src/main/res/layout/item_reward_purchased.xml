@@ -12,7 +12,7 @@
         android:id="@+id/item_reward_purchased_img"
         android:layout_width="98dp"
         android:layout_height="match_parent"
-        android:src="@drawable/icon_cart_52" />
+        android:src="@drawable/icon_treasure_chest_64" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -86,7 +86,7 @@
             android:fontFamily="@font/roboto_black"
             android:text="Grant"
             android:layout_gravity="right"
-
+            android:textColor="@color/white"
             tools:layout_conversion_absoluteHeight="75dp"
             tools:layout_conversion_absoluteWidth="131dp"
             tools:layout_editor_absoluteX="259dp"

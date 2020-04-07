@@ -13,30 +13,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/textedit_background"
+        android:drawableLeft="@drawable/icon_coins_24"
         android:ems="10"
-        android:fontFamily="@font/yatra_one"
+        android:fontFamily="@font/roboto_black"
         android:hint="Price"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="483dp"
-        android:drawableLeft="@drawable/icon_coins_24"
-        />
+        tools:layout_editor_absoluteY="483dp" />
 
     <TextView
         android:id="@+id/createRewardHeader_textview"
         android:layout_width="292dp"
         android:layout_height="63dp"
-        android:fontFamily="@font/yatra_one"
+        android:fontFamily="@font/roboto_black"
         android:text="Create a Reward"
+        android:textAlignment="center"
+        android:textColor="@color/main_color"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/rewardName_plaintext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textAlignment="center"
-        android:textColor="@color/main_color"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
@@ -50,16 +48,15 @@
         android:layout_height="63dp"
         android:layout_marginTop="99dp"
         android:background="@drawable/textedit_background"
+        android:drawableLeft="@drawable/icon_dog_tag_30"
         android:ems="10"
-        android:fontFamily="@font/yatra_one"
+        android:fontFamily="@font/roboto_black"
         android:hint="Reward Name"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/rewardDescription_plaintext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:drawableLeft="@drawable/icon_dog_tag_30"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/rewardDescription_plaintext"
@@ -69,45 +66,42 @@
         android:layout_marginTop="212dp"
         android:layout_marginEnd="44dp"
         android:background="@drawable/textedit_background"
+        android:drawableEnd="@drawable/icon_hand_write_30"
         android:ems="10"
-        android:fontFamily="@font/yatra_one"
+        android:fontFamily="@font/roboto_black"
         android:gravity="start|top"
         android:hint="Reward Description"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toTopOf="@+id/lvlRequired_number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:drawableEnd="@drawable/icon_hand_write_30"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/lvlRequired_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/textedit_background"
+        android:drawableLeft="@drawable/icon_stairs_30"
         android:ems="10"
-        android:fontFamily="@font/yatra_one"
+        android:fontFamily="@font/roboto_black"
         android:hint="Level required"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="420dp"
-        android:drawableLeft="@drawable/icon_stairs_30"
-        />
+        tools:layout_editor_absoluteY="420dp" />
 
     <Button
         android:id="@+id/createReward_button"
         android:layout_width="120dp"
         android:layout_height="56dp"
         android:background="@drawable/button_background"
-        android:fontFamily="@font/yatra_one"
+        android:fontFamily="@font/roboto_black"
         android:text="Create!"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/price_number"
-        tools:layout_editor_absoluteX="158dp"
-        android:textColor="@color/white"
-        />
+        tools:layout_editor_absoluteX="158dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
