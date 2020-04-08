@@ -6,15 +6,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
+import is.hi.HBV601G.mundusandroid.Activities.ChildActivities.ChildMainMenuActivity;
 import is.hi.HBV601G.mundusandroid.Entities.Parent;
 import is.hi.HBV601G.mundusandroid.Entities.Person;
 import is.hi.HBV601G.mundusandroid.Network.MundusAPI;
 import is.hi.HBV601G.mundusandroid.Network.RetrofitSingleton;
 import is.hi.HBV601G.mundusandroid.PersonAdapter;
 import is.hi.HBV601G.mundusandroid.R;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,6 +43,8 @@ public class PersonSelectActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private MundusAPI mundusAPI;
 
+    private Button mLogOut;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +59,18 @@ public class PersonSelectActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.persons_recyclerView);
         mRecyclerView.setHasFixedSize(true);
 
+        mLogOut = findViewById(R.id.logOut_button);
+
 
         createRecyclerView();
         loadPersons();
+
+        mLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logOut();
+            }
+        });
 
 
     }
@@ -121,6 +136,29 @@ public class PersonSelectActivity extends AppCompatActivity {
                 //TODO Vantar að meðhöndla vandamál, verðum að gera eh hér.
             }
         });
+    }
+
+    private void logOut(){
+        Call<ResponseBody> call = mundusAPI.logoutAccount();
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(!response.isSuccessful()){
+                    //TODO Her tharf ad gera stoff
+                    return;
+                }
+                Intent intent = new Intent(PersonSelectActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finishAffinity();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                //TODO Her tharf ad gera stoff
+            }
+        });
+
     }
 
 
