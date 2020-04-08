@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -109,8 +110,9 @@ public class SignupActivity extends AppCompatActivity {
      * Starts the LoginActivity
      */
     private void startLoginActivity() {
-        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-        startActivity(intent);
+        Toast toast = Toast.makeText(getApplicationContext(), "Account created.", Toast.LENGTH_LONG);
+        toast.show();
+        finish();
     }
 
 }

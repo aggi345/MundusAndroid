@@ -149,6 +149,7 @@ public class ParentMainMenuActivity extends AppCompatActivity {
                 }
                 Intent intent = new Intent(ParentMainMenuActivity.this, PersonLoginActivity.class);
                 startActivity(intent);
+                finishAffinity();
             }
 
             @Override
@@ -170,6 +171,7 @@ public class ParentMainMenuActivity extends AppCompatActivity {
                 }
                 Intent intent = new Intent(ParentMainMenuActivity.this, LoginActivity.class);
                 startActivity(intent);
+                finishAffinity();
             }
 
             @Override
