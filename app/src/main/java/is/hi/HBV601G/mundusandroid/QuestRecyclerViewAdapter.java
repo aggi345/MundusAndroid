@@ -769,7 +769,7 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                         Quest quest = mData.get(vHolder.getAdapterPosition());
                         long questId = quest.getId();
                         int position = vHolder.getAdapterPosition();
-                        mData.get(position).setImageChild(questId+"c");
+                        mData.get(position).setImageChild(questId+"");
                         boolean withImg = activity.takePhoto(imgview_child, questId);
                 }});
                 questDialog.show();
