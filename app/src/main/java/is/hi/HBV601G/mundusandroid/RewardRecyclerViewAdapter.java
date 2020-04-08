@@ -137,7 +137,7 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
             public void onClick(View v) {
                  long rewardId = Long.parseLong(holder.tv_rewardId.getText().toString());
                  System.out.println("Buy reward with Id: " + rewardId);
-                 int position = holder.getAdapterPosition();
+
                  Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
                  MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
                  Call<Boolean> call = mundusAPI.purchaseReward(rewardId);
@@ -153,7 +153,7 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
                             // Setja dialog eða toast sem segir you broke bitch! eða e-h þannig
                          boolean status = response.body();
                          System.out.println(status);
-
+                         int position = holder.getAdapterPosition();
                          if (status == true) {
                              Toast.makeText(mContext,
                                      "Reward purchased", Toast.LENGTH_SHORT).show();

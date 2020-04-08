@@ -768,6 +768,8 @@ public class QuestRecyclerViewAdapter extends RecyclerView.Adapter<QuestRecycler
                     public void onClick(View v) {
                         Quest quest = mData.get(vHolder.getAdapterPosition());
                         long questId = quest.getId();
+                        int position = vHolder.getAdapterPosition();
+                        mData.get(position).setImageChild(questId+"c");
                         boolean withImg = activity.takePhoto(imgview_child, questId);
                 }});
                 questDialog.show();
