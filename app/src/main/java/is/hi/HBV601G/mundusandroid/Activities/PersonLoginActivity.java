@@ -89,7 +89,6 @@ public class PersonLoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                mErrorMessage.setText("Worked");
 
                 FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( PersonLoginActivity.this,  new OnSuccessListener<InstanceIdResult>() {
                     @Override
