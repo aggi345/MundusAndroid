@@ -157,10 +157,11 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
                          if (status == true) {
                              Toast.makeText(mContext,
                                      "Reward purchased", Toast.LENGTH_SHORT).show();
+                             Reward r = mData.get(position);
                              mData.remove(position);
+
                              RewardRecyclerViewAdapter.this.notifyItemRemoved(position);
                              activity.updateInfoBar();
-                             Reward r = mData.get(position);
                              RecyclerStorage.getMyRewardsChild().addItem(r);
                          }
                          else {
