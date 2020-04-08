@@ -160,14 +160,15 @@ public class RewardRecyclerViewAdapter extends RecyclerView.Adapter<RewardRecycl
                              mData.remove(position);
                              RewardRecyclerViewAdapter.this.notifyItemRemoved(position);
                              activity.updateInfoBar();
+                             Reward r = mData.get(position);
+                             RecyclerStorage.getMyRewardsChild().addItem(r);
                          }
                          else {
                              Toast.makeText(mContext,
                                      "You broke bitch!", Toast.LENGTH_SHORT).show();
                          }
 
-                         Reward r = mData.get(position);
-                         RecyclerStorage.getMyRewardsChild().addItem(r);
+
                      }
                      @Override
                      public void onFailure(Call<Boolean> call, Throwable t) {
