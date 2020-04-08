@@ -117,7 +117,7 @@ public interface MundusAPI {
 
     @FormUrlEncoded
     @POST("grantReward")
-    Call<Boolean> grantReward(@Field("rewardId") long rewardId, @Field("childId") long childId);
+    Call<ResponseBody> grantReward(@Field("rewardId") long rewardId, @Field("childId") long childId);
 
     @FormUrlEncoded
     @POST("deleteQuest")

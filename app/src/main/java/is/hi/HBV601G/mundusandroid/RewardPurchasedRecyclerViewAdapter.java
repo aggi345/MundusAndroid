@@ -80,11 +80,11 @@ public class RewardPurchasedRecyclerViewAdapter extends RecyclerView.Adapter<Rew
 
                 Retrofit retrofit = RetrofitSingleton.getInstance(mContext).getRetrofit();
                 MundusAPI mundusAPI = retrofit.create(MundusAPI.class);
-                Call<Boolean> call = mundusAPI.grantReward(rewardId, childId);
+                Call<ResponseBody> call = mundusAPI.grantReward(rewardId, childId);
 
-                call.enqueue(new Callback<Boolean>() {
+                call.enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if(!response.isSuccessful()){
                             //TODO Her tharf ad gera stoff
                             System.out.println("Grant Reward failed");
@@ -99,7 +99,7 @@ public class RewardPurchasedRecyclerViewAdapter extends RecyclerView.Adapter<Rew
                         RewardPurchasedRecyclerViewAdapter.this.notifyItemRemoved(position);
                     }
                     @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
                         //TODO Her tharf ad gera stoff
                         System.out.println("Her2");
                     }
