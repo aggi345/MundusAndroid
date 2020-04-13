@@ -25,25 +25,36 @@
 
         <activity
             android:name=".Activities.ChildActivities.QuestLogChildActivity"
-            android:exported="true" />
-        <activity android:name=".Activities.ChildActivities.MarketplaceChildActivity" />
-        <activity android:name=".Activities.ParentActivities.CreateRewardActivity" />
-        <activity android:name=".Activities.ParentActivities.CreateQuestActivity" />
-        <activity android:name=".Activities.ParentActivities.ProfileManagementActivity" />
-        <activity android:name=".Activities.ParentActivities.StatisticsActivity" />
-        <activity android:name=".Activities.ParentActivities.MarketplaceParentActivity" />
-        <activity android:name=".Activities.ParentActivities.QuestLogParentActivity" /> <!-- android:exported="true" -->
-        <activity android:name=".Activities.ChildActivities.ChildMainMenuActivity" />
-        <activity android:name=".Activities.ParentActivities.ParentMainMenuActivity" />
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.ChildActivities.MarketplaceChildActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.ParentActivities.CreateRewardActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.ParentActivities.CreateQuestActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.ParentActivities.ProfileManagementActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.ParentActivities.StatisticsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.ParentActivities.MarketplaceParentActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.ParentActivities.QuestLogParentActivity"
+            android:screenOrientation="portrait"/> <!-- android:exported="true" -->
+        <activity android:name=".Activities.ChildActivities.ChildMainMenuActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.ParentActivities.ParentMainMenuActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.PersonLoginActivity"
-            android:noHistory="true" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.PersonSelectActivity"
-            android:noHistory="true" />
-        <activity android:name=".Activities.SignupActivity" />
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.SignupActivity"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name=".Activities.LoginActivity">
+            android:name=".Activities.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
