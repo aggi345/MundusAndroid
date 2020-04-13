@@ -129,16 +129,19 @@ public class LoginActivity extends AppCompatActivity {
     private void startPersonSelectActivity() {
         Intent intent = new Intent(LoginActivity.this, PersonSelectActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private void startChildMainMenuActivity() {
         Intent intent = new Intent(LoginActivity.this, ChildMainMenuActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private void startParentMainMenuActivity() {
         Intent intent = new Intent(LoginActivity.this, ParentMainMenuActivity.class);
         startActivity(intent);
+        finish();
     }
 
 
@@ -162,6 +165,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (r != -1) {
                     Intent intent = new Intent(LoginActivity.this, PersonSelectActivity.class);
                     startActivity(intent);
+                    finish();
                 }
 
             }
