@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MundusAndroid</string>
+    <string name="app_name">Mundus</string>
     <string name="title_activity_quest_log_parent">QuestLogParentActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
