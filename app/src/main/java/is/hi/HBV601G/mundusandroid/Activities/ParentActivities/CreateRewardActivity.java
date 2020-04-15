@@ -95,7 +95,7 @@ public class CreateRewardActivity extends AppCompatActivity {
                 }
                 RewardRecyclerViewAdapter temp = RecyclerStorage.getAvailableRewardsParent();
                 temp.addItem(response.body());
-                Toast toast = Toast.makeText(getApplicationContext(), "Reward created.", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(), "Reward created", Toast.LENGTH_LONG);
                 toast.show();
                 finish();
             }

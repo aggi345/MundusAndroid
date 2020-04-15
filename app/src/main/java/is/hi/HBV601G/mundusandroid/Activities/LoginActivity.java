@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import is.hi.HBV601G.mundusandroid.Activities.ChildActivities.ChildMainMenuActivity;
@@ -158,6 +159,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (!response.isSuccessful()) {
                     //TODO Her þarf að meðhöndla vandamál.
+
                     return;
                 }
                 Integer r = response.body();
@@ -166,7 +168,12 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, PersonSelectActivity.class);
                     startActivity(intent);
                     finish();
+                }else if(r == -1){
+                    Toast toast = Toast.makeText(getApplicationContext(), "Email or password incorrect", Toast.LENGTH_LONG);
+                    toast.show();
                 }
+
+
 
             }
 

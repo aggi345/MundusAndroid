@@ -255,7 +255,7 @@ public class CreateQuestActivity extends AppCompatActivity implements AdapterVie
                 withImg = false;
 
                 //Shows toast and closes activity on success.
-                Toast toast = Toast.makeText(getApplicationContext(), "Quest created.", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(), "Quest created", Toast.LENGTH_LONG);
                 toast.show();
                 finish();
             }
