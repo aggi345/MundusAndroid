@@ -22,24 +22,16 @@ public class RetrofitSingleton {
     private static RetrofitSingleton INSTANCE;
 
     private Retrofit retrofit;
-    //private String BASE_URL = "http://192.168.1.71:8080/";
-   // private String BASE_URL = "http://192.168.56.1:8080/";
     private String BASE_URL = "https://mundus-android.herokuapp.com/";
 
     private RetrofitSingleton(Context context){
 
-       // SimpleCookieJar simpleCookieJar = new SimpleCookieJar();
-      //  CookieHandler cookieHandler = new CookieManager();
-       // cookieJar = new JavaNetCookieJar(cookieHandler);
         ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context));
 
         SharedPrefsCookiePersistor sp = new SharedPrefsCookiePersistor(context);
         SetCookieCache sc = new SetCookieCache();
 
-
-
-
-
+        
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(new OkHttpClient().newBuilder().cookieJar(cookieJar).build())
